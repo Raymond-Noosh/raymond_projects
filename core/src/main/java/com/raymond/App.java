@@ -1,36 +1,29 @@
 package com.raymond;
 
 import com.raymond.examples.RaymondStack;
+import com.raymond.examples.AddToStackThread;
+import com.raymond.examples.RemoveFromStackThread;
+
+//import java.util.logging.Logger;
 
 /**
  * Hello world!
  *
  */
-public class App implements Runnable
+public class App
 {
-    @Override
-    public void run() {
-        RaymondStack.add("abc");
-        RaymondStack.add("def");
-        RaymondStack.remove();
-        RaymondStack.add("ghi");
-        //RaymondStack.remove();
-        RaymondStack.add("jkl");
-        RaymondStack.remove();
-        RaymondStack.add("mno");
-        RaymondStack.remove();
-    }
+    //static final Logger logger = Logger.getLogger(App.class.getName());
 
     public static void main(String[] args )
     {
-        System.out.println( "Hello World!" );
-        (new Thread(new App())).start();
-        (new Thread(new App())).start();
-        (new Thread(new App())).start();
-        (new Thread(new App())).start();
-        (new Thread(new App())).start();
-        System.out.println(Thread.activeCount());
+        AddToStackThread thread1 = new AddToStackThread();
+        thread1.run();
 
-        //String str = RaymondStack.remove();
+        RaymondStack.getList().add("Possible to still modify variables if the method is not synchronized");
+
+        RemoveFromStackThread thread2 = new RemoveFromStackThread();
+        thread2.run();
+
+        System.out.println(RaymondStack.getSize());
     }
 }

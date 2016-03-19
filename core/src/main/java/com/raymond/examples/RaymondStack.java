@@ -1,6 +1,7 @@
 package com.raymond.examples;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Raymond Kwong on 3/16/2016.
@@ -8,7 +9,6 @@ import java.util.ArrayList;
 public class RaymondStack {
     private static final Integer MAX_SIZE = 10;
     private static ArrayList<String> list = new ArrayList<>(MAX_SIZE);
-    private String str;
 
     public static void add(String str) {
         synchronized (list) {
@@ -23,13 +23,18 @@ public class RaymondStack {
                 }
             }
             list.add(str);
+            try {
+                list.wait(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public static String remove() {
         synchronized (list) {
             System.out.println(Thread.currentThread().getName() +  " " + "Current Size from Remove " + list.size());
-            if (list.size() > 1) {
+            if (list.size() > 0) {
                 String str = list.remove(list.size() - 1);
                 list.notifyAll();
                 return str;
@@ -41,6 +46,19 @@ public class RaymondStack {
 
     public static boolean isFull() {
         return (list.size() == MAX_SIZE);
+    }
+
+    public static int getSize() {
+        return list.size();
+    }
+
+    public static List getList() {
+        return list;
+    }
+
+    public static void main( String[] args )
+    {
+        System.out.println( "Hello World!" );
     }
 
 }

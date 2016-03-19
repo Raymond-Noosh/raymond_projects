@@ -1,6 +1,9 @@
+com\raymond\examples\RemoveFromStackThread.class
 com\raymond\examples\RaymondStack.class
+com\raymond\examples\AddToStackThread.class
 com\raymond\examples\Singleton.class
 com\raymond\examples\Generics.class
 com\raymond\service\RaymondService.class
 com\raymond\examples\Generics$Box.class
+com\raymond\App.class
 com\raymond\service\impl\RaymondServiceImpl.class

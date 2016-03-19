@@ -9,10 +9,10 @@ import java.util.logging.Logger;
  */
 public class RaymondServiceImpl implements RaymondService {
 
-    static final Logger log = Logger.getLogger(RaymondServiceImpl.class.getName());
+    static final Logger logger = Logger.getLogger(RaymondServiceImpl.class.getName());
 
     public void test() {
-        log.info("bs");
+        logger.info("bs");
     }
 
     public static void main( String[] args )
