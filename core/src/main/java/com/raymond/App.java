@@ -19,7 +19,7 @@ public class App
         AddToStackThread thread1 = new AddToStackThread();
         thread1.run();
 
-        RaymondStack.getList().add("Possible to still modify variables if the method is not synchronized");
+        RaymondStack.getList().add("Possible to still modify variables if the nothing is synchronizing that variable");
 
         RemoveFromStackThread thread2 = new RemoveFromStackThread();
         thread2.run();

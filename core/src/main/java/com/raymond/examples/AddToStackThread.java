@@ -11,7 +11,6 @@ public class AddToStackThread implements Runnable {
 
     @Override
     public void run() {
-        logger.info("Start " + System.currentTimeMillis());
         RaymondStack.add(""+System.currentTimeMillis());
     }
 }
