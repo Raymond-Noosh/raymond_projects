@@ -29,8 +29,9 @@ public class Fibonacci {
         // (5 + 4 + 3 + 2 + 1)
     }
 
-    // 1, 1, 2, 3, 5
+    // 1, 1, 2, 3, 5, 8, 13, 21
     public static int fib(int start, int end) {
+        logger.info(""+start);
         if (start >= end) {
             return start;
         }
@@ -39,14 +40,29 @@ public class Fibonacci {
         //1 + 2 3 4 5
     }
 
+    //n=1 i=0
+    //n=n+i = 1 i=0
+    //n=n+i = 2 i=1
+    //n=n+i = 4 i=2
+
+    // 1, 1, 2, 3, 5, 8, 13, 21
+    public static void fibloop(int end) {
+        int a = 0;
+        int b = 1;
+        int sum = 0;
+        for (int i = 1; i < end; i++) {
+            a = a + (a + 1);
+        }
+    }
+
     public static void main(String[] args){
         int i = factorial(3);
-        logger.info("" + i);
+        //logger.info("" + i);
 
         int s = sum(5);
-        logger.info("" + s);
+        //logger.info("" + s);
 
         int f = fib(1, 5);
-        logger.info("" + f);
+        //logger.info("" + f);
     }
 }
