@@ -31,7 +31,7 @@ public class Fibonacci {
     }
 
     // 1, 1, 2, 3, 5, 8, 13, 21, 34
-    public static int fibonacciWhileLoop(int end) {
+    public static int fibonacciWhileLoopLimit(int end) {
         int a = 1;
         int b = 1;
         int sum = 0;
@@ -52,15 +52,15 @@ public class Fibonacci {
     }
 
     // 1, 1, 2, 3, 5, 8, 13, 21, 34
-    public static int fibonacciRecursion(int start, int mid, int limit) {//1 1 27
+    public static int fibonacciRecursionLimit(int start, int mid, int limit) {//1 1 27
         //logger.info(""+start);
         if (mid > limit) {
             return start;
         }
-        return fibonacciRecursion(mid, start + mid, limit);
+        return fibonacciRecursionLimit(mid, start + mid, limit);
     }
 
-    public static int fibonacciRecursion2(int limit) {
+    public static int fibonacciRecursion2Limit(int limit) {
         int i = 1;
         int sum = 0;
         int previousSum = 0;
@@ -94,15 +94,15 @@ public class Fibonacci {
         int maxFibonacci = 100000000;
 
         long now = new Date().getTime();
-        int fLoop = fibonacciWhileLoop(maxFibonacci);
+        int fLoop = fibonacciWhileLoopLimit(maxFibonacci);
         logger.info("" + fLoop + " Time:" + (new Date().getTime()-now));
 
         now = new Date().getTime();
-        int fRecursion = fibonacciRecursion(1, 1, maxFibonacci);
+        int fRecursion = fibonacciRecursionLimit(1, 1, maxFibonacci);
         logger.info("" + fRecursion+ " Time:" + (new Date().getTime()-now));
 
         now = new Date().getTime();
-        int f3 = fibonacciRecursion2(maxFibonacci);//Slow
+        int f3 = fibonacciRecursion2Limit(maxFibonacci);//Slow
         logger.info("" + f3 + " Time:" + (new Date().getTime()-now));
     }
 }
