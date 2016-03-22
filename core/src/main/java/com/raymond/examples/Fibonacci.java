@@ -1,5 +1,6 @@
 package com.raymond.examples;
 
+import java.util.Date;
 import java.util.logging.Logger;
 
 /**
@@ -29,29 +30,57 @@ public class Fibonacci {
         // (5 + 4 + 3 + 2 + 1)
     }
 
-    // 1, 1, 2, 3, 5, 8, 13, 21
-    public static int fib(int start, int end) {
-        logger.info(""+start);
-        if (start >= end) {
-            return start;
-        }
-        int sum = (start + fib(start + 1, end));
-        return sum;
-        //1 + 2 3 4 5
-    }
-
-    //n=1 i=0
-    //n=n+i = 1 i=0
-    //n=n+i = 2 i=1
-    //n=n+i = 4 i=2
-
-    // 1, 1, 2, 3, 5, 8, 13, 21
-    public static void fibloop(int end) {
-        int a = 0;
+    // 1, 1, 2, 3, 5, 8, 13, 21, 34
+    public static int fibonacciWhileLoop(int end) {
+        int a = 1;
         int b = 1;
         int sum = 0;
-        for (int i = 1; i < end; i++) {
-            a = a + (a + 1);
+        while (true) {
+            if (sum == 0) { // first time
+                sum = a; //1
+            }
+            else { // after
+                a = b; //1 1 2 3 5 8 13
+                b = sum; //1 2 3 5 8 13 21
+                sum = sum + a; //2 3 5 8 13 21 34
+                if (sum > end) {
+                    return b;
+                }
+            }
+            //logger.info(""+b);
+        }
+    }
+
+    // 1, 1, 2, 3, 5, 8, 13, 21, 34
+    public static int fibonacciRecursion(int start, int mid, int limit) {//1 1 27
+        //logger.info(""+start);
+        if (mid > limit) {
+            return start;
+        }
+        return fibonacciRecursion(mid, start + mid, limit);
+    }
+
+    public static int fibonacciRecursion2(int limit) {
+        int i = 1;
+        int sum = 0;
+        int previousSum = 0;
+        while (true) {
+            previousSum = sum;
+            sum = fib(i);
+            if (sum > limit) {
+                return previousSum;
+            }
+            i++;
+        }
+
+    }
+
+    public static int fib(int n) {
+        if (n <= 1) {
+            return n;
+        }
+        else {
+            return fib(n-1) + fib(n-2);
         }
     }
 
@@ -62,7 +91,18 @@ public class Fibonacci {
         int s = sum(5);
         //logger.info("" + s);
 
-        int f = fib(1, 5);
-        //logger.info("" + f);
+        int maxFibonacci = 100000000;
+
+        long now = new Date().getTime();
+        int fLoop = fibonacciWhileLoop(maxFibonacci);
+        logger.info("" + fLoop + " Time:" + (new Date().getTime()-now));
+
+        now = new Date().getTime();
+        int fRecursion = fibonacciRecursion(1, 1, maxFibonacci);
+        logger.info("" + fRecursion+ " Time:" + (new Date().getTime()-now));
+
+        now = new Date().getTime();
+        int f3 = fibonacciRecursion2(maxFibonacci);//Slow
+        logger.info("" + f3 + " Time:" + (new Date().getTime()-now));
     }
 }
