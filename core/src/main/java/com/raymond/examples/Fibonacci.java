@@ -31,7 +31,7 @@ public class Fibonacci {
     }
 
     // 1, 1, 2, 3, 5, 8, 13, 21, 34
-    public static int fibonacciWhileLoopLimit(int end) {
+    public static int fibonacciWhileLoopLimit(int limit) {
         int a = 1;
         int b = 1;
         int sum = 0;
@@ -43,7 +43,7 @@ public class Fibonacci {
                 a = b; //1 1 2 3 5 8 13
                 b = sum; //1 2 3 5 8 13 21
                 sum = sum + a; //2 3 5 8 13 21 34
-                if (sum > end) {
+                if (sum > limit) {
                     return b;
                 }
             }
@@ -60,28 +60,55 @@ public class Fibonacci {
         return fibonacciRecursionLimit(mid, start + mid, limit);
     }
 
-    public static int fibonacciRecursion2Limit(int limit) {
+    //0  1  2  3  4  5  6   7   8   9
+    //0, 1, 1, 2, 3, 5, 8, 13, 21, 34
+    public static int fibonacciRecursionNth(int start, int mid, int nth) {//1 1 2
+        if (nth <= 1) {
+            return start;
+        }
+        return fibonacciRecursionNth(mid, start+mid, nth-1);
+    }
+
+    public static int fibonacciRecursionNthLimit(int limit) {//1 1 2
+        int i = 1;
+        int sum = 0;
+        while (true) {
+            int beforeMax = fibonacciRecursionNth(1, 1, i);
+            if (beforeMax > limit) {
+                sum = fibonacciRecursionNth(1, 1, i-1);
+                break;
+            }
+            i++;
+        }
+        return sum;
+    }
+
+    public static int fibonacciRecursionSlowLimit(int limit) {
         int i = 1;
         int sum = 0;
         int previousSum = 0;
         while (true) {
             previousSum = sum;
-            sum = fib(i);
+            sum = fibonacciRecursionSlow(i);
             if (sum > limit) {
                 return previousSum;
             }
             i++;
         }
-
     }
 
-    public static int fib(int n) {
+    //Possible classic, but slow
+    //grab 5th one
+    public static int fibonacciRecursionSlow(int n) { ////fibonacciRecursionSlow(3)
         if (n <= 1) {
             return n;
         }
         else {
-            return fib(n-1) + fib(n-2);
+            return fibonacciRecursionSlow(n-1) + fibonacciRecursionSlow(n-2);
         }
+                //fibonacciRecursionSlow(2)+fibonacciRecursionSlow(1)
+        //fibonacciRecursionSlow(1)+fibonacciRecursionSlow(0)             1
+            //1 + 0
     }
 
     public static void main(String[] args){
@@ -98,11 +125,19 @@ public class Fibonacci {
         logger.info("" + fLoop + " Time:" + (new Date().getTime()-now));
 
         now = new Date().getTime();
-        int fRecursion = fibonacciRecursionLimit(1, 1, maxFibonacci);
-        logger.info("" + fRecursion+ " Time:" + (new Date().getTime()-now));
+        int fibLimit = fibonacciRecursionLimit(1, 1, maxFibonacci);
+        logger.info("" + fibLimit+ " Time:" + (new Date().getTime()-now));
 
         now = new Date().getTime();
-        int f3 = fibonacciRecursion2Limit(maxFibonacci);//Slow
+        int fFib2 = fibonacciRecursionNth(1, 1, 5);
+        logger.info("" + fFib2+ " Time:" + (new Date().getTime()-now));
+
+        now = new Date().getTime();
+        int f2 = fibonacciRecursionNthLimit(maxFibonacci);
+        logger.info("" + f2+ " Time:" + (new Date().getTime()-now));
+
+        now = new Date().getTime();
+        int f3 = fibonacciRecursionSlowLimit(maxFibonacci);//Slow
         logger.info("" + f3 + " Time:" + (new Date().getTime()-now));
     }
 }
