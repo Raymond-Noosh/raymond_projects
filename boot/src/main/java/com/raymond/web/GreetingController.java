@@ -1,4 +1,4 @@
-package com.raymond;
+package com.raymond.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
