@@ -8,11 +8,13 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 //@SpringBootApplication // same as @Configuration @EnableAutoConfiguration @ComponentScan
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class Application extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
