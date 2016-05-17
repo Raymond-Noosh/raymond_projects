@@ -69,5 +69,6 @@
     <orderEntry type="library" name="Maven: org.apache.tomcat.embed:tomcat-embed-el:8.0.32" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.32" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.tomcat.embed:tomcat-embed-websocket:8.0.32" level="project" />
+    <orderEntry type="library" name="Maven: com.hazelcast:hazelcast:3.6" level="project" />
   </component>
 </module>
