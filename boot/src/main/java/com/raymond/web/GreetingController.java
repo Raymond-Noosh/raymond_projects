@@ -5,6 +5,7 @@ import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.spring.cache.HazelcastCache;
 import com.hazelcast.spring.cache.HazelcastCacheManager;
+import com.raymond.service.MathService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.Cache;
@@ -25,6 +26,9 @@ public class GreetingController {
     private static final Logger logger = LoggerFactory.getLogger(GreetingController.class);
 
     @Autowired
+    private MathService mathService;
+
+    @Autowired
     private CacheManager cacheManager;
 
     @Value("${name2}")
@@ -34,6 +38,8 @@ public class GreetingController {
     public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name, Map<String, Object> model) {
         logger.info("greeting got called");
         logger.info(name2);
+
+        mathService.computePiDecimal(1);
 
         Cache test = cacheManager.getCache("test");
         test.put("1", "1");
