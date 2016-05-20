@@ -45,7 +45,7 @@
         <!--<expiry-policy-factory class-name="com.example.cache.MyExpirePolicyFactory" />-->
     </cache>
 
-    <cache name="cacheTest">
+    <cache name="books">
         <key-type class-name="java.lang.Object" />
         <value-type class-name="java.lang.Object" />
         <statistics-enabled>true</statistics-enabled>

@@ -16,7 +16,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 @ComponentScan
 @EnableAutoConfiguration
 @EnableCaching
-@EnableGlobalMethodSecurity(securedEnabled = true)
+//@EnableGlobalMethodSecurity(securedEnabled = true)
 public class Application extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
@@ -27,4 +27,6 @@ public class Application extends SpringBootServletInitializer {
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(Application.class);
 	}
+
+
 }

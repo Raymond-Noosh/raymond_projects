@@ -13,11 +13,20 @@ import java.util.Map;
 @Controller
 public class HomeController {
     @RequestMapping("/")
-    //@Secured("ROLE_ADMIN")
     public String home(Map<String, Object> model) {
         model.put("message", "Hello World");
         model.put("title", "Hello Home");
         model.put("date", new Date());
+        System.out.println("THE DEFAULT ONE");
+        return "home";
+    }
+
+    @RequestMapping("/home")
+    public String home2(Map<String, Object> model) {
+        model.put("message", "Hello World");
+        model.put("title", "Hello Home");
+        model.put("date", new Date());
+        System.out.println("THE DEFAULT TWO");
         return "home";
     }
 }
