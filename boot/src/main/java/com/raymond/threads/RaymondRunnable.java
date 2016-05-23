@@ -16,7 +16,7 @@ public class RaymondRunnable implements Runnable {
     @Override
     public void run() {
         long start = System.nanoTime();
-        this.ray = RaymondSingleton.getInstanceFromHelper2();
+        this.ray = RaymondSingleton.getInstanceFromHelper();
         long end = System.nanoTime();
         System.out.println("Run-"+Thread.currentThread().getName() + "-"+(end-start)/1000);
     }

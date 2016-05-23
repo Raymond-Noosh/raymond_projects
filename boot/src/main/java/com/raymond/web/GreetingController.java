@@ -52,6 +52,12 @@ public class GreetingController {
         String abcString = (String) abc.get();
         logger.info(abcString);
 
+        Cache.ValueWrapper one = test.get("1");
+        logger.info((String) one.get());
+
+        Cache.ValueWrapper two = test.get("2");
+        logger.info((String) two.get());
+
         model.put("name", name);
         return "greeting";
     }

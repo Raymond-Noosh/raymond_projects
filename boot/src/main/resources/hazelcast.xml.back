@@ -70,4 +70,16 @@
         <min-eviction-check-millis>100</min-eviction-check-millis>
     </map>
 
+    <map name="my-read-mostly-map">
+        <near-cache name="default">
+          <in-memory-format>BINARY</in-memory-format>
+          <max-size>5000</max-size>
+          <time-to-live-seconds>0</time-to-live-seconds>
+          <max-idle-seconds>60</max-idle-seconds>
+          <eviction-policy>LRU</eviction-policy>
+          <invalidate-on-change>true</invalidate-on-change>
+          <cache-local-entries>true</cache-local-entries>
+        </near-cache>
+      </map>
+
 </hazelcast>
