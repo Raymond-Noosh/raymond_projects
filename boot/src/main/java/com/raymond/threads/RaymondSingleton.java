@@ -37,24 +37,25 @@ public class RaymondSingleton {
         return result;
     }
 
-    private static volatile boolean helperInt = false;
+    private static volatile RaymondSingleton helper2;
     public static RaymondSingleton getInstanceFromHelper2() {
+        if (helper2 == null) {
+            synchronized(RaymondSingleton.class) {
+                if (helper2 == null) {
+                    helper2 = new RaymondSingleton();
+                }
+            }
+        }
+        return helper2;
+    }
+
+    private static volatile boolean helperInt = false;
+    public static RaymondSingleton getInstanceFromHelper3() {
         if (helperInt == false && raymond == null) {
             synchronized(RaymondSingleton.class) {
                 if (raymond == null) {
                     raymond = new RaymondSingleton();
                     helperInt = true;
-                }
-            }
-        }
-        return raymond;
-    }
-
-    public static RaymondSingleton getInstanceFromSychronizedStatements() {
-        if (raymond == null) {
-            synchronized(RaymondSingleton.class) {
-                if (raymond == null) {
-                    raymond = new RaymondSingleton();
                 }
             }
         }
@@ -106,5 +107,4 @@ public class RaymondSingleton {
         }
         return wrapper.value;
     }
-
 }

@@ -8,16 +8,10 @@ public class RaymondTest {
     public RaymondTest() {
     }
 
-    /*public static void main(String args[]) {
-        RaymondRunnable run0 = new RaymondRunnable();
-        Thread threadZero = new Thread(run0);
-        threadZero.start();
+    public static void main(String args[]) {
+        new Thread(new RaymondRunnable()).start();
 
-
-        RaymondRunnable run1 = new RaymondRunnable();
-        Thread threadOne = new Thread(run1);
-        threadOne.start();
-
-    }*/
+        new Thread(new RaymondRunnable()).start();
+    }
 
 }
