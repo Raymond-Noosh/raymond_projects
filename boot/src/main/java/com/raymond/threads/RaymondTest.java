@@ -8,10 +8,10 @@ public class RaymondTest {
     public RaymondTest() {
     }
 
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         new Thread(new RaymondRunnable()).start();
 
         new Thread(new RaymondRunnable()).start();
-    }
+    }*/
 
 }

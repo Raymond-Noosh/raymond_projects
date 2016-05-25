@@ -1,19 +1,16 @@
 package com.raymond.queue;
 
-import com.raymond.threads.RaymondRunnable;
-
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadInfo;
 import java.util.*;
 
 /**
  * Created by Raymond Kwong on 5/23/2016.
  */
-public class RaymondQueue {
+public class RaymondQueue<T> {
     private static volatile RaymondQueue raymondQueue;
-
-    private static volatile int queueSize = 0;
-    private static final int maxSize = 5;
-    private static Queue<String> queue = new PriorityQueue<>(maxSize);
-
+    private final int MAX_SIZE = 10;
+    private Queue<T> queue = new LinkedList<>();
 
     public static RaymondQueue getInstance() {
         if (raymondQueue == null) {
@@ -26,36 +23,51 @@ public class RaymondQueue {
         return raymondQueue;
     }
 
-    public static void add(String str) {
-        /*while (queue.p) {
-
-        }*/
-
-
-        if (queueSize < maxSize) {
-            synchronized (RaymondQueue.class) {
-                queue.add(str);
-                queueSize++;
-            }
+    public synchronized void add(T str) throws InterruptedException {
+        while (queue.size() == MAX_SIZE) {
+            wait();
         }
-        else {
-            //Thread.currentThread()
-        }
-
+        notifyAll();
+        queue.add(str);
     }
 
-    public static String remove() {
-        if (queueSize > 0) {
-            synchronized (RaymondQueue.class) {
-                String str = queue.remove();
-                queueSize--;
-                return str;
-            }
+    public synchronized T remove() throws InterruptedException {
+        while (queue.size() == 0) {
+            wait();
         }
-        return null;
+        notifyAll();
+        return queue.remove();
     }
 
-    public static void main(String args[]) {
+    public synchronized void P() {
+        System.out.println("P");
+    }
+
+    public synchronized void C() {
+        System.out.println("C");
+    }
+
+    public void startProducer() {
+        new Thread(new RaymondQueueProducer()).start();//1
+    }
+
+    public void startConsumer() {
+        new Thread(new RaymondQueueConsumer()).start();//1
+    }
+
+    public void checkWaitingThreads() {
+        ThreadInfo[] infos = ManagementFactory.getThreadMXBean().dumpAllThreads(true, true);
+        for (int i = 0; i < infos.length; i++) {
+            System.out.println("Waiting Threads -" + infos[i].getWaitedCount());
+        }
+        System.out.println(queue.size());
+    }
+
+    /*public static void main(String args[]) {
+        new Thread(new RaymondQueueProducer()).start();//1
+        new Thread(new RaymondQueueProducer()).start();//1
+        new Thread(new RaymondQueueProducer()).start();//1
+        new Thread(new RaymondQueueProducer()).start();//1
         new Thread(new RaymondQueueProducer()).start();//1
         new Thread(new RaymondQueueProducer()).start();//2
         new Thread(new RaymondQueueConsumer()).start();//1
@@ -67,21 +79,10 @@ public class RaymondQueue {
         new Thread(new RaymondQueueProducer()).start();//5
         new Thread(new RaymondQueueProducer()).start();//6
 
-        try {
-            Thread.sleep(1000L);
-            RaymondQueue qq = RaymondQueue.getInstance();
-            System.out.println(qq.queue.size());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        ThreadInfo[] infos = ManagementFactory.getThreadMXBean().dumpAllThreads(true, true);
+        for (int i = 0; i < infos.length; i++) {
+            System.out.println("Waiting Threads -" + infos[i].getWaitedCount());
         }
-
-
-        /*Iterator iter = qq.queue.iterator();
-        while (iter.hasNext()) {
-            System.out.println("A");
-            //System.out.println((String) iter.next());
-        }*/
-
-    }
+    }*/
 
 }

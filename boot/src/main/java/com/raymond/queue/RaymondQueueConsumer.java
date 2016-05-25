@@ -6,8 +6,12 @@ package com.raymond.queue;
 public class RaymondQueueConsumer implements Runnable {
     @Override
     public void run() {
+        System.out.println("C-"+Thread.currentThread().getName());
         RaymondQueue raymondQueue = RaymondQueue.getInstance();
-        raymondQueue.remove();
-        System.out.println(Thread.currentThread().getName());
+        try {
+            raymondQueue.remove();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
