@@ -1,9 +1,15 @@
 package com.raymond.web;
 
-import com.raymond.queue.RaymondQueue;
+import com.raymond.queue.RaymondBlockingQueue;
+import com.raymond.queue.RaymondNormalQueue;
+import com.raymond.queue.RaymondQueueConsumer;
+import com.raymond.queue.RaymondQueueProducer;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Iterator;
+import java.util.concurrent.BlockingQueue;
 
 /**
  * Created by Raymond Kwong on 3/27/2016.
@@ -15,54 +21,28 @@ public class HelloController {
         return "Hello, " + name + "!";
     }
 
-    @RequestMapping("/startProducer")
-    String startProducer() {
-        RaymondQueue q = RaymondQueue.getInstance();
-        int i = 400;
-        while (i > 0) {
-            q.startProducer();
-            i--;
-        }
-
-        return "Producer Started";
-    }
-
-    @RequestMapping("/startConsumer")
-    String startConsumer() {
-        RaymondQueue q = RaymondQueue.getInstance();
-        int i = 400;
-        while (i > 0) {
-            q.startConsumer();
-            i--;
-        }
-        return "Consumer Started";
-    }
-
     @RequestMapping("/startSimulation")
     String startSimulation() {
-        RaymondQueue q = RaymondQueue.getInstance();
+        RaymondBlockingQueue q = RaymondBlockingQueue.getInstance();
 
-        int i = 400;
+        int i = 405;
         while (i > 0) {
-            q.startProducer();
+            new Thread(new RaymondQueueProducer(q)).start();//1
             i--;
         }
 
         int j = 400;
         while (j > 0) {
-            q.startConsumer();
+            new Thread(new RaymondQueueConsumer(q)).start();//1
             j--;
         }
         return "Started Simulation";
     }
 
-    @RequestMapping("/checkWaitingThreads")
+    @RequestMapping("/checkQueueSize")
     String checkWaitingThreads() {
-        RaymondQueue q = RaymondQueue.getInstance();
-        q.checkWaitingThreads();
-        return "Waiting Threads";
+        RaymondBlockingQueue q = RaymondBlockingQueue.getInstance();
+        return "QueueSize=" + q.getSize();
     }
-
-
 
 }
