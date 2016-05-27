@@ -23,20 +23,12 @@ public class RaymondBlockingQueue<T> implements RaymondQueue {
     }
 
     @Override
-    public synchronized void add(Object obj) throws InterruptedException {
-        while(blockingQueue.size() == MAX_SIZE) {
-            wait();
-        }
-        notifyAll();
+    public void add(Object obj) throws InterruptedException {
         blockingQueue.put((T) obj);
     }
 
     @Override
-    public synchronized T remove() throws InterruptedException {
-        while(blockingQueue.size() == 0) {
-            wait();
-        }
-        notifyAll();
+    public T remove() throws InterruptedException {
         return blockingQueue.take();
     }
 

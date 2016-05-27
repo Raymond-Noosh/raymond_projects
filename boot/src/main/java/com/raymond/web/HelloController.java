@@ -25,13 +25,13 @@ public class HelloController {
     String startSimulation() {
         RaymondBlockingQueue q = RaymondBlockingQueue.getInstance();
 
-        int i = 405;
+        int i = 11;
         while (i > 0) {
             new Thread(new RaymondQueueProducer(q)).start();//1
             i--;
         }
 
-        int j = 400;
+        int j = 10;
         while (j > 0) {
             new Thread(new RaymondQueueConsumer(q)).start();//1
             j--;

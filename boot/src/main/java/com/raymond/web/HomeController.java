@@ -17,7 +17,6 @@ public class HomeController {
         model.put("message", "Hello World");
         model.put("title", "Hello Home");
         model.put("date", new Date());
-        System.out.println("THE DEFAULT ONE");
         return "home";
     }
 
@@ -26,7 +25,11 @@ public class HomeController {
         model.put("message", "Hello World");
         model.put("title", "Hello Home");
         model.put("date", new Date());
-        System.out.println("THE DEFAULT TWO");
         return "home";
     }
+
+    /*@RequestMapping("/login")
+    public String login(Map<String, Object> model) {
+        return "login";
+    }*/
 }
