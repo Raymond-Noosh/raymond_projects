@@ -4,6 +4,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ import java.util.Map;
 @Controller
 public class HomeController {
     @RequestMapping("/")
-    public String home(Map<String, Object> model) {
+    public String home(Map<String, Object> model, HttpServletRequest request) {
         model.put("message", "Hello World");
         model.put("title", "Hello Home");
         model.put("date", new Date());
@@ -21,7 +22,7 @@ public class HomeController {
     }
 
     @RequestMapping("/home")
-    public String home2(Map<String, Object> model) {
+    public String home2(Map<String, Object> model, HttpServletRequest request) {
         model.put("message", "Hello World");
         model.put("title", "Hello Home");
         model.put("date", new Date());

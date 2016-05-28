@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .sessionFixation()
-                .migrateSession()
+                .newSession()
                 .maximumSessions(10)
                 .sessionRegistry(sessionRegistry()); // << this here!
     }
