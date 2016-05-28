@@ -1,11 +1,14 @@
 package com.raymond.config;
 
 import com.hazelcast.config.*;
+import com.hazelcast.core.Hazelcast;
+import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.web.SessionListener;
 import com.hazelcast.web.spring.SpringAwareWebFilter;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.session.hazelcast.config.annotation.web.http.EnableHazelcastHttpSession;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.http.HttpSessionListener;
@@ -13,8 +16,33 @@ import javax.servlet.http.HttpSessionListener;
 /**
  * Created by Raymond Kwong on 5/22/2016.
  */
+//@EnableHazelcastHttpSession
 @Configuration
 public class HazelcastConfig {
+
+    /*@Bean
+    public HazelcastInstance embeddedHazelcast() {
+        Config hazelConfig = new Config();
+        hazelConfig.setInstanceName("raymond");
+        GroupConfig groupConfig = new GroupConfig();
+        groupConfig.setName("raymond");
+        groupConfig.setPassword("raymond123");
+        hazelConfig.setGroupConfig(groupConfig);
+        NetworkConfig networkConfg = new NetworkConfig();
+        networkConfg.setPort( 5701 );
+        networkConfg.setPortAutoIncrement( true );
+        networkConfg.setPortCount( 100 );
+        JoinConfig join = networkConfg.getJoin();
+        join.getMulticastConfig().setEnabled( true );
+
+        hazelConfig.setNetworkConfig(networkConfg);
+
+        ManagementCenterConfig managementCenterConfig = new ManagementCenterConfig();
+        managementCenterConfig.setEnabled(true);
+        managementCenterConfig.setUrl("http://localhost:8080/mancenter");
+        hazelConfig.setManagementCenterConfig(managementCenterConfig);
+        return Hazelcast.newHazelcastInstance(hazelConfig);
+    }*/
 
     @Bean
     public Config hazelConfig() {
@@ -57,11 +85,6 @@ public class HazelcastConfig {
         registration.addInitParameter("map-name", "my-sessions");
         registration.addInitParameter("session-ttl-seconds", "1");
         registration.addInitParameter("cookie-name", "hazelcast.sessionId");
-        /*registration.addInitParameter("sticky-session", "true");
-        registration.addInitParameter("cookie-secure", "true");
-        registration.addInitParameter("cookie-http-only", "true");
-        registration.addInitParameter("shutdown-on-destroy", "true");*/
-
         return registration;
     }
 
