@@ -4,9 +4,9 @@ package com.raymond.map;
  * Created by Raymond Kwong on 5/28/2016.
  */
 public class RaymondMapConsumer implements Runnable{
-    private RaymondMap map;
+    private RaymondM map;
 
-    public RaymondMapConsumer(RaymondMap map) {
+    public RaymondMapConsumer(RaymondM map) {
         this.map = map;
     }
 

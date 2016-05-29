@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Raymond Kwong on 5/26/2016.
  */
-public class RaymondMap<T, K> {
+public class RaymondMap<T, K> implements RaymondM<T, K>{
     private int size;
     private RaymondEntry[] map;
 

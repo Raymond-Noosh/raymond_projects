@@ -7,9 +7,9 @@ import java.util.Random;
  */
 public class RaymondMapProducer implements Runnable {
 
-    private RaymondMap map;
+    private RaymondM map;
 
-    public RaymondMapProducer(RaymondMap map) {
+    public RaymondMapProducer(RaymondM map) {
         this.map = map;
     }
 
