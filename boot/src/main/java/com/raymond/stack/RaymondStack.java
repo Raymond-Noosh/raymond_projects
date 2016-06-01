@@ -36,7 +36,7 @@ public class RaymondStack<T> {
         return stack.size();
     }
 
-    public static void main (String args[]) {
+    /*public static void main (String args[]) {
         RaymondStack q = new RaymondStack<String>(10);
         int i = 20;
         while (i > 0) {
@@ -56,5 +56,5 @@ public class RaymondStack<T> {
             e.printStackTrace();
         }
         System.out.println("QueueSize=" + q.getSize());
-    }
+    }*/
 }

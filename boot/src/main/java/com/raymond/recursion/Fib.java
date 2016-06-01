@@ -33,12 +33,12 @@ public class Fib {
     }
 
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         long start = System.nanoTime();
         int result = newFib(25);
         long end = System.nanoTime();
         System.out.println(result);
         System.out.println(end-start+" nanoseconds");
 
-    }
+    }*/
 }

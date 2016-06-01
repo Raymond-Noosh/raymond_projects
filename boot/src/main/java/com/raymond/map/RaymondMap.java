@@ -77,7 +77,7 @@ public class RaymondMap<T, K> implements RaymondM<T, K>{
         this.map[this.map.length-1]=null;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         RaymondMap m = new RaymondMap();
         int i = 2;
         while (i > 0) {
@@ -101,6 +101,6 @@ public class RaymondMap<T, K> implements RaymondM<T, K>{
             System.out.println(e[p].getValue());
         }
         System.out.println("Size=" + m.getSize());
-    }
+    }*/
 
 }

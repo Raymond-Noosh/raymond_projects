@@ -43,3 +43,4 @@ Thumbs.db
 .settings/
 
 /target/
+/upload-dir/

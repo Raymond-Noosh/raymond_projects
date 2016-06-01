@@ -57,7 +57,7 @@ public class RaymondMultiMap<T, K> implements RaymondM<T, K> {
         return map;
     }
 
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         RaymondMultiMap m = new RaymondMultiMap();
 
         int i = 5;
@@ -90,5 +90,5 @@ public class RaymondMultiMap<T, K> implements RaymondM<T, K> {
         }
         System.out.println("Size=" + m.getSize());
 
-    }
+    }*/
 }
