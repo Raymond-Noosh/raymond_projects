@@ -16,11 +16,20 @@ import javax.servlet.http.HttpSessionListener;
 /**
  * Created by Raymond Kwong on 5/22/2016.
  */
-//@EnableHazelcastHttpSession
+//Begin Hazelcast with Spring Session
+@EnableHazelcastHttpSession
+//End Hazelcast with Spring Session
 @Configuration
 public class HazelcastConfig {
 
-    /*@Bean
+    private static final String SESSIONS_MAP_NAME = "spring:session:sessions";
+
+    private static final String TEST_MAP = "test";
+
+    private static MaxSizeConfig SMALL_USED_HEAP_SIZE_POLICY = new MaxSizeConfig(32, MaxSizeConfig.MaxSizePolicy.USED_HEAP_SIZE);//In megabytes, applies to Total Heap Cost, Owned + Backup
+
+    //Begin Hazelcast with Spring Session
+    @Bean
     public HazelcastInstance embeddedHazelcast() {
         Config hazelConfig = new Config();
         hazelConfig.setInstanceName("raymond");
@@ -39,12 +48,17 @@ public class HazelcastConfig {
 
         ManagementCenterConfig managementCenterConfig = new ManagementCenterConfig();
         managementCenterConfig.setEnabled(true);
-        managementCenterConfig.setUrl("http://localhost:8080/mancenter");
+        managementCenterConfig.setUrl("http://localhost:6080/mancenter");
         hazelConfig.setManagementCenterConfig(managementCenterConfig);
-        return Hazelcast.newHazelcastInstance(hazelConfig);
-    }*/
 
-    @Bean
+        initSessionMapConfig(hazelConfig);
+        initMapConfigs(hazelConfig);
+        return Hazelcast.newHazelcastInstance(hazelConfig);
+    }
+    //End Hazelcast with Spring Session
+
+    //Start Regular Hazelcast without Spring Session
+    /*@Bean
     public Config hazelConfig() {
         Config hazelConfig = new Config();
         hazelConfig.setInstanceName("raymond");
@@ -63,15 +77,15 @@ public class HazelcastConfig {
 
         ManagementCenterConfig managementCenterConfig = new ManagementCenterConfig();
         managementCenterConfig.setEnabled(true);
-        managementCenterConfig.setUrl("http://localhost:8080/mancenter");
+        managementCenterConfig.setUrl("http://localhost:6080/mancenter");
         hazelConfig.setManagementCenterConfig(managementCenterConfig);
 
         MapConfig mapConfig = hazelConfig.getMapConfig("my-sessions");
 
         return hazelConfig;
-    }
+    }*/
 
-    @Bean
+    /*@Bean
     public FilterRegistrationBean hazelcastFilterRegistration() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(someFilter());
@@ -97,5 +111,20 @@ public class HazelcastConfig {
     @Bean
     public com.hazelcast.web.SessionListener sessionListener() {
         return new com.hazelcast.web.SessionListener();
+    }*/
+    //End Regular Hazelcast without Spring Session
+
+    public static void initSessionMapConfig(Config config) {
+        MapConfig mySession = config.getMapConfig(SESSIONS_MAP_NAME);
+        mySession.setMaxSizeConfig(new MaxSizeConfig(256, MaxSizeConfig.MaxSizePolicy.USED_HEAP_SIZE));
+        mySession.setEvictionPolicy(EvictionPolicy.LRU);
+        mySession.setMaxIdleSeconds(45000); //750 * 60 = 45000, 12.5 hrs because our normal session timeout is 12 hours
+    }
+
+    public static void initMapConfigs(Config config) {
+        MapConfig mySession = config.getMapConfig(TEST_MAP);
+        mySession.setMaxSizeConfig(SMALL_USED_HEAP_SIZE_POLICY);
+        mySession.setEvictionPolicy(EvictionPolicy.LRU);
+        mySession.setMaxIdleSeconds(45000);
     }
 }
