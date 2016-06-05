@@ -13,16 +13,19 @@ import org.springframework.session.hazelcast.config.annotation.web.http.EnableHa
 import javax.servlet.DispatcherType;
 import javax.servlet.http.HttpSessionListener;
 
+import static com.raymond.config.HazelcastConfig.SESSIONS_MAP_NAME;
+
 /**
  * Created by Raymond Kwong on 5/22/2016.
  */
 //Begin Hazelcast with Spring Session
-@EnableHazelcastHttpSession
+//maxInactiveIntervalInSeconds here will override the Map's MaxIdleSeconds
+@EnableHazelcastHttpSession(sessionMapName = SESSIONS_MAP_NAME, maxInactiveIntervalInSeconds = 43200)
 //End Hazelcast with Spring Session
 @Configuration
 public class HazelcastConfig {
 
-    private static final String SESSIONS_MAP_NAME = "spring:session:sessions";
+    public static final String SESSIONS_MAP_NAME = "raymond-sessions";
 
     private static final String TEST_MAP = "test";
 
@@ -118,7 +121,7 @@ public class HazelcastConfig {
         MapConfig mySession = config.getMapConfig(SESSIONS_MAP_NAME);
         mySession.setMaxSizeConfig(new MaxSizeConfig(256, MaxSizeConfig.MaxSizePolicy.USED_HEAP_SIZE));
         mySession.setEvictionPolicy(EvictionPolicy.LRU);
-        mySession.setMaxIdleSeconds(45000); //750 * 60 = 45000, 12.5 hrs because our normal session timeout is 12 hours
+        //mySession.setMaxIdleSeconds(43200); //12 hrs because our normal session timeout is 12 hours
     }
 
     public static void initMapConfigs(Config config) {
