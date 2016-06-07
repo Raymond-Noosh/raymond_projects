@@ -40,22 +40,63 @@ public class RaymondBinaryTree {
         return node;
     }
 
-    public void printIt() {
-        printTree(root, root.data);
+    public Node find(int n) {
+        return find(this.root, n);
     }
 
-    private Node printTree(Node node, int data) {
+    private Node find(Node node, int data) {
         if (node == null) {
-
+            return null;
         }
         if (data < node.data) {
-            node.left = printTree(node.left, data);
+            return find(node.left, data);
+        }
+        else if (data > node.data) {
+            return find(node.right, data);
         }
         else {
-            node.right = printTree(node.right, data);
+            return node;
         }
+    }
+
+    public Node findWhile(int data) {
+        return findWhile(this.root, data);
+    }
+
+    private Node findWhile(Node node, int data) {
+        if (node == null) {
+            return null;
+        }
+        
+        while (data < node.data) {
+            node = node.left;
+        }
+        while (data > node.data) {
+            node = node.right;
+        }
+
         return node;
     }
+
+    public void printIt() {
+        inOrderTraversal(root);
+    }
+
+    private void inOrderTraversal(Node node) {
+        if (node != null) {
+            inOrderTraversal(node.left);
+            System.out.println(node.data);
+            inOrderTraversal(node.right);
+        }
+    }
+
+    /*private void postOrder(Node node) {
+        if (node != null) {
+            inOrder(node.left);
+            System.out.println(node.data);
+            inOrder(node.right);
+        }
+    }*/
 
     public static void main (String args[]) {
         RaymondBinaryTree raymondBinaryTree = new RaymondBinaryTree();
@@ -66,5 +107,11 @@ public class RaymondBinaryTree {
         raymondBinaryTree.insert(3);
         raymondBinaryTree.insert(6);
         raymondBinaryTree.insert(10);
+
+        Node d = raymondBinaryTree.find(6);
+
+        Node a = raymondBinaryTree.findWhile(6);
+        System.out.println("test");
+        raymondBinaryTree.printIt();
     }
 }
