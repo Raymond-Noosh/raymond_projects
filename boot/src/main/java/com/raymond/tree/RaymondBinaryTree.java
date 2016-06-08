@@ -1,5 +1,7 @@
 package com.raymond.tree;
 
+import java.util.Stack;
+
 /**
  * Created by Raymond Kwong on 6/5/2016.
  */
@@ -64,10 +66,17 @@ public class RaymondBinaryTree {
     }
 
     private Node findWhile(Node node, int data) {
+        Stack s = new Stack();
+        if (node != null) {
+            s.add(node.left);
+            while (!s.isEmpty()) {
+                s.peek();
+            }
+        }
         if (node == null) {
             return null;
         }
-        
+
         while (data < node.data) {
             node = node.left;
         }
@@ -78,8 +87,45 @@ public class RaymondBinaryTree {
         return node;
     }
 
-    public void printIt() {
-        inOrderTraversal(root);
+    void inorder() {
+        if (root == null) {
+            return;
+        }
+
+        //keep the nodes in the path that are waiting to be visited
+        Stack<Node> stack = new Stack<Node>();
+        Node node = root;
+
+        //first node to be visited will be the left one
+        while (node != null) {
+            stack.push(node);
+            node = node.left;
+        }
+
+        // traverse the tree
+        while (stack.size() > 0) {
+
+            // visit the top node
+            node = stack.pop();
+            System.out.print(node.data + " ");
+            if (node.right != null) {
+                node = node.right;
+
+                // the next node to be visited is the leftmost
+                while (node != null) {
+                    stack.push(node);
+                    node = node.left;
+                }
+            }
+        }
+    }
+
+    /*
+    Inorder Traversal
+    In this traversal method, the left left-subtree is visited first, then root and then the right sub-tree.
+     */
+    public void inOrderPrint() {
+        inOrderTraversal(this.root);
     }
 
     private void inOrderTraversal(Node node) {
@@ -90,13 +136,37 @@ public class RaymondBinaryTree {
         }
     }
 
-    /*private void postOrder(Node node) {
+    /*
+    Preorder
+    In this traversal method, the root node is visited first, then left subtree and finally right sub-tree.
+    */
+    public void preOrderPrint() {
+        preOrderTraversal(this.root);
+    }
+
+    private void preOrderTraversal(Node node) {
         if (node != null) {
-            inOrder(node.left);
             System.out.println(node.data);
-            inOrder(node.right);
+            preOrderTraversal(node.left);
+            preOrderTraversal(node.right);
         }
-    }*/
+    }
+
+    /**
+     Postorder Traversal
+     In this traversal method, the root node is visited last, hence the name. First we traverse left subtree, then right subtree and finally root.
+     */
+    public void postOrderPrint() {
+        postOrderTraversal(this.root);
+    }
+
+    private void postOrderTraversal(Node node) {
+        if (node != null) {
+            postOrderTraversal(node.left);
+            postOrderTraversal(node.right);
+            System.out.println(node.data);
+        }
+    }
 
     public static void main (String args[]) {
         RaymondBinaryTree raymondBinaryTree = new RaymondBinaryTree();
@@ -109,9 +179,14 @@ public class RaymondBinaryTree {
         raymondBinaryTree.insert(10);
 
         Node d = raymondBinaryTree.find(6);
+        //Node a = raymondBinaryTree.findWhile(6);
 
-        Node a = raymondBinaryTree.findWhile(6);
-        System.out.println("test");
-        raymondBinaryTree.printIt();
+        raymondBinaryTree.inOrderPrint();
+        System.out.println("-----------");
+        //raymondBinaryTree.preOrderPrint();
+        //System.out.println("-----------");
+        //raymondBinaryTree.postOrderPrint();
+        //System.out.println("-----------");
+        raymondBinaryTree.inorder();
     }
 }
