@@ -8,5 +8,10 @@ function click5(e) {
 }
 
 function click4(e) {
-    window.open('https://storelocator.staples.com/?locale=en_US_cp&returnurl=http://localhost:8080/store', 'winStoreLocator', 'width=1020,height=725,frameBorder=0,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no');
+    console.info(e);
+    window.open('https://storelocator.staples.com/?locale=en_US_cp&returnurl=http://localhost:8080'+e, 'winStoreLocator', 'width=1020,height=725,frameBorder=0,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no');
+}
+
+function updateStore(storeId) {
+    console.info(storeId);
 }
