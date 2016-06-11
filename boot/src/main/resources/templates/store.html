@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    var storeId = window.location.search.substring(10);
+    window.opener.updateStore(storeId);
+    window.close();
+</script>
+</body>
+</html>

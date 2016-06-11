@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.Map;
 
@@ -22,7 +23,7 @@ public class HomeController {
     }
 
     @RequestMapping("/home")
-    public String home2(Map<String, Object> model, HttpServletRequest request) {
+    public String home2(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) {
         model.put("message", "Hello World");
         model.put("title", "Hello Home");
         model.put("date", new Date());
@@ -35,12 +36,17 @@ public class HomeController {
     }*/
 
     @RequestMapping("/test")
-    public String test(Map<String, Object> model, HttpServletRequest request) {
+    public String test(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) {
         return "test";
     }
 
     @RequestMapping("/popup")
-    public String popup(Map<String, Object> model, HttpServletRequest request) {
+    public String popup(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) {
         return "popup";
+    }
+
+    @RequestMapping("/store")
+    public String store(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) {
+        return "store";
     }
 }
