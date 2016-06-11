@@ -14,4 +14,6 @@ function click4(e) {
 
 function updateStore(storeId) {
     console.info(storeId);
+    $("#storeNumber").val(storeId);
+
 }
