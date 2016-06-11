@@ -44,3 +44,7 @@ Thumbs.db
 
 /target/
 /upload-dir/
+
+# Dependency directories
+node_modules
+bower_components

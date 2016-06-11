@@ -36,7 +36,11 @@ public class HomeController {
 
     @RequestMapping("/test")
     public String test(Map<String, Object> model, HttpServletRequest request) {
-
         return "test";
+    }
+
+    @RequestMapping("/popup")
+    public String popup(Map<String, Object> model, HttpServletRequest request) {
+        return "popup";
     }
 }

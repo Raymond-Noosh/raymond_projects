@@ -22,14 +22,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().authenticated();
+        /*http.authorizeRequests().anyRequest().authenticated();
         http.formLogin().failureUrl("/login?error")
                 .defaultSuccessUrl("/")
                 .loginPage("/login")
                 .permitAll()
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
-                .permitAll();
+                .permitAll();*/
+
+        http.authorizeRequests().antMatchers("/login").permitAll().anyRequest()
+                .fullyAuthenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/home")
+                .failureUrl("/login?error").and().logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).and()
+                .exceptionHandling().accessDeniedPage("/access?error");
+
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .sessionFixation()
