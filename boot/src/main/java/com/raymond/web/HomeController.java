@@ -33,4 +33,10 @@ public class HomeController {
     public String login(Map<String, Object> model) {
         return "login";
     }*/
+
+    @RequestMapping("/test")
+    public String test(Map<String, Object> model, HttpServletRequest request) {
+
+        return "test";
+    }
 }

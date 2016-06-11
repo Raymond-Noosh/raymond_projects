@@ -168,7 +168,7 @@ public class RaymondBinaryTree {
         }
     }
 
-    public static void main (String args[]) {
+    /*public static void main (String args[]) {
         RaymondBinaryTree raymondBinaryTree = new RaymondBinaryTree();
         raymondBinaryTree.insert(5);
         raymondBinaryTree.insert(7);
@@ -188,5 +188,5 @@ public class RaymondBinaryTree {
         //raymondBinaryTree.postOrderPrint();
         //System.out.println("-----------");
         raymondBinaryTree.inorder();
-    }
+    }*/
 }
