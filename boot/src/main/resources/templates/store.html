@@ -5,9 +5,13 @@
     <title></title>
 </head>
 <body>
+<script th:src="@{/js/bower_components/jquery/dist/jquery.min.js}"></script>
 <script type="text/javascript">
     var storeId = window.location.search.substring(10);
-    window.opener.updateStore(storeId);
+    var doc = window.opener.document;
+    $(doc.documentElement).find('input[name="storeNumber"]').val(storeId); //works
+    //doc.getElementById("storeNumber").value=storeId; //works
+    //window.opener.updateStore(storeId); //works
     window.close();
 </script>
 </body>
