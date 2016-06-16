@@ -136,6 +136,27 @@ public class RaymondBinaryTree {
         }
     }
 
+    void preorder() {
+        if (root == null) {
+            return;
+        }
+        Node node = root;
+        Stack<Node> stack = new Stack<Node>();
+        stack.push(node);
+
+        while (!stack.isEmpty()) {
+            node = stack.pop();
+            System.out.print(node.data + " ");
+
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+        }
+    }
+
     /*
     Preorder
     In this traversal method, the root node is visited first, then left subtree and finally right sub-tree.
@@ -149,6 +170,35 @@ public class RaymondBinaryTree {
             System.out.println(node.data);
             preOrderTraversal(node.left);
             preOrderTraversal(node.right);
+        }
+    }
+
+    public void postorder() {
+        if (root == null) {
+            return;
+        }
+        Stack<Node> stack = new Stack<>();
+        Node node = root;
+        stack.push(node);
+
+        while (node.left != null) {
+            stack.push(node.left);
+        }
+
+        while (!stack.isEmpty()) {
+            node = stack.peek();
+
+            if (node.right != null) {
+
+
+                stack.push(node.right);
+            }
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+
+            System.out.println(node.data + " ");
+            stack.pop();
         }
     }
 
@@ -181,12 +231,13 @@ public class RaymondBinaryTree {
         Node d = raymondBinaryTree.find(6);
         //Node a = raymondBinaryTree.findWhile(6);
 
-        raymondBinaryTree.inOrderPrint();
-        System.out.println("-----------");
+        //raymondBinaryTree.inOrderPrint();
+        //System.out.println("-----------");
         //raymondBinaryTree.preOrderPrint();
         //System.out.println("-----------");
-        //raymondBinaryTree.postOrderPrint();
+        raymondBinaryTree.postOrderPrint();
         //System.out.println("-----------");
-        raymondBinaryTree.inorder();
+        //raymondBinaryTree.inorder();
+        //raymondBinaryTree.preorder();
     }*/
 }

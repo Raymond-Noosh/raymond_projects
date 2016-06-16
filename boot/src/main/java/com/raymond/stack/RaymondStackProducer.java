@@ -16,7 +16,7 @@ public class RaymondStackProducer<T> implements Runnable{
     @Override
     public void run() {
         try {
-            producer.push("1");
+            producer.push(""+System.nanoTime());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

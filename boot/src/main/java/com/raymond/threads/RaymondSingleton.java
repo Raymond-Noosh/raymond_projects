@@ -30,6 +30,7 @@ public class RaymondSingleton {
             synchronized(RaymondSingleton.class) {
                 result = helper;
                 if (result == null) {
+                    System.out.println("aaa");
                     helper = result = new RaymondSingleton();
                 }
             }
@@ -42,6 +43,7 @@ public class RaymondSingleton {
         if (helper2 == null) {
             synchronized(RaymondSingleton.class) {
                 if (helper2 == null) {
+                    System.out.println("bbb");
                     helper2 = new RaymondSingleton();
                 }
             }
