@@ -51,7 +51,7 @@ public class HazelcastConfig {
 
         ManagementCenterConfig managementCenterConfig = new ManagementCenterConfig();
         managementCenterConfig.setEnabled(true);
-        managementCenterConfig.setUrl("http://localhost:6080/mancenter");
+        managementCenterConfig.setUrl("http://localhost:5080/mancenter");
         hazelConfig.setManagementCenterConfig(managementCenterConfig);
 
         initSessionMapConfig(hazelConfig);

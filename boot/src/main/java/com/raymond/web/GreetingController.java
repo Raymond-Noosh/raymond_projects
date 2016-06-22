@@ -1,19 +1,11 @@
 package com.raymond.web;
 
-import com.hazelcast.cache.HazelcastCachingProvider;
-import com.hazelcast.config.Config;
-import com.hazelcast.core.Hazelcast;
-import com.hazelcast.spring.cache.HazelcastCache;
-import com.hazelcast.spring.cache.HazelcastCacheManager;
 import com.raymond.service.MathService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
-import org.springframework.cache.annotation.Caching;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.slf4j.Logger;

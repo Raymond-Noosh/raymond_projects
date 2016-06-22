@@ -42,11 +42,11 @@ public class C3IOTProblem {
         return response;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         int[] time = new int[]{3,5,6,2,1,4,6,9};
         int[] abc = larger(time);
         for (int i = 0; i < abc.length; i++) {
             System.out.print(abc[i] + " ");
         }
-    }
+    }*/
 }
