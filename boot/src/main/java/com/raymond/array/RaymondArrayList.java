@@ -37,7 +37,7 @@ public class RaymondArrayList {
         return array[index];
     }
 
-    public static void main (String[] args) {
+    /*public static void main (String[] args) {
         RaymondArrayList a = new RaymondArrayList(5);
         a.add("15");//0
         a.add("16");//1
@@ -46,6 +46,6 @@ public class RaymondArrayList {
         a.add("19");//4
         a.add("20");//5
         System.out.println(a.get(4));
-    }
+    }*/
 
 }

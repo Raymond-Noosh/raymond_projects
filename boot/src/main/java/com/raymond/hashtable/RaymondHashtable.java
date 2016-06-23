@@ -1,32 +1,33 @@
 package com.raymond.hashtable;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by Raymond Kwong on 6/21/2016.
  */
-public class RaymondHashtable<T> {
+public class RaymondHashTable<T> {
 
-    public int size = 33;
-
+    private int size;
     private List<T>[] table;
 
-    public RaymondHashtable() {
-        table = new ArrayList[size];
+    public RaymondHashTable(int size) {
+        this.size = size;
+        table = new LinkedList[size];
     }
 
-    public void insert(T value) {
+    public synchronized void put(T value) {
         int index = getHashCode(value);
         List<T> subList = table[index];
         if (subList == null) {
-            subList = new ArrayList<T>();
+            subList = new LinkedList<T>();
         }
         subList.add(value);
         table[index] = subList;
     }
 
-    public T get(T value) {
+    public synchronized T get(T value) {
         List<T> subList = table[getHashCode(value)];
         if (subList != null) {
             for (T s : subList) {
@@ -39,13 +40,21 @@ public class RaymondHashtable<T> {
     }
 
     public int getHashCode(T key) {
-        return key.hashCode() % size;
+        return Arrays.hashCode(new Object[]{key}) % this.size;
+    }
+
+    public synchronized void printAllAtIndex(int index) {
+        List<T> row = table[index];
+        if (row != null) {
+            row.forEach(System.out::println);
+        }
     }
 
     public static void main(String args[]) {
-        RaymondHashtable<String> hash = new RaymondHashtable<String>();
-        hash.insert("abc");
-        System.out.println(hash.get("ddd"));
+        RaymondHashTable<String> hash = new RaymondHashTable<String>(31);
+        hash.put("abc");
+        hash.printAllAtIndex(6);
+        System.out.println(hash.get("abc"));
     }
 
 }

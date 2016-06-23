@@ -32,6 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll();*/
         /*http.headers()
                 .frameOptions().sameOrigin();*/
+        http.csrf().disable();
         http.authorizeRequests().antMatchers("/login").permitAll().anyRequest()
                 .fullyAuthenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/home")
                 .failureUrl("/login?error").and().logout()

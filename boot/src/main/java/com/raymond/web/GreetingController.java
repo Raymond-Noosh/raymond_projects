@@ -30,6 +30,7 @@ public class GreetingController {
 
     @RequestMapping("/greeting")
     public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name, Map<String, Object> model, HttpServletRequest request) {
+        System.out.println("System out test");
         logger.info("greeting got called");
         logger.info(name2);
 

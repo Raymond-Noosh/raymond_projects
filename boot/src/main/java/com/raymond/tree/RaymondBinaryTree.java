@@ -220,13 +220,13 @@ public class RaymondBinaryTree {
 
     /*public static void main (String args[]) {
         RaymondBinaryTree raymondBinaryTree = new RaymondBinaryTree();
-        raymondBinaryTree.insert(5);
-        raymondBinaryTree.insert(7);
-        raymondBinaryTree.insert(4);
-        raymondBinaryTree.insert(9);
-        raymondBinaryTree.insert(3);
-        raymondBinaryTree.insert(6);
-        raymondBinaryTree.insert(10);
+        raymondBinaryTree.put(5);
+        raymondBinaryTree.put(7);
+        raymondBinaryTree.put(4);
+        raymondBinaryTree.put(9);
+        raymondBinaryTree.put(3);
+        raymondBinaryTree.put(6);
+        raymondBinaryTree.put(10);
 
         Node d = raymondBinaryTree.find(6);
         //Node a = raymondBinaryTree.findWhile(6);
