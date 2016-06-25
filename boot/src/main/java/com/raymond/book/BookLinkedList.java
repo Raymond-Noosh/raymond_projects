@@ -47,7 +47,7 @@ public class BookLinkedList<T> {
 
 
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         LinkedList<String> list = new LinkedList<>();
         list.add("abc");
         list.add("ghi");
@@ -71,5 +71,5 @@ public class BookLinkedList<T> {
         l.deleteMiddleNode(linkedList.getNode("c"));
         linkedList.print();
 
-    }
+    }*/
 }

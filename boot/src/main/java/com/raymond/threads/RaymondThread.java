@@ -10,8 +10,8 @@ public class RaymondThread extends Thread {
         super.run();
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         RaymondThread thread = new RaymondThread();
         thread.run();
-    }
+    }*/
 }

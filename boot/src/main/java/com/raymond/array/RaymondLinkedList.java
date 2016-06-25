@@ -93,7 +93,7 @@ public class RaymondLinkedList<T> {
         System.out.print(temp.data+ " ");
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         RaymondLinkedList<String> linkedList = new RaymondLinkedList<>();
         linkedList.insert("abc");
         linkedList.insert("def");
@@ -101,7 +101,7 @@ public class RaymondLinkedList<T> {
         linkedList.delete("ghi");
         System.out.println(linkedList.getNode("def").data);
         linkedList.print();
-    }
+    }*/
 
 
 }

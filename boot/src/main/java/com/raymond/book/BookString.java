@@ -119,11 +119,13 @@ public class BookString {
         return true;
     }
 
-    public static void main (String[] args) {
+
+
+    /*public static void main (String[] args) {
         BookString book = new BookString();
         System.out.println(book.checkUniqueCharacters("Abc"));
         System.out.println(book.checkUnique2("Abc"));
         System.out.println(book.checkPermutation1("abcc", "acbb"));
         System.out.println(book.checkPermutation2("abcc", "acbb"));
-    }
+    }*/
 }

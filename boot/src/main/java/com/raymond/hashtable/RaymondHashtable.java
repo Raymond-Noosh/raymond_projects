@@ -50,11 +50,11 @@ public class RaymondHashTable<T> {
         }
     }
 
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         RaymondHashTable<String> hash = new RaymondHashTable<String>(31);
         hash.put("abc");
         hash.printAllAtIndex(6);
         System.out.println(hash.get("abc"));
-    }
+    }*/
 
 }

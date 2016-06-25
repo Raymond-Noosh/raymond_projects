@@ -29,8 +29,8 @@ public class RaymondRunnable implements Runnable {
         this.ray = ray;
     }
 
-    public static void main (String[] args) {
+    /*public static void main (String[] args) {
         Thread one = new Thread(new RaymondRunnable());
         one.start();
-    }
+    }*/
 }
