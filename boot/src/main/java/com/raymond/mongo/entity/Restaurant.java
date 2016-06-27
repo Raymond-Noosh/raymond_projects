@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Restaurant {
     @Id
     private String id;
-    private String address;
+    private Address address;
     private String borough;
     private String cuisine;
     private String grades;
@@ -20,7 +20,7 @@ public class Restaurant {
     public Restaurant() {
     }
 
-    public Restaurant(String address, String borough, String cuisine, String grades, String name, String restaurant_id) {
+    public Restaurant(Address address, String borough, String cuisine, String grades, String name, String restaurant_id) {
         this.address = address;
         this.borough = borough;
         this.cuisine = cuisine;
@@ -37,11 +37,11 @@ public class Restaurant {
         this.id = id;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 

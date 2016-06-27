@@ -1,6 +1,7 @@
 package com.raymond.mongo;
 
 import com.raymond.mongo.dto.RestaurantDto;
+import com.raymond.mongo.entity.Address;
 import com.raymond.mongo.entity.Restaurant;
 import com.raymond.mongo.repository.RestaurantRepository;
 import com.raymond.mongo.service.RestaurantService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,9 +22,38 @@ public class RestaurantController {
     @Autowired
     private RestaurantService restaurantService;
 
+    @Autowired
+    private RestaurantRepository restaurantRepository;
+
     @RequestMapping("/mongo")
-    public @ResponseBody List<RestaurantDto> mongo() {
-        List<RestaurantDto> restaurantList = restaurantService.findByBorough("Queens2");
-        return restaurantList;
+    public @ResponseBody Restaurant mongo() {
+        Address address = new Address();
+        address.setBuilding("97-22");
+        List<String> coor = new ArrayList<>();
+        coor.add("-73.8601152");
+        coor.add("40.7311739");
+        address.setCoord(coor);
+        address.setStreet("63 Road");
+        address.setZipcode("11374");
+        Restaurant restaurant = restaurantRepository.findByAddress(address);
+        return restaurant;
+    }
+
+    @RequestMapping("/findRestaurant")
+    public @ResponseBody List<RestaurantDto> findRestaurant() {
+        List<RestaurantDto> restaurant = restaurantService.findByBorough("Queens2");
+        return restaurant;
+    }
+
+    @RequestMapping("/findByAddressStreet")
+    public @ResponseBody List<Restaurant> findByAddressStreet() {
+        List<Restaurant> restaurant = restaurantRepository.findByAddressStreet("63 Road", "Queens2");
+        return restaurant;
+    }
+
+    @RequestMapping("/findByAddressStreetSmall")
+    public @ResponseBody List<Address> findByAddressStreetSmall() {
+        List<Address> addresses = restaurantRepository.findByAddressStreetSmall("63 Road", "Queens2");
+        return addresses;
     }
 }

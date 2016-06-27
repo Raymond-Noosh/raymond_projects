@@ -5,7 +5,7 @@ package com.raymond.mongo.dto;
  */
 public class RestaurantDto {
     private String id;
-    private String address;
+    private AddressDto address;
     private String borough;
     private String cuisine;
     private String grades;
@@ -20,11 +20,11 @@ public class RestaurantDto {
         this.id = id;
     }
 
-    public String getAddress() {
+    public AddressDto getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(AddressDto address) {
         this.address = address;
     }
 
