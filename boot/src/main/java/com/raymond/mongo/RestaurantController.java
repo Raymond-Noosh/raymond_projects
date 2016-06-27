@@ -39,21 +39,21 @@ public class RestaurantController {
         return restaurant;
     }
 
-    @RequestMapping("/findRestaurant")
-    public @ResponseBody List<RestaurantDto> findRestaurant() {
-        List<RestaurantDto> restaurant = restaurantService.findByBorough("Queens2");
+    @RequestMapping("/findByBorough")
+    public @ResponseBody List<RestaurantDto> findByBorough() {
+        List<RestaurantDto> restaurant = restaurantService.findByBorough("Brooklyn");
         return restaurant;
     }
 
     @RequestMapping("/findByAddressStreet")
     public @ResponseBody List<Restaurant> findByAddressStreet() {
-        List<Restaurant> restaurant = restaurantRepository.findByAddressStreet("63 Road", "Queens2");
+        List<Restaurant> restaurant = restaurantRepository.findByAddressStreet("63 Road", "Brooklyn");
         return restaurant;
     }
 
-    @RequestMapping("/findByAddressStreetSmall")
-    public @ResponseBody List<Address> findByAddressStreetSmall() {
-        List<Address> addresses = restaurantRepository.findByAddressStreetSmall("63 Road", "Queens2");
+    @RequestMapping("/findByBoroughReturnAddress")
+    public @ResponseBody List<Restaurant> findByBoroughReturnAddress() {
+        List<Restaurant> addresses = restaurantRepository.findByBoroughReturnAddress("Brooklyn");
         return addresses;
     }
 }

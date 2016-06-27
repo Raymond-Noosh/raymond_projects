@@ -25,6 +25,6 @@ public interface RestaurantRepository extends PagingAndSortingRepository<Restaur
     @Query(value="{ 'address.street' : ?0, 'borough' : ?1 }")
     public List<Restaurant> findByAddressStreet(String street, String borough);
 
-    @Query(value="{ 'address.street' : ?0, 'borough' : ?1 }", fields="{ 'address.building' : 1}")
-    public List<Address> findByAddressStreetSmall(String street, String borough);
+    @Query(value="{ 'borough' : ?0 }", fields="{ 'address' : 1}")
+    public List<Restaurant> findByBoroughReturnAddress(String borough);
 }
