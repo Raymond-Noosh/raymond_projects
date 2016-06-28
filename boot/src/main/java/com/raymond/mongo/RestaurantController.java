@@ -6,6 +6,8 @@ import com.raymond.mongo.entity.Restaurant;
 import com.raymond.mongo.repository.RestaurantRepository;
 import com.raymond.mongo.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,6 +56,18 @@ public class RestaurantController {
     @RequestMapping("/findByBoroughReturnAddress")
     public @ResponseBody List<Restaurant> findByBoroughReturnAddress() {
         List<Restaurant> addresses = restaurantRepository.findByBoroughReturnAddress("Brooklyn");
+        return addresses;
+    }
+
+    @RequestMapping("/findUsingMatchOperation")
+    public @ResponseBody List<Restaurant> findUsingMatchOperation() {
+        List<Restaurant> addresses = restaurantService.findUsingMatchOperation();
+        return addresses;
+    }
+
+    @RequestMapping("/findUsingAggregationOperation")
+    public @ResponseBody List<Restaurant> findUsingAggregationOperation() {
+        List<Restaurant> addresses = restaurantService.findUsingAggregationOperation();
         return addresses;
     }
 }

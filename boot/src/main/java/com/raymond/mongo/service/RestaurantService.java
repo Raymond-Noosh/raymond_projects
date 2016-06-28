@@ -14,4 +14,8 @@ public interface RestaurantService {
     public List<RestaurantDto> findByCuisine(String cuisine);
 
     List<RestaurantDto> findAll();
+
+    public List<Restaurant> findUsingMatchOperation();
+
+    public List<Restaurant>  findUsingAggregationOperation();
 }
