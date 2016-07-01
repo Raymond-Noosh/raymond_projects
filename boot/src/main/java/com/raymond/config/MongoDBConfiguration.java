@@ -1,30 +1,29 @@
 package com.raymond.config;
 
-import com.mongodb.Mongo;
-import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDbFactory;
-import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 
 /**
  * Created by Raymond Kwong on 6/27/2016.
  */
-//@Configuration
+//mongo --host localhost:27017,localhost:27018,localhost:27019
+@Configuration
 public class MongoDBConfiguration {
-    @Bean
-    public MongoDbFactory getMongoDbFactory() throws Exception {
-        return new SimpleMongoDbFactory(new MongoClient("localhost",27017), "test");
+    private MongoClientURI mongo() throws Exception {
+        return new MongoClientURI("mongodb://localhost:27017,localhost:27018,localhost:27019/dist?replicaSet=rs0");
     }
 
     @Bean
-    public MongoTemplate getMongoTemplate() throws Exception {
-        MongoTemplate mongoTemplate = new MongoTemplate(getMongoDbFactory());
-
-        return mongoTemplate;
+    public MongoDbFactory mongoDbFactory() throws Exception {
+        return new SimpleMongoDbFactory(mongo());
     }
 
-
+    @Bean
+    public MongoTemplate mongoTemplate() throws Exception {
+        return new MongoTemplate(mongoDbFactory());
+    }
 }
