@@ -10,11 +10,12 @@ import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 /**
  * Created by Raymond Kwong on 6/27/2016.
  */
-//mongo --host localhost:27017,localhost:27018,localhost:27019
+//mongo --host rs0/localhost:27017,localhost:27018,localhost:27019
+//mongo --host rs0/localhost:27017,localhost:27018,localhost:27019 dist -u "admin" -p "password" --authenticationDatabase "admin"
 @Configuration
 public class MongoDBConfiguration {
     private MongoClientURI mongo() throws Exception {
-        return new MongoClientURI("mongodb://localhost:27017,localhost:27018,localhost:27019/dist?replicaSet=rs0");
+        return new MongoClientURI("mongodb://dist:dist_app@localhost:27017,localhost:27018,localhost:27019/dist?replicaSet=rs0");
     }
 
     @Bean
