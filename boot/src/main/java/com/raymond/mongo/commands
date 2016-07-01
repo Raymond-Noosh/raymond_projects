@@ -1,0 +1,117 @@
+mongoimport -u "admin" -p "password" --authenticationDatabase "admin" -d dist -c restaurants --drop --file primer-dataset.json
+
+mongoimport --jsonArray -d dist -c users2 --file users.json
+
+mongoimport --jsonArray -d dist -c web_heirarchy --file specific_web_heirarchy.json
+
+mongoimport --jsonArray -d dist -c config_heirarchy --file specific_config_heirarchy.json
+
+mongoimport --jsonArray -d dist -c template --file specific_template.json
+
+mongoimport --jsonArray -d dist -c template_cost --file specific_template_cost.json
+
+
+--Restaurant
+db.getCollection('restaurants').find({"address.street":"63 Road"})
+
+db.getCollection('restaurants').find({"borough":"Brooklyn"})
+
+db.getCollection('restaurants').find({"address.street":"63 Road", "borough":"Queens2"}, { "address": 5 })
+
+db.getCollection('restaurants').find({ 'address.street' : '63 Road', 'borough' : 'Queens2' }, { 'address' : 1})
+
+db.getCollection('restaurants').find({"address.street":"63 Road", "borough":"Queens2"}, { "address": { $slice: 5 } })
+
+db.getCollection('restaurants').find({"grades.grade":"Z"}, { "grades.$": 1 })
+
+
+--Config Heirarchy
+db.getCollection('config_heirarchy').find({"attrCtgry.attrCtgryId":"A7"})
+
+db.getCollection('config_heirarchy').find({"configAttrName.attrNameId":"N6"})
+
+db.getCollection('config_heirarchy').find({"configAttrName.attrNameId":"N1"})
+
+db.getCollection('config_heirarchy').find({"configAttrValue.attrValueId":"V51"})
+
+db.getCollection('config_heirarchy').find({"configAttrName.attrNameId":"N1"}, { "configAttrName": 1 })
+
+db.getCollection('config_heirarchy').find({"configAttrName.attrNameId":"N1"}, { "configAttrValue": 1 })
+
+db.getCollection('config_heirarchy').find({"configAttrName.attrNameId":"N1"}, { "configAttrValue": 1 })
+
+db.getCollection('config_heirarchy').find({"configAttrName.attrNameId":"N1", "configAttrValue.attrValueId":"V51"})
+
+db.getCollection('config_heirarchy').find({"configAttrName.attrNameId":"N3", "configAttrValue.attrValueId":"V135"})
+
+db.getCollection('config_heirarchy').find({"configAttrName.attrNameId":"N4", "configAttrValue.attrValueId":"V237"})
+
+db.getCollection('template').find({"tplCfgMapList.configAttrDetailMapList.configAttrValueId":"V51"}, {"tplCfgMapList.configAttrDetailMapList":1})
+
+--Web Heirarchy
+db.getCollection('web_heirarchy').find({"hierarchyDetailId":"C63"})
+
+db.getCollection('web_heirarchy').find({"parentHierarchyDetailId":"N1"})
+
+db.getCollection('template').find({"tplCfgMapList.configAttrDetailMapList.configAttrNameId":"N1"})
+
+
+--Steps for creating shards
+
+mongod --auth --port 27017 --dbpath C:\data\rs0-0 --replSet rs0 --smallfiles --oplogSize 128
+
+mongod --auth --port 27018 --dbpath C:\data\rs0-1 --replSet rs0 --smallfiles --oplogSize 128
+
+mongod --auth --port 27019 --dbpath C:\data\rs0-2 --replSet rs0 --smallfiles --oplogSize 128
+
+mongod --config "C:\data\mongod0.cfg"
+mongod --config "C:\data\mongod1.cfg"
+mongod --config "C:\data\mongod2.cfg"
+
+rs.initiate(
+  {
+    _id: "rs0",
+    members: [
+      { _id : 0, host : "localhost:27017" },
+      { _id : 1, host : "localhost:27018" },
+      { _id : 2, host : "localhost:27019" }
+    ]
+  }
+)
+
+--Create Users
+
+use admin
+db.createUser(
+  {
+    user: "root",
+    pwd: "C@ssi0pei@",
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
+  }
+);
+
+use admin
+db.createUser(
+  {
+    user: "admin",
+    pwd: "password",
+    roles: [ { role: "root", db: "admin" } ]
+  }
+);
+
+use admin
+db.createUser(
+  {
+    user: "dist",
+    pwd: "dist_app",
+    roles: [ { role: "dbOwner", db: "dist" } ]
+  }
+);
+
+openssl rand -base64 755 > C:\data\key.txt
+
+mongo -u "admin" -p "password" --authenticationDatabase "admin"
+
+mongo -u "root" -p "C@ssi0pei@" --authenticationDatabase "admin"
+
+mongo -u "admin" -p "password" --authenticationDatabase "dist"
