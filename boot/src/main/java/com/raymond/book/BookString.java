@@ -1,5 +1,9 @@
 package com.raymond.book;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Hashtable;
+
 /**
  * Created by Raymond Kwong on 6/22/2016.
  */
@@ -119,13 +123,275 @@ public class BookString {
         return true;
     }
 
+    //Replace spaces with %20
+    public String urlify(String url) {
+        char[] stringChar = url.toCharArray();
+        int numberOfSpaces = 0;
+        for (int i = 0; i < stringChar.length; i++) {//A BC
+            if (stringChar[i] == ' ') {
+                numberOfSpaces++;
+            }
+        }
+        char[] increasedSize = new char[stringChar.length + (numberOfSpaces*3)];
+        int j = 0;
+        for (int i = 0; i < stringChar.length; i++) {//A BC
+            increasedSize[j] = stringChar[i];
+            if (stringChar[i] == ' ') {
+                increasedSize[j] = 37;
+                increasedSize[j + 1] = 50;
+                increasedSize[j + 2] = 48;
+                j = j + 2;
+            }
+            j++;
+        }
+        return new String(increasedSize);
+    }
 
+    public String urlify2(char[] url, int length) {
+        int numberOfSpaces = 0;
+        for (int i = 0; i < url.length; i++) {//A BC
+            if (url[i] == ' ') {
+                numberOfSpaces++;
+            }
+        }
+        char[] increasedSize = new char[length + (numberOfSpaces*3)];
+        int j = 0;
+        for (int i = 0; i < url.length; i++) {//A BC
+            increasedSize[j] = url[i];
+            if (url[i] == ' ') {
+                increasedSize[j] = 37;
+                increasedSize[j + 1] = 50;
+                increasedSize[j + 2] = 48;
+                j = j + 2;
+            }
+            j++;
+        }
+        return new String(increasedSize);
+    }
 
-    /*public static void main (String[] args) {
+    public String urlify3(char[] url, int length) { //4
+        int numberOfSpaces = 0;
+        for (int i = 0; i < url.length; i++) {
+            if (url[i] == ' ') {
+                numberOfSpaces++;
+            }
+        }
+        char[] increasedSize = new char[length + (numberOfSpaces*3)];
+        int counter = length + (numberOfSpaces*3) - 1;
+        for (int i = length - 1; i >= 0; i--) {
+            if (url[i] == ' ') {
+                increasedSize[counter] = '0';
+                increasedSize[counter-1] = '2';
+                increasedSize[counter-2] = '%';
+                counter = counter - 3;
+            }
+            else {
+                increasedSize[counter] = url[i];
+                counter--;
+            }
+        }
+        return new String(increasedSize);
+    }
+
+    //Palindrome Permutation
+    //Tact Coa -> true, taco cat
+    public boolean palindromePermutation(String str) {
+        //as I go from left to right, I remove the letters that match, if one or none remain, true
+        String temp = str.toUpperCase();
+        char[] chars = temp.toCharArray();
+        HashMap<Character, Integer> abc = new HashMap();
+        for (int i = 0; i < str.length(); i++) {
+            Character c = chars[i];
+            //System.out.print(c);
+            if (abc.containsKey(c)) {
+                Integer count = abc.get(c);
+                count++;
+                abc.put(c, count);
+            }
+            else {
+                if (c != ' ') {
+                    abc.put(c, new Integer(1));
+                }
+            }
+        }
+
+        int isOneOdd = 0;
+        for (int i = 0; i < str.length(); i++) {
+            Integer count = abc.get(chars[i]);
+            if (count != null && count.intValue() % 2 == 1) {
+                isOneOdd++;
+            }
+            if (isOneOdd > 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //Tact Coa -> true, taco cat
+    public boolean palindromePermutation2(String str) {
+        //as I go from left to right, I remove the letters that match, if one or none remain, true
+        //Add count into array
+        int[] letters = new int[128];
+        char[] s1_array = str.toCharArray(); //a b c
+        for (int i = 0; i < s1_array.length; i++) {
+            letters[s1_array[i]]++;
+        }
+        int isOneOdd = 0;
+        for (int i = 0; i < s1_array.length; i++) {
+            System.out.println(s1_array[i]);
+            int count = letters[s1_array[i]];
+            System.out.println(count);
+            if (count % 2 == 1) {
+                isOneOdd++;
+            }
+            if (isOneOdd > 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //Insert, Delete, Replace to get true
+    //pale, ple   -> true //insert
+    //pales, pale -> true //delete
+    //pale, bale  -> true //replace
+    //pale, bake  -> false
+    public boolean oneAway(String str1, String str2) { //5
+        if (str1.length() == str2.length()) { //if same length, replace
+            return replaceAway(str1, str2);
+        }
+        else if (str1.length() - 1 == str2.length()) { //if 1 length difference
+            return insertDeleteAway(str2, str1);
+        }
+        else if (str1.length() + 1 == str2.length()) { //if 1 length difference
+            return insertDeleteAway(str1, str2);
+        }
+        else { //possibly too large
+            return false;
+        }
+    }
+
+    private boolean replaceAway(String str1, String str2) {
+        char[] chars1 = str1.toCharArray();
+        char[] chars2 = str2.toCharArray();
+        boolean allowOne = false;
+        for (int i = 0; i < str1.length(); i++) {
+            if (chars1[i] != chars2[i]) {
+                if (allowOne) {
+                    return false;
+                }
+                allowOne = true;
+            }
+        }
+        return true;
+    }
+
+    //"pale", "ple"
+    private boolean insertDeleteAway(String smaller, String larger) {
+        char[] chars1 = smaller.toCharArray();
+        char[] chars2 = larger.toCharArray();
+        boolean allowOne = false;
+
+        int i = 0;
+        int j = 0;
+        while (i < chars1.length && j < chars2.length) {
+            if (chars1[i] != chars2[j]) {//pale pales
+                if (allowOne) {
+                    return false;
+                }
+                allowOne = true;
+            }
+            else {
+                i++;
+            }
+            j++;
+        }
+        return true;
+    }
+
+    //aabcccccaaa -> a2b1c5a3
+    //assume all lower case
+    //if it won't be smaller then return original str
+    public String compression(String str) {
+        int[] letterCount = new int[128];
+        char[] chars = str.toCharArray();
+        boolean isAllOne = true;
+        for (int i = 0; i < chars.length; i++) {
+            letterCount[chars[i]]++;
+            if (letterCount[chars[i]] > 1) {
+                isAllOne = false;
+            }
+        }
+        if (isAllOne) {
+            return str;
+        }
+
+        char alreadyPrinted = 0;
+        StringBuilder output = new StringBuilder();
+        for (int i = 0; i < chars.length; i++) {
+            if (alreadyPrinted != chars[i]) {
+                output.append(chars[i]);
+                output.append(letterCount[chars[i]]);
+            }
+            alreadyPrinted = chars[i];
+        }
+        return output.toString();
+    }
+
+    public String compression2(String str) {
+        int count = countCompression(str);
+        if (count >= str.length()) {
+            return str;
+        }
+
+        StringBuilder output = new StringBuilder(count);
+        int countConsecutive = 0;
+        for (int i = 0; i < str.length(); i++) {//aebcc 012, 3
+            countConsecutive++;
+            if (i + 1 >= str.length() || str.charAt(i) != str.charAt(i + 1)) {
+                output.append(str.charAt(i));
+                output.append(countConsecutive);
+                countConsecutive = 0;
+            }
+        }
+        return output.toString();
+    }
+
+    private int countCompression(String str) {
+        int compressedLength = 0;
+        int countConsecutive = 0;
+        for (int i = 0; i < str.length(); i++) {//aebcc
+            countConsecutive++;
+            if (i + 1 >= str.length() || str.charAt(i) != str.charAt(i + 1)) {
+                compressedLength += 1 + String.valueOf(countConsecutive).length();
+                countConsecutive = 0;
+            }
+        }
+        System.out.println(compressedLength);
+        return compressedLength;
+    }
+
+    //Rotate image by 90 degrees
+    //Assumption is that eah pixel in the imgage is 4 bytes.
+    //DO in place
+    public void rotateImage(int[][] image) {
+
+    }
+
+    public static void main (String[] args) {
         BookString book = new BookString();
-        System.out.println(book.checkUniqueCharacters("Abc"));
+        /*System.out.println(book.checkUniqueCharacters("Abc"));
         System.out.println(book.checkUnique2("Abc"));
         System.out.println(book.checkPermutation1("abcc", "acbb"));
         System.out.println(book.checkPermutation2("abcc", "acbb"));
-    }*/
+        char[] url = new char[]{'A',' ','B','C'};
+        System.out.println(book.urlify3(url, 4));
+        String permutation = "tactcooa";
+        System.out.println(book.palindromePermutation2(permutation));
+        System.out.println(book.oneAway("pale", "pales"));
+        */
+        //System.out.println(book.compression("aebcc"));
+        System.out.println(book.compression2("abcc"));
+    }
 }
