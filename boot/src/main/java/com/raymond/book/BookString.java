@@ -375,8 +375,52 @@ public class BookString {
     //Rotate image by 90 degrees
     //Assumption is that eah pixel in the imgage is 4 bytes.
     //DO in place
-    public void rotateImage(int[][] image) {
+    public int[][] rotateImage(int[][] image) {
+        for (int y = 0; y < image.length / 2; y++) {//0
+            int first = y;//0
+            int last = image.length - 1 - y;//2
+            for (int x = first; x < last; x++) {//0,1
+                int offset = x - first;//0,1
+                //top
+                int top = image[first][x];
+                //left->top
+                image[first][x]=image[last-offset][first];
+                //bottom->left
+                image[last-offset][first] = image[last][last-offset];
+                //right->bottom
+                image[last][last-offset] = image[x][last];
+                //top->right
+                image[x][last]=top;
+            }
+        }
+        return image;
+    }
 
+    public int[][] rotateImage2(int[][] image) {
+        for (int y = 0; y < image.length / 2; y++) {//0
+            int last = image.length - 1 - y;//2
+            for (int x = y; x < last; x++) {//0,1
+                int offset = x - y;//0,1
+                //top
+                int top = image[y][x];
+                //left->top
+                image[y][x]=image[last-offset][y];
+                //bottom->left
+                image[last-offset][y] = image[last][last-offset];
+                //right->bottom
+                image[last][last-offset] = image[x][last];
+                //top->right
+                image[x][last]=top;
+            }
+        }
+        return image;
+    }
+
+    //Zero Matrix
+    //If an element in an MxN matrix is 0, its entire row and column are set to 0
+    //Do not wipe out whole matrix
+    public int[][] zeroMatrix(int[][]matrix) {
+        return matrix;
     }
 
     public static void main (String[] args) {
@@ -392,6 +436,24 @@ public class BookString {
         System.out.println(book.oneAway("pale", "pales"));
         */
         //System.out.println(book.compression("aebcc"));
-        System.out.println(book.compression2("abcc"));
+        //System.out.println(book.compression2("abcc"));
+
+        /*int[][] image = { //[3][3]
+                { 1, 2 },
+                { 3, 4 }
+        };*/
+
+        int[][] image = { //[3][3]
+                { 1, 2, 3 },
+                { 4, 5, 6 },
+                { 7, 8, 9 }
+        };
+        image = book.rotateImage2(image);
+        for (int y = 0; y < image.length; y++) {
+            for (int x = 0; x < image[y].length; x++) {
+                System.out.print(image[y][x] + " ");
+            }
+            System.out.println(" ");
+        }
     }
 }
