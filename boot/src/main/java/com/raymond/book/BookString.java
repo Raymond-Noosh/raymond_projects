@@ -423,9 +423,9 @@ public class BookString {
         return matrix;
     }
 
-    public static void main (String[] args) {
+    /*public static void main (String[] args) {
         BookString book = new BookString();
-        /*System.out.println(book.checkUniqueCharacters("Abc"));
+        System.out.println(book.checkUniqueCharacters("Abc"));
         System.out.println(book.checkUnique2("Abc"));
         System.out.println(book.checkPermutation1("abcc", "acbb"));
         System.out.println(book.checkPermutation2("abcc", "acbb"));
@@ -434,14 +434,11 @@ public class BookString {
         String permutation = "tactcooa";
         System.out.println(book.palindromePermutation2(permutation));
         System.out.println(book.oneAway("pale", "pales"));
-        */
+
         //System.out.println(book.compression("aebcc"));
         //System.out.println(book.compression2("abcc"));
 
-        /*int[][] image = { //[3][3]
-                { 1, 2 },
-                { 3, 4 }
-        };*/
+
 
         int[][] image = { //[3][3]
                 { 1, 2, 3 },
@@ -455,5 +452,5 @@ public class BookString {
             }
             System.out.println(" ");
         }
-    }
+    }*/
 }
