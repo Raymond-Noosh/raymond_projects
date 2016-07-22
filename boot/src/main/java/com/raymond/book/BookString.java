@@ -420,10 +420,42 @@ public class BookString {
     //If an element in an MxN matrix is 0, its entire row and column are set to 0
     //Do not wipe out whole matrix
     public int[][] zeroMatrix(int[][]matrix) {
+        int[] row = new int[matrix.length];
+        int[] col = new int[matrix[0].length];
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j] == 0) {
+                    row[i]=1;
+                    col[j]=1;
+                }
+            }
+        }
+
+        boolean allRows = true;
+        for (int r = 0; r < row.length; r++) {
+            if (row[r] == 1) {
+                for (int c = 0; c < col.length; c++) {
+                    matrix[r][c] = 0;
+                }
+            } else {
+                allRows = false;
+            }
+        }
+
+        if (!allRows) {
+            for (int c = 0; c < col.length; c++) {
+                if (col[c] == 1) {
+                    for (int r = 0; r < row.length; r++) {
+                        matrix[r][c] = 0;
+                    }
+                }
+            }
+        }
         return matrix;
     }
 
-    /*public static void main (String[] args) {
+    public static void main (String[] args) {
         BookString book = new BookString();
         System.out.println(book.checkUniqueCharacters("Abc"));
         System.out.println(book.checkUnique2("Abc"));
@@ -440,17 +472,22 @@ public class BookString {
 
 
 
-        int[][] image = { //[3][3]
+        /*int[][] image = { //[3][3]
                 { 1, 2, 3 },
                 { 4, 5, 6 },
                 { 7, 8, 9 }
+        };*/
+        int[][] image = { //[3][3]
+                { 0, 2, 3 },
+                { 0, 0, 6 },
+                { 7, 8, 9 }
         };
-        image = book.rotateImage2(image);
+        image = book.zeroMatrix(image);
         for (int y = 0; y < image.length; y++) {
             for (int x = 0; x < image[y].length; x++) {
                 System.out.print(image[y][x] + " ");
             }
             System.out.println(" ");
         }
-    }*/
+    }
 }
