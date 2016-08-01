@@ -455,6 +455,42 @@ public class BookString {
         return matrix;
     }
 
+    //Is str1 a rotation of str2,
+    //We are only allowed one call to a fake method call isSubstring(String str1, String str2)
+    public boolean isRotation(String str1, String str2) {
+        if (str1.length() == str2.length() && str1.length() > 0) {
+            return isSubstring(str1 + str1, str2);
+        }
+        return false;
+    }
+
+    public boolean isSubstring(String str1, String str2) {
+        return (str1.indexOf(str2) > -1);
+    }
+
+    public boolean toLike(String str1, String str2) {
+        if (str1.equals(str2)) {
+            return true;
+        }
+        if (str1.length() != str2.length()) {
+            return false;
+        }
+        if (str1.length() == 1) {
+            return str1.equals(str2);
+        }
+
+        int position = 1;
+        while (position < str1.length()) {
+            String part1 = str1.substring(0, position);
+            String part2 = str1.substring(position, str1.length());
+            if ((part2+part1).equals(str2)) {
+                return true;
+            }
+            position++;
+        }
+        return false;
+    }
+
     public static void main (String[] args) {
         BookString book = new BookString();
         System.out.println(book.checkUniqueCharacters("Abc"));
@@ -489,5 +525,8 @@ public class BookString {
             }
             System.out.println(" ");
         }
+        System.out.println(book.toLike("abc","abc"));
+        System.out.println(book.isRotation("abc","abc"));
+
     }
 }
