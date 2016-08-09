@@ -29,14 +29,20 @@ public class RaymondLinkedList<T> {
         }
     }
     private Node head;
+    private int size = 0;
 
     public RaymondLinkedList() {
 
     }
 
+    public Node getHead() {
+        return head;
+    }
+
     public void insert(T data) {
         if (head == null) {
             head = new Node(data);
+            size = 1;
             return;
         }
 
@@ -45,6 +51,7 @@ public class RaymondLinkedList<T> {
             temp = temp.next;
         }
         temp.next = new Node(data);
+        size++;
     }
 
     public void delete(T data) {
@@ -53,6 +60,7 @@ public class RaymondLinkedList<T> {
         }
         else if (head.data.equals(data)) {
             head = head.next;
+            size--;
             return;
         }
 
@@ -60,6 +68,7 @@ public class RaymondLinkedList<T> {
         while (temp.next != null) {
             if (temp.next.data == data) {
                 temp.next = temp.next.next;
+                size--;
                 return;
             }
             temp = temp.next;
@@ -93,15 +102,34 @@ public class RaymondLinkedList<T> {
         System.out.print(temp.data+ " ");
     }
 
-    /*public static void main(String[] args) {
+    public int getSize() {
+        return size;
+    }
+
+    public T getKthFromLast(int k) {
+        int size = getSize();
+        int count = 1;
+        Node temp = head;
+        while (count < (size-k)) {
+            temp = temp.next;
+            count++;
+        }
+        return temp.getData();
+    }
+
+    public static void main(String[] args) {
         RaymondLinkedList<String> linkedList = new RaymondLinkedList<>();
-        linkedList.insert("abc");
-        linkedList.insert("def");
-        linkedList.insert("ghi");
-        linkedList.delete("ghi");
-        System.out.println(linkedList.getNode("def").data);
-        linkedList.print();
-    }*/
+        linkedList.insert("1");
+        linkedList.insert("2");
+        linkedList.insert("3");
+        linkedList.delete("4");
+        linkedList.insert("5");
+        linkedList.insert("6");
+        //System.out.println(linkedList.getNode("def").data);
+        //linkedList.print();
+        //System.out.println(linkedList.getSize());
+        System.out.println(linkedList.getKthFromLast(0));
+    }
 
 
 }
