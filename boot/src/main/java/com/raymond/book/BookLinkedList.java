@@ -1,7 +1,6 @@
 package com.raymond.book;
 
 import com.raymond.array.RaymondLinkedList;
-import org.omg.CORBA.INTERNAL;
 
 import java.util.*;
 
@@ -29,7 +28,7 @@ public class BookLinkedList<T> {
     //Using my RaymondLinkedList
     //Implement an alg to find the kth to last element of a singly linked list
     //This only works if size is known
-    public int getKthFromLast(RaymondLinkedList<Integer> linkedList, int k) {
+    public int getKthFromLast(RaymondLinkedList linkedList, int k) {
         return linkedList.getKthFromLast(k);
     }
 
@@ -46,7 +45,7 @@ public class BookLinkedList<T> {
         }
     }
 
-    public void partition(RaymondLinkedList<Integer> numbers, Integer partition) {
+    public void partition(RaymondLinkedList numbers, Integer partition) {
         RaymondLinkedList.Node head = numbers.getHead();
         RaymondLinkedList.Node cursor = head;
         while (cursor.getNext() != null) {
@@ -72,12 +71,12 @@ public class BookLinkedList<T> {
         }
     }
 
-    public RaymondLinkedList<Integer>.Node parting(RaymondLinkedList<Integer>.Node node, Integer x) {
-        RaymondLinkedList<Integer>.Node head = node;
-        RaymondLinkedList<Integer>.Node tail = node;
+    public RaymondLinkedList.Node parting(RaymondLinkedList.Node node, Integer x) {
+        RaymondLinkedList.Node head = node;
+        RaymondLinkedList.Node tail = node;
 
         while (node != null) {
-            RaymondLinkedList<Integer>.Node next = node.getNext();
+            RaymondLinkedList.Node next = node.getNext();
             if (node.getData() < x) {
                 node.setNext(head);
                 head = node;
@@ -93,32 +92,32 @@ public class BookLinkedList<T> {
         return head;
     }
 
-    public RaymondLinkedList<Integer> sumList(RaymondLinkedList<Integer> a, RaymondLinkedList<Integer> b) {
-        RaymondLinkedList<Integer> sum = new RaymondLinkedList<>();
-        RaymondLinkedList<Integer>.Node cursor1 = a.getHead();
-        RaymondLinkedList<Integer>.Node cursor2 = b.getHead();
+    public RaymondLinkedList sumList(RaymondLinkedList a, RaymondLinkedList b) {
+        RaymondLinkedList sum = new RaymondLinkedList();
+        RaymondLinkedList.Node cursor1 = a.getHead();
+        RaymondLinkedList.Node cursor2 = b.getHead();
         while (cursor1 != null && cursor2 != null) {
-            RaymondLinkedList<Integer>.Node next1 = cursor1.getNext();
-            RaymondLinkedList<Integer>.Node next2 = cursor2.getNext();
+            RaymondLinkedList.Node next1 = cursor1.getNext();
+            RaymondLinkedList.Node next2 = cursor2.getNext();
 
             Integer temp = cursor1.getData() + cursor2.getData();
-            sum.insert(temp);
+            sum.insertToEnd(temp);
 
             if (next1 == null && next2 != null) {
-                a.insert(0);
+                a.insertToEnd(0);
                 next1 = cursor1.getNext();
             }
             if (next2 == null && next1 != null) {
-                b.insert(0);
+                b.insertToEnd(0);
                 next2 = cursor2.getNext();
             }
             cursor1 = next1;
             cursor2 = next2;
         }
 
-        RaymondLinkedList<Integer>.Node head = sum.getHead();
+        RaymondLinkedList.Node head = sum.getHead();
         while (head != null) {
-            RaymondLinkedList<Integer>.Node next = head.getNext();
+            RaymondLinkedList.Node next = head.getNext();
             Integer v = head.getData();
             if (v.intValue() > 10) {
                 int digit = v.intValue() % 10;
@@ -127,12 +126,135 @@ public class BookLinkedList<T> {
                     next.setData(next.getData() + 1);
                 }
                 else {
-                    sum.insert(1);
+                    sum.insertToEnd(1);
                 }
             }
             head = next;
         }
         return sum;
+    }
+
+    public RaymondLinkedList sumListFoward(RaymondLinkedList a, RaymondLinkedList b) {
+        RaymondLinkedList sum = new RaymondLinkedList();
+        RaymondLinkedList.Node cursor1 = a.getHead();
+        RaymondLinkedList.Node cursor2 = b.getHead();
+        while (cursor1 != null && cursor2 != null) {
+            RaymondLinkedList.Node next1 = cursor1.getNext();
+            RaymondLinkedList.Node next2 = cursor2.getNext();
+
+            Integer temp = cursor1.getData() + cursor2.getData();
+            sum.insertToEnd(temp);
+
+            if (next1 == null && next2 != null) {
+                a.insertToEnd(0);
+                next1 = cursor1.getNext();
+            }
+            if (next2 == null && next1 != null) {
+                b.insertToEnd(0);
+                next2 = cursor2.getNext();
+            }
+            cursor1 = next1;
+            cursor2 = next2;
+        }
+
+        /*RaymondLinkedList<Integer>.Node node = sum.getHead();
+        RaymondLinkedList<Integer>.Node head = sum.getHead();
+        while (node != null) {
+            RaymondLinkedList<Integer>.Node next = node.getNext();
+            if (head.getData() > 9 && head.equals(node)) {
+                Integer v = head.getData();
+                int digit = v.intValue() % 10;
+                head.setData(digit);
+                sum.insertToFront(1);
+                head = sum.getHead();
+            }
+            if (next != null) {
+                Integer v = next.getData();
+                if (v > 9) {
+                    int digit = v.intValue() % 10;
+                    next.setData(digit);
+                    node.setData(node.getData() + 1);
+                    node = head;
+                }
+                else {
+                    node = next;
+                }
+            }
+            else {
+                node = next;
+            }
+        }*/
+        return sum;
+    }
+
+    public RaymondLinkedList.Node sumListBackward(RaymondLinkedList a, RaymondLinkedList b, Integer carry) {
+        return sumListBackward(a.getHead(), b.getHead(), 0);
+    }
+
+    public RaymondLinkedList.Node sumListBackward(RaymondLinkedList.Node a, RaymondLinkedList.Node b, Integer carry) {
+        Integer value = carry;
+        if (a != null) {
+            value = value + a.getData();
+        }
+        if (b != null) {
+            value = value + b.getData();
+        }
+
+        RaymondLinkedList.Node node = new RaymondLinkedList.Node(value % 10);
+        if ((a != null || b != null)) {
+            RaymondLinkedList.Node next = sumListBackward(a.getNext(), b.getNext(), (value > 9 ? 1 : 0));
+            node.setNext(next);
+        }
+        return node;
+    }
+
+    public static class BookNode {
+        RaymondLinkedList.Node node;
+        int carry;
+
+        public RaymondLinkedList.Node getNode() {
+            return node;
+        }
+
+        public void setNode(RaymondLinkedList.Node node) {
+            this.node = node;
+        }
+
+        public int getCarry() {
+            return carry;
+        }
+
+        public void setCarry(int carry) {
+            this.carry = carry;
+        }
+    }
+
+    public BookNode sumListForward(RaymondLinkedList.Node a, RaymondLinkedList.Node b) {
+        if (a == null && b == null) {
+            return new BookNode();
+        }
+
+        BookNode node = sumListForward(a.getNext(), b.getNext());
+        Integer value = node.getCarry() + a.getData() + b.getData();
+
+        int digit = value % 10;
+        RaymondLinkedList.Node full = RaymondLinkedList.Node.insertInFront(node.getNode(), digit);
+
+        node.setNode(full);
+        node.setCarry(value > 9 ? 1 : 0);
+
+        return node;
+    }
+
+    public RaymondLinkedList.Node sumListFowardMain(RaymondLinkedList.Node a, RaymondLinkedList.Node b) {
+        //for now assume padding is there
+
+        BookNode ss = sumListForward(a, b);
+        if (ss.getCarry() > 0) {
+            RaymondLinkedList.Node tt = RaymondLinkedList.Node.insertInFront(ss.getNode(), ss.getCarry());
+            ss.setNode(tt);
+        }
+        return ss.getNode();
     }
 
     public static void main(String[] args) {
@@ -149,34 +271,34 @@ public class BookLinkedList<T> {
         System.out.println(list);
 
 
-        RaymondLinkedList<String> linkedList = new RaymondLinkedList<>();
-        linkedList.insert("a");
-        linkedList.insert("b");
-        linkedList.insert("c");
-        linkedList.insert("d");
-        linkedList.insert("e");
-        linkedList.insert("f");
-        l.deleteMiddleNode(linkedList.getNode("c"));
+        /*RaymondLinkedList linkedList = new RaymondLinkedList<>();
+        linkedList.insertToEnd("a");
+        linkedList.insertToEnd("b");
+        linkedList.insertToEnd("c");
+        linkedList.insertToEnd("d");
+        linkedList.insertToEnd("e");
+        linkedList.insertToEnd("f");
+        l.deleteMiddleNode(linkedList.getNode("c"));*/
         //linkedList.print();
 
 
-        RaymondLinkedList<Integer> integerLinkedList = new RaymondLinkedList<>();
-        integerLinkedList.insert(new Integer(9));
-        integerLinkedList.insert(new Integer(7));
-        //integerLinkedList.insert(new Integer(8));
-        //integerLinkedList.insert(new Integer(5));
-        //integerLinkedList.insert(new Integer(10));
-        //integerLinkedList.insert(new Integer(2));
-        //integerLinkedList.insert(new Integer(1));
+        RaymondLinkedList integerLinkedList = new RaymondLinkedList();
+        integerLinkedList.insertToEnd(new Integer(3));
+        integerLinkedList.insertToEnd(new Integer(4));
+        integerLinkedList.insertToEnd(new Integer(9));
+        //integerLinkedList.insertToEnd(new Integer(5));
+        //integerLinkedList.insertToEnd(new Integer(10));
+        //integerLinkedList.insertToEnd(new Integer(2));
+        //integerLinkedList.insertToEnd(new Integer(1));
         //l.partition(integerLinkedList, new Integer(5));
-        //RaymondLinkedList<Integer>.Node redone = l.parting(integerLinkedList.getHead(), new Integer(5));
+        //RaymondLinkedList<Integ er>.Node redone = l.parting(integerLinkedList.getHead(), new Integer(5));
         //integerLinkedList.print(redone);
 
-        RaymondLinkedList<Integer> integerLinkedList2 = new RaymondLinkedList<>();
-        integerLinkedList2.insert(new Integer(6));
-        integerLinkedList2.insert(new Integer(8));
-        integerLinkedList2.insert(new Integer(5));
-        RaymondLinkedList<Integer> sum = l.sumList(integerLinkedList, integerLinkedList2);
-        sum.print();
+        RaymondLinkedList integerLinkedList2 = new RaymondLinkedList();
+        integerLinkedList2.insertToEnd(new Integer(7));
+        integerLinkedList2.insertToEnd(new Integer(5));
+        integerLinkedList2.insertToEnd(new Integer(4));
+        RaymondLinkedList.Node result = l.sumListFowardMain(integerLinkedList.getHead(), integerLinkedList2.getHead());
+        integerLinkedList.print(result);
     }
 }

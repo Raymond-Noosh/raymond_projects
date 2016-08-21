@@ -3,20 +3,20 @@ package com.raymond.array;
 /**
  * Created by Raymond Kwong on 6/23/2016.
  */
-public class RaymondLinkedList<T> {
-    public class Node {
-        T data;
+public class RaymondLinkedList {
+    public static class Node {
+        Integer data;
         Node next = null;
 
-        public Node(T data) {
+        public Node(java.lang.Integer data) {
             this.data = data;
         }
 
-        public T getData() {
+        public Integer getData() {
             return data;
         }
 
-        public void setData(T data) {
+        public void setData(Integer data) {
             this.data = data;
         }
 
@@ -26,6 +26,12 @@ public class RaymondLinkedList<T> {
 
         public void setNext(Node next) {
             this.next = next;
+        }
+
+        public static Node insertInFront(Node node, Integer value) {
+            Node temp = new Node(value);
+            temp.setNext(node);
+            return temp;
         }
     }
     private Node head;
@@ -39,7 +45,20 @@ public class RaymondLinkedList<T> {
         return head;
     }
 
-    public void insert(T data) {
+    public void insertToFront(Integer data) {
+        if (head == null) {
+            head = new Node(data);
+            size = 1;
+            return;
+        }
+
+        Node temp = new Node(data);
+        temp.next = head;
+        head = temp;
+        size++;
+    }
+
+    public void insertToEnd(Integer data) {
         if (head == null) {
             head = new Node(data);
             size = 1;
@@ -54,7 +73,7 @@ public class RaymondLinkedList<T> {
         size++;
     }
 
-    public void delete(T data) {
+    public void delete(Integer data) {
         if (head.data == null) {
             return;
         }
@@ -75,7 +94,7 @@ public class RaymondLinkedList<T> {
         }
     }
 
-    public Node getNode(T data) {
+    public Node getNode(Integer data) {
         if (head.data == data) {
             return head;
         }
@@ -106,7 +125,7 @@ public class RaymondLinkedList<T> {
         return size;
     }
 
-    public T getKthFromLast(int k) {
+    public Integer getKthFromLast(int k) {
         int size = getSize();
         int count = 1;
         Node temp = head;
@@ -118,13 +137,13 @@ public class RaymondLinkedList<T> {
     }
 
     public static void main(String[] args) {
-        RaymondLinkedList<String> linkedList = new RaymondLinkedList<>();
-        linkedList.insert("1");
-        linkedList.insert("2");
-        linkedList.insert("3");
-        linkedList.delete("4");
-        linkedList.insert("5");
-        linkedList.insert("6");
+        RaymondLinkedList linkedList = new RaymondLinkedList();
+        linkedList.insertToEnd(1);
+        linkedList.insertToEnd(2);
+        linkedList.insertToEnd(3);
+        linkedList.delete(4);
+        linkedList.insertToEnd(5);
+        linkedList.insertToEnd(6);
         //System.out.println(linkedList.getNode("def").data);
         //linkedList.print();
         //System.out.println(linkedList.getSize());

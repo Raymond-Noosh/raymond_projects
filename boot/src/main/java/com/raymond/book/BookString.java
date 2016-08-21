@@ -253,7 +253,7 @@ public class BookString {
     }
 
     //Insert, Delete, Replace to get true
-    //pale, ple   -> true //insert
+    //pale, ple   -> true //insertToEnd
     //pales, pale -> true //delete
     //pale, bale  -> true //replace
     //pale, bake  -> false
