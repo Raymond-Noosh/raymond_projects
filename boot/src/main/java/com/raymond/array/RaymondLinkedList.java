@@ -136,7 +136,7 @@ public class RaymondLinkedList {
         return temp.getData();
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         RaymondLinkedList linkedList = new RaymondLinkedList();
         linkedList.insertToEnd(1);
         linkedList.insertToEnd(2);
@@ -148,7 +148,7 @@ public class RaymondLinkedList {
         //linkedList.print();
         //System.out.println(linkedList.getSize());
         System.out.println(linkedList.getKthFromLast(0));
-    }
+    }*/
 
 
 }

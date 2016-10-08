@@ -491,7 +491,7 @@ public class BookString {
         return false;
     }
 
-    public static void main (String[] args) {
+    /*public static void main (String[] args) {
         BookString book = new BookString();
         System.out.println(book.checkUniqueCharacters("Abc"));
         System.out.println(book.checkUnique2("Abc"));
@@ -508,11 +508,11 @@ public class BookString {
 
 
 
-        /*int[][] image = { //[3][3]
-                { 1, 2, 3 },
-                { 4, 5, 6 },
-                { 7, 8, 9 }
-        };*/
+        //int[][] image = { //[3][3]
+        //        { 1, 2, 3 },
+        //        { 4, 5, 6 },
+        //        { 7, 8, 9 }
+        //};
         int[][] image = { //[3][3]
                 { 0, 2, 3 },
                 { 0, 0, 6 },
@@ -528,5 +528,5 @@ public class BookString {
         System.out.println(book.toLike("abc","abc"));
         System.out.println(book.isRotation("abc","abc"));
 
-    }
+    }*/
 }

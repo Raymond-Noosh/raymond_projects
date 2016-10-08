@@ -143,32 +143,38 @@ public class InterviewProblem {
                 }
             }
         }
-
-        int[] result = new int[n.length];
-        int i = position_index;
-        int j = position_index - 1;
-        for (int k = 0; k <result.length; k++) {
-            if (i < temp.length && j >= 0) {
-                if (temp[i] < temp[j]) {
+        if (position_index == -1) {
+            for (int i = 0, j = n.length - 1; i < n.length / 2 && j > n.length / 2; i ++, j--) {
+                int t = temp[i];
+                temp[i] = temp[j];
+                temp[j] = t;
+            }
+            return temp;
+        }
+        else {
+            int[] result = new int[n.length];
+            int i = position_index;
+            int j = position_index - 1;
+            for (int k = 0; k < result.length; k++) {
+                if (i < temp.length && j >= 0) {
+                    if (temp[i] < temp[j]) {
+                        result[k] = temp[i];
+                        i++;
+                    } else {
+                        result[k] = temp[j];
+                        j--;
+                    }
+                } else if (i == temp.length && j >= 0) { //j still has some
+                    result[k] = temp[j];
+                    j--;
+                } else {
                     result[k] = temp[i];
                     i++;
                 }
-                else {
-                    result[k] = temp[j];
-                    j--;
-                }
-            }
-            else if (i == temp.length && j >= 0) { //j still has some
-                result[k] = temp[j];
-                j--;
-            }
-            else {
-                result[k] = temp[i];
-                i++;
-            }
 
+            }
+            return result;
         }
-        return result;
     }
 
     //2
@@ -176,7 +182,13 @@ public class InterviewProblem {
     //Return the unique array of strings
     //"marketing automation services" keep
     //"services automation marketing" remove since not unique
-    //
+    public void uniqueWords(String[] search) {
+        HashMap tree = new HashMap();
+        tree.put("A", "Red");
+        tree.put("A", "Blue");
+        tree.put("B", "Red");
+
+    }
 
     //3
     //Given an array of numbers, 3 4 8 5 6 2 14 15
@@ -189,11 +201,12 @@ public class InterviewProblem {
     //1
     //
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         InterviewProblem test = new InterviewProblem();
         //int[] time = new int[]{3,5,6,4,7,9,8,2,4};
         //int[] time = new int[]{9,2,1,2,2,3};
-        int[] time = new int[]{-100, -7, -4, 1, 5, 9};
+        //int[] time = new int[]{-100, -7, -4, 1, 5, 9};
+        int[] time = new int[]{-100, -7, -4};
         /*int[] abc = larger(time);
         for (int i = 0; i < abc.length; i++) {
             System.out.print(abc[i] + " ");
@@ -217,12 +230,15 @@ public class InterviewProblem {
 
         System.out.println("");
         int tt = test.grabSmaller(time, 3, 3);
-        System.out.println(tt);*/
+        System.out.println(tt);
 
         System.out.println("");
         int[] dd = test.square(time);
         for (int i = 0; i < dd.length; i++) {
             System.out.print(dd[i] + " ");
         }
-    }
+        String[] searches = new String[]{"marketing automation services", "services automation marketing"};
+        test.uniqueWords(searches);
+
+    }*/
 }

@@ -257,7 +257,7 @@ public class BookLinkedList<T> {
         return ss.getNode();
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         LinkedList<String> list = new LinkedList<>();
         list.add("abc");
         list.add("ghi");
@@ -271,14 +271,14 @@ public class BookLinkedList<T> {
         System.out.println(list);
 
 
-        /*RaymondLinkedList linkedList = new RaymondLinkedList<>();
-        linkedList.insertToEnd("a");
-        linkedList.insertToEnd("b");
-        linkedList.insertToEnd("c");
-        linkedList.insertToEnd("d");
-        linkedList.insertToEnd("e");
-        linkedList.insertToEnd("f");
-        l.deleteMiddleNode(linkedList.getNode("c"));*/
+        //RaymondLinkedList linkedList = new RaymondLinkedList<>();
+        //linkedList.insertToEnd("a");
+        //linkedList.insertToEnd("b");
+        //linkedList.insertToEnd("c");
+        //linkedList.insertToEnd("d");
+        //linkedList.insertToEnd("e");
+        //linkedList.insertToEnd("f");
+        //l.deleteMiddleNode(linkedList.getNode("c"));
         //linkedList.print();
 
 
@@ -300,5 +300,5 @@ public class BookLinkedList<T> {
         integerLinkedList2.insertToEnd(new Integer(4));
         RaymondLinkedList.Node result = l.sumListFowardMain(integerLinkedList.getHead(), integerLinkedList2.getHead());
         integerLinkedList.print(result);
-    }
+    }*/
 }
