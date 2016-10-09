@@ -1,10 +1,10 @@
 package com.raymond.config;
 
-import com.hazelcast.config.*;
-import com.hazelcast.core.Hazelcast;
-import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.web.SessionListener;
-import com.hazelcast.web.spring.SpringAwareWebFilter;
+//import com.hazelcast.config.*;
+//import com.hazelcast.core.Hazelcast;
+//import com.hazelcast.core.HazelcastInstance;
+//import com.hazelcast.web.SessionListener;
+//import com.hazelcast.web.spring.SpringAwareWebFilter;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,18 +13,18 @@ import org.springframework.session.hazelcast.config.annotation.web.http.EnableHa
 import javax.servlet.DispatcherType;
 import javax.servlet.http.HttpSessionListener;
 
-import static com.raymond.config.HazelcastConfig.SESSIONS_MAP_NAME;
+//import static com.raymond.config.HazelcastConfig.SESSIONS_MAP_NAME;
 
 /**
  * Created by Raymond Kwong on 5/22/2016.
  */
 //Begin Hazelcast with Spring Session
 //maxInactiveIntervalInSeconds here will override the Map's MaxIdleSeconds
-@EnableHazelcastHttpSession(sessionMapName = SESSIONS_MAP_NAME, maxInactiveIntervalInSeconds = 43200)
+//@EnableHazelcastHttpSession(sessionMapName = SESSIONS_MAP_NAME, maxInactiveIntervalInSeconds = 43200)
 //End Hazelcast with Spring Session
 @Configuration
 public class HazelcastConfig {
-
+    /*
     public static final String SESSIONS_MAP_NAME = "raymond-sessions";
 
     private static final String TEST_MAP = "test";
@@ -57,7 +57,7 @@ public class HazelcastConfig {
         initSessionMapConfig(hazelConfig);
         initMapConfigs(hazelConfig);
         return Hazelcast.newHazelcastInstance(hazelConfig);
-    }
+    }*/
     //End Hazelcast with Spring Session
 
     //Start Regular Hazelcast without Spring Session
@@ -117,7 +117,7 @@ public class HazelcastConfig {
     }*/
     //End Regular Hazelcast without Spring Session
 
-    public static void initSessionMapConfig(Config config) {
+    /*public static void initSessionMapConfig(Config config) {
         MapConfig mySession = config.getMapConfig(SESSIONS_MAP_NAME);
         mySession.setMaxSizeConfig(new MaxSizeConfig(256, MaxSizeConfig.MaxSizePolicy.USED_HEAP_SIZE));
         mySession.setEvictionPolicy(EvictionPolicy.LRU);
@@ -129,5 +129,5 @@ public class HazelcastConfig {
         mySession.setMaxSizeConfig(SMALL_USED_HEAP_SIZE_POLICY);
         mySession.setEvictionPolicy(EvictionPolicy.LRU);
         mySession.setMaxIdleSeconds(45000);
-    }
+    }*/
 }
