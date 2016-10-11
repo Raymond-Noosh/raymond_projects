@@ -5,6 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
+import org.springframework.data.redis.cache.RedisCache;
+import org.springframework.data.redis.cache.RedisCacheElement;
+import org.springframework.data.redis.cache.RedisCacheKey;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +26,13 @@ public class GreetingController {
 
     private static final Logger logger = LoggerFactory.getLogger(GreetingController.class);
 
+    // inject the actual template
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
+
+    @Autowired
+    private StringRedisTemplate template;
+
     @Autowired
     private MathService mathService;
 
@@ -31,29 +45,43 @@ public class GreetingController {
     @RequestMapping("/greeting")
     public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name, Map<String, Object> model, HttpServletRequest request) {
         System.out.println("System out test");
-        logger.info("greeting got called");
-        logger.info(name2);
+        System.out.println("greeting got called");
+        System.out.println(name2);
 
-        mathService.computePiDecimal(1);
+        String value = mathService.computePiDecimal("1");//no idea why this returns 1
+        System.out.println(value);
+
+        RedisCache cacheTest = (RedisCache) cacheManager.getCache("cacheTest");
+        cacheTest.put("1", "ABC");
+        Cache.ValueWrapper abc = cacheTest.get("1");
+        String abcString = (String) abc.get();
+        System.out.println(abcString);
+
+        HashOperations hashOperations = redisTemplate.opsForHash();
+        hashOperations.put("w", "t", "f");
 
         Cache test = cacheManager.getCache("test");
         test.put("1", "1");
         test.put("2", "2");
         test.put("3", "3");
-
-        Cache cacheTest = cacheManager.getCache("cacheTest");
-        cacheTest.put("1", "ABC");
-        Cache.ValueWrapper abc = cacheTest.get("1");
-        String abcString = (String) abc.get();
-        logger.info(abcString);
-
         Cache.ValueWrapper one = test.get("1");
-        logger.info((String) one.get());
+        System.out.println((String) one.get());
 
         Cache.ValueWrapper two = test.get("2");
-        logger.info((String) two.get());
+        System.out.println((String) two.get());
+
+        Cache.ValueWrapper three = test.get("3");
+        System.out.println((String) three.get());
 
         model.put("name", name);
+
+        ValueOperations<String, String> ops = this.template.opsForValue();
+        String key = "spring.boot.redis.test";
+        if (!this.template.hasKey(key)) {
+            ops.set(key, "foo");
+        }
+        System.out.println("Found key " + key + ", value=" + ops.get(key));
+
         return "greeting";
     }
 
