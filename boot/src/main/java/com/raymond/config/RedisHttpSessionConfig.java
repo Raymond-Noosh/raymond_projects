@@ -12,19 +12,16 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
  */
 @EnableRedisHttpSession
 public class RedisHttpSessionConfig {
-    @Bean
+    /*@Bean
     public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory cf) {
         RedisTemplate<String, String> redisTemplate = new RedisTemplate<String, String>();
         redisTemplate.setConnectionFactory(cf);
         return redisTemplate;
-    }
+    }*/
 
     @Bean
     public CacheManager cacheManager(RedisTemplate redisTemplate) {
         RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);
-
-        // Number of seconds before expiration. Defaults to unlimited (0)
-        cacheManager.setDefaultExpiration(100);
         return cacheManager;
     }
 

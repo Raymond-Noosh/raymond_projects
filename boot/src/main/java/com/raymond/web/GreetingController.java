@@ -1,5 +1,6 @@
 package com.raymond.web;
 
+import com.raymond.redis.RedisService;
 import com.raymond.redis.dto.SimpleBean;
 import com.raymond.service.MathService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,9 @@ public class GreetingController {
     @Autowired
     private CacheManager cacheManager;
 
+    @Autowired
+    private RedisService redisService;
+
     @Value("${name2}")
     private String name2;
 
@@ -48,6 +52,8 @@ public class GreetingController {
         System.out.println("System out test");
         System.out.println("greeting got called");
         System.out.println(name2);
+
+        redisService.save("ab", "cd");
 
         //Session Test
         String def = (String) request.getSession(false).getAttribute("def");
