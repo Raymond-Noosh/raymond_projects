@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class MathService {
 
     //No expiration
-    @Cacheable(value = "piAnnotation", key="#pi")
+    @Cacheable(value = "piAnnotation")
     public String computePiDecimal(String pi) {
         String value = "piAnnotation"+System.nanoTime();
         return value;

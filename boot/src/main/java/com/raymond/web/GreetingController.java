@@ -75,7 +75,6 @@ public class GreetingController {
         System.out.println(eee);
 
         String value = mathService.computePiDecimal("321");
-        redisTemplate.expire("piAnnotation", 5, TimeUnit.MINUTES);
         System.out.println(value);
 
         Cache cacheTest = cacheManager.getCache("cacheTest");
