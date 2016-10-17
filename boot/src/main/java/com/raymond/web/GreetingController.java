@@ -3,21 +3,16 @@ package com.raymond.web;
 import com.raymond.redis.RedisService;
 import com.raymond.redis.dto.SimpleBean;
 import com.raymond.service.MathService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
-import org.springframework.data.redis.cache.RedisCache;
-import org.springframework.data.redis.cache.RedisCacheManager;
-import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -30,10 +25,7 @@ public class GreetingController {
 
     // inject the actual template
     @Autowired
-    private RedisTemplate<String, String> redisTemplate;
-
-    @Autowired
-    private StringRedisTemplate template;
+    private RedisTemplate redisTemplate;
 
     @Autowired
     private MathService mathService;
@@ -49,13 +41,9 @@ public class GreetingController {
 
     @RequestMapping("/greeting")
     public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name, Map<String, Object> model, HttpServletRequest request) {
-        System.out.println("System out test");
         System.out.println("greeting got called");
-        System.out.println(name2);
 
-        redisService.save("ab", "cd");
-
-        //Session Test
+        //Start Session Test
         String def = (String) request.getSession(false).getAttribute("def");
         System.out.println(def);
         request.getSession().setAttribute("def", "ghi");
@@ -71,42 +59,34 @@ public class GreetingController {
         bean.setNumber2(2);
         bean.setNumber3(3);
         request.getSession().setAttribute("bean", bean);
+        //End Session Test
 
-        String value = mathService.computePiDecimal("1");//no idea why this returns 1
+        redisService.saveString("ab", "cd", 1, TimeUnit.MINUTES);
+        String fff = redisService.getString("ab");
+        System.out.println(fff);
+
+        redisService.saveString(""+System.nanoTime(), ""+System.nanoTime(), 1, TimeUnit.DAYS);
+
+        redisService.saveHash("w", "t", "f");
+        redisService.saveHash("w", "t", "fhi");
+        redisService.saveHash("w", "a", "b");
+        redisTemplate.expire("w", 5, TimeUnit.MINUTES);
+        String eee = (String) redisService.getHash("w", "a");
+        System.out.println(eee);
+
+        String value = mathService.computePiDecimal("321");
+        redisTemplate.expire("piAnnotation", 5, TimeUnit.MINUTES);
         System.out.println(value);
 
-        RedisCache cacheTest = (RedisCache) cacheManager.getCache("cacheTest");
-        cacheTest.put("99", "ABC");
-        Cache.ValueWrapper abc = cacheTest.get("99");
-        String abcString = (String) abc.get();
-        System.out.println(abcString);
-
-        HashOperations hashOperations = redisTemplate.opsForHash();
-        hashOperations.put("w", "t", "f");
-        redisTemplate.expire("w", 30, TimeUnit.SECONDS);
-
-        Cache test = cacheManager.getCache("test");
-        test.put("1", "1");
-        test.put("2", "2");
-        test.put("3", "3");
-        Cache.ValueWrapper one = test.get("1");
+        Cache cacheTest = cacheManager.getCache("cacheTest");
+        cacheTest.put("1", "1");
+        cacheTest.put("2", "2");
+        Cache.ValueWrapper one = cacheTest.get("1");
         System.out.println((String) one.get());
-
-        Cache.ValueWrapper two = test.get("2");
+        Cache.ValueWrapper two = cacheTest.get("2");
         System.out.println((String) two.get());
 
-        Cache.ValueWrapper three = test.get("3");
-        System.out.println((String) three.get());
-
         model.put("name", name);
-
-        ValueOperations<String, String> ops = this.template.opsForValue();
-        String key = "spring.boot.redis.test";
-        if (!this.template.hasKey(key)) {
-            ops.set(key, "foo");
-        }
-        System.out.println("Found key " + key + ", value=" + ops.get(key));
-
         return "greeting";
     }
 

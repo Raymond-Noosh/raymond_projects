@@ -1,11 +1,16 @@
 package com.raymond.redis;
 
-import org.springframework.stereotype.Service;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Raymond Kwong on 10/13/2016.
  */
 
 public interface RedisService {
-    public void save(String key, String value);
+    public void saveString(String key, String value, long timeout, TimeUnit timeUnit);
+    public String getString(String key);
+    public void saveHash(Object key, Object hashKey, Object value);
+    public void saveHashM(Object key, Map map);
+    public Object getHash(Object key, Object hashKey);
 }
