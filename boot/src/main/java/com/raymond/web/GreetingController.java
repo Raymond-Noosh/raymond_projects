@@ -72,7 +72,6 @@ public class GreetingController {
         redisService.saveHash("w", "t", "f");
         redisService.saveHash("w", "t", "fhi");
         redisService.saveHash("w", "a", "b");
-        redisTemplate.expire("w", 5, TimeUnit.MINUTES);//doesn't do anything either
 
         String value = mathService.computePiDecimal("321");
         System.out.println(value);
