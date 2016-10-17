@@ -61,29 +61,29 @@ public class GreetingController {
         request.getSession().setAttribute("bean", bean);
         //End Session Test
 
-        redisService.saveString("ab", "cd", 1, TimeUnit.MINUTES);
         String fff = redisService.getString("ab");
         System.out.println(fff);
+        redisService.saveString("ab", "cd", 1, TimeUnit.MINUTES);
 
         redisService.saveString(""+System.nanoTime(), ""+System.nanoTime(), 1, TimeUnit.DAYS);
 
+        String eee = (String) redisService.getHash("w", "a");
+        System.out.println(eee);
         redisService.saveHash("w", "t", "f");
         redisService.saveHash("w", "t", "fhi");
         redisService.saveHash("w", "a", "b");
         redisTemplate.expire("w", 5, TimeUnit.MINUTES);
-        String eee = (String) redisService.getHash("w", "a");
-        System.out.println(eee);
 
         String value = mathService.computePiDecimal("321");
         System.out.println(value);
 
         Cache cacheTest = cacheManager.getCache("cacheTest");
+        Cache.ValueWrapper one = cacheTest.get("1");
+        System.out.println((one == null) ? "null" : (String) one.get());
+        Cache.ValueWrapper two = cacheTest.get("2");
+        System.out.println((two == null) ? "null" : (String) two.get());
         cacheTest.put("1", "1");
         cacheTest.put("2", "2");
-        Cache.ValueWrapper one = cacheTest.get("1");
-        System.out.println((String) one.get());
-        Cache.ValueWrapper two = cacheTest.get("2");
-        System.out.println((String) two.get());
 
         model.put("name", name);
         return "greeting";
