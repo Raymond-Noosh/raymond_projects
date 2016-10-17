@@ -39,11 +39,22 @@ public class RedisServiceImpl implements RedisService {
         return value;
     }
 
+    /**
+     * Appear to can't set expiration
+     * @param key
+     * @param hashKey
+     * @param value
+     */
     public void saveHash(Object key, Object hashKey, Object value) {
         HashOperations hashOperations = redisTemplate.opsForHash();
         hashOperations.put(key, hashKey, value);
     }
 
+    /**
+     * Appear to can't set expiration
+     * @param key
+     * @param map
+     */
     public void saveHashM(Object key, Map map) {
         HashOperations hashOperations = redisTemplate.opsForHash();
         hashOperations.putAll(key, map);
