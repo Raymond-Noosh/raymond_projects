@@ -13,4 +13,5 @@ public interface RedisService {
     public void saveHash(Object key, Object hashKey, Object value);
     public void saveHashM(Object key, Map map);
     public Object getHash(Object key, Object hashKey);
+    public void saveBoundHash(String hashKey, Object key, Object value, long timeout, TimeUnit timeUnit);
 }

@@ -199,20 +199,51 @@ public class InterviewProblem {
     //Given an array of numbers, 1 3 5 6 7 8 9 2 and 678
     //Return the count of all possible matches within the string
     //1
-    //
+
+    public int countWord(int[] seq, int[] match) {
+        int count = 0;
+        int size = match.length;  //3
+        int valid = 0;
+        int i = 0;
+        while (i < seq.length) {
+            System.out.println(i);
+            int j = 0;
+            while (j < size) {
+                System.out.println(j);
+                if (match[j] == seq[i]) {
+                    System.out.println("match"+match[j]);
+                    valid++;
+                    i++;
+                }
+                else {
+                    valid = 0;
+                    break;
+                }
+                j++;
+            }
+            if (valid == size) {
+                count++;
+            }
+            i++;
+        }
+        return count;
+    }
 
     /*public static void main(String[] args) {
         InterviewProblem test = new InterviewProblem();
+        int[] a = new int[]{1,3,5,6,7,8,9,2,6,7,8};
+        int[] b = new int[]{6,7,8};
+        System.out.println(test.countWord(a,b));
         //int[] time = new int[]{3,5,6,4,7,9,8,2,4};
         //int[] time = new int[]{9,2,1,2,2,3};
         //int[] time = new int[]{-100, -7, -4, 1, 5, 9};
         int[] time = new int[]{-100, -7, -4};
-        /*int[] abc = larger(time);
+        int[] abc = larger(time);
         for (int i = 0; i < abc.length; i++) {
             System.out.print(abc[i] + " ");
         }
-        System.out.println("");*/
-        /*Long start = System.nanoTime();
+        System.out.println("");
+        Long start = System.nanoTime();
         int[] def = test.computeSmaller(time);
         for (int i = 0; i < def.length; i++) {
             System.out.print(def[i] + " ");

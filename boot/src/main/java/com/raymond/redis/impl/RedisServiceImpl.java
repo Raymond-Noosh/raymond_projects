@@ -4,9 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.raymond.redis.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -64,5 +62,11 @@ public class RedisServiceImpl implements RedisService {
         HashOperations hashOperations = redisTemplate.opsForHash();
         Object value = hashOperations.get(key, hashKey);
         return value;
+    }
+
+    public void saveBoundHash(String hashKey, Object key, Object value, long timeout, TimeUnit timeUnit) {
+        BoundHashOperations boundHashOperations = redisTemplate.boundHashOps(hashKey);
+        boundHashOperations.put(key, value);
+        boundHashOperations.expire(timeout, timeUnit);
     }
 }

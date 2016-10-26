@@ -69,9 +69,9 @@ public class GreetingController {
 
         String eee = (String) redisService.getHash("w", "a");
         System.out.println(eee);
-        redisService.saveHash("w", "t", "f");
-        redisService.saveHash("w", "t", "fhi");
-        redisService.saveHash("w", "a", "b");
+        redisService.saveBoundHash("w", "t", "f", 10, TimeUnit.SECONDS);
+        redisService.saveBoundHash("w", "t", "fhi", 10, TimeUnit.SECONDS);
+        redisService.saveBoundHash("w", "a", "b", 10, TimeUnit.SECONDS);
 
         String value = mathService.computePiDecimal("321");
         System.out.println(value);
