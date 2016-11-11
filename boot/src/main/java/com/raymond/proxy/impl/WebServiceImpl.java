@@ -175,14 +175,34 @@ public class WebServiceImpl implements WebService {
         if (headers != null && headers.length > 0) {
             for (Header header : headers) {
                 String name = header.getName();
-                List<String> value = multiValueMap.getOrDefault(name, null);
-                if (value == null) {
-                    value = new ArrayList();
+                if (name.equalsIgnoreCase("content-type") || name.equalsIgnoreCase("content-language")
+                        || name.equalsIgnoreCase("content-length")) {
+                    List<String> value = multiValueMap.getOrDefault(name, null);
+                    if (value == null) {
+                        value = new ArrayList();
+                    }
+                    value.add(header.getValue());
+                    multiValueMap.put(name, value);
                 }
-                value.add(header.getValue());
-                multiValueMap.put(name, value);
             }
         }
+
+        /*ArrayList acah = new ArrayList();
+        acah.add("Origin, X-Requested-With, Content-Type, Accept");
+        multiValueMap.put("access-control-allow-headers", acah);
+
+        ArrayList acam = new ArrayList();
+        acam.add("POST, GET, OPTIONS, DELETE");
+        multiValueMap.put("access-control-allow-methods", acam);
+
+        ArrayList acao = new ArrayList();
+        acao.add("*");
+        multiValueMap.put("access-control-allow-origin", acao);
+
+        ArrayList acma = new ArrayList();
+        acma.add("3600");
+        multiValueMap.put("access-control-max-age", acma);*/
+
         return multiValueMap;
     }
 
@@ -198,7 +218,7 @@ public class WebServiceImpl implements WebService {
         int statusCode = response.getStatusLine().getStatusCode();
         Header[] responseHeaders = response.getAllHeaders();
         MultiValueMap responseHeadersMap = buildHeaderMap(responseHeaders);
-        //return new ResponseEntity(responseString, responseHeadersMap, org.springframework.http.HttpStatus.valueOf(statusCode));
-        return new ResponseEntity(responseString, org.springframework.http.HttpStatus.valueOf(statusCode));
+        return new ResponseEntity(responseString, responseHeadersMap, org.springframework.http.HttpStatus.valueOf(statusCode));
+        //return new ResponseEntity(responseString, org.springframework.http.HttpStatus.valueOf(statusCode));
     }
 }

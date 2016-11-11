@@ -26,7 +26,6 @@ public class WebController {
     @Autowired
     private WebService webService;
 
-    @ResponseBody
     @RequestMapping(value = "/proxyGet", method = RequestMethod.GET)
     public ResponseEntity<String> proxyGet(@RequestParam String target, HttpServletRequest httpRequest) {
         URI uri = null;
@@ -39,7 +38,6 @@ public class WebController {
         return responseEntity;
     }
 
-    @ResponseBody
     @RequestMapping(value = "/proxyPost", method = RequestMethod.POST)
     public ResponseEntity<String> proxyPost(@RequestParam String target, HttpServletRequest httpRequest) {
         ResponseEntity responseEntity = webService.proxyPost(httpRequest, target);
