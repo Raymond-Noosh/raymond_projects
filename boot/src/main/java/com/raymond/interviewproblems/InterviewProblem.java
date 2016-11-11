@@ -194,6 +194,10 @@ public class InterviewProblem {
     //Given an array of numbers, 3 4 8 5 6 2 14 15
     //Find the largest sublist possible and its size
     //Example, 3 4 6 14 15, size 5
+    //not sure if this is a correct example
+    /*public int[] subList(int[] arr) {
+
+    }*/
 
     //4
     //Given an array of numbers, 1 3 5 6 7 8 9 2 and 678
