@@ -170,7 +170,7 @@ public class WebServiceImpl implements WebService {
         return headers;
     }
 
-    private MultiValueMap<String, String> buildHeaderMap(Header[] headers) {
+    private MultiValueMap<String, String> buildResponseHeaderMap(Header[] headers) {
         MultiValueMap<String, String> multiValueMap = new HttpHeaders();
         if (headers != null && headers.length > 0) {
             for (Header header : headers) {
@@ -217,7 +217,7 @@ public class WebServiceImpl implements WebService {
         }
         int statusCode = response.getStatusLine().getStatusCode();
         Header[] responseHeaders = response.getAllHeaders();
-        MultiValueMap responseHeadersMap = buildHeaderMap(responseHeaders);
+        MultiValueMap responseHeadersMap = buildResponseHeaderMap(responseHeaders);
         return new ResponseEntity(responseString, responseHeadersMap, org.springframework.http.HttpStatus.valueOf(statusCode));
         //return new ResponseEntity(responseString, org.springframework.http.HttpStatus.valueOf(statusCode));
     }
