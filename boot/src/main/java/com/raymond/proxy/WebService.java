@@ -11,5 +11,5 @@ import java.net.URI;
  */
 public interface WebService {
     public ResponseEntity proxyGet(HttpServletRequest httpRequest, URI uri);
-    public ResponseEntity proxyPost(HttpServletRequest httpRequest, String url);
+    public ResponseEntity proxyPost(HttpServletRequest httpRequest, URI uri);
 }

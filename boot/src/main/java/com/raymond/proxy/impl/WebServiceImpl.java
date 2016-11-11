@@ -110,23 +110,23 @@ public class WebServiceImpl implements WebService {
     }
 
     @Override
-    public ResponseEntity proxyPost(HttpServletRequest httpRequest, String url) {
+    public ResponseEntity proxyPost(HttpServletRequest httpRequest, URI uri) {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         httpclient = createCloseableHttpClient_AcceptsUntrustedCerts();
         try {
-            HttpPost httpPost = new HttpPost(url.toString());
-            //Header[] requestHeaders = buildHeadersFromRequest(httpRequest);
+            HttpPost httpPost = new HttpPost(uri);
+            //Header[] requestHeaders = buildHeadersFromRequest(httpRequest, uri);
             //httpPost.setHeaders(requestHeaders);
 
-            String body = "{\"sourceSystem\":\"SOS\",\"orderPriceTypeRequested\":\"ePB\",\"jobSet\":[{\"sku\":2103923,\"jobQty\":15,\"turnTime\":5,\"configurationId\":\"\",\"multiPriceIndicator\":\"true\",\"documentSet\":[{\"configValueSet\":[{\"configAttrValueId\":\"V547\"},{\"configAttrValueId\":\"V548\"},{\"configAttrValueId\":\"V542\"}]}]}]}";
+            //String body = "{\"sourceSystem\":\"SOS\",\"orderPriceTypeRequested\":\"ePB\",\"jobSet\":[{\"sku\":2103923,\"jobQty\":15,\"turnTime\":5,\"configurationId\":\"\",\"multiPriceIndicator\":\"true\",\"documentSet\":[{\"configValueSet\":[{\"configAttrValueId\":\"V547\"},{\"configAttrValueId\":\"V548\"},{\"configAttrValueId\":\"V542\"}]}]}]}";
             //httpPost.setEntity(new UrlEncodedFormEntity(nvps));
             EntityBuilder entityBuilder = EntityBuilder.create()
-                    .setText(body)
+                    //.setText(body)
                     .setContentType(ContentType.APPLICATION_JSON);
 
             httpPost.setEntity(entityBuilder.build());
             CloseableHttpResponse response = httpclient.execute(httpPost);
-            logger.info("POST:" + url.toString() + " : " +response.getStatusLine());
+            logger.info("POST:" + uri.toString() + " : " +response.getStatusLine());
             return proxyResponseHandler(response);
         }
         catch (IOException e) {
@@ -218,6 +218,5 @@ public class WebServiceImpl implements WebService {
         Header[] responseHeaders = response.getAllHeaders();
         MultiValueMap responseHeadersMap = buildResponseHeaderMap(responseHeaders);
         return new ResponseEntity(responseString, responseHeadersMap, org.springframework.http.HttpStatus.valueOf(statusCode));
-        //return new ResponseEntity(responseString, org.springframework.http.HttpStatus.valueOf(statusCode));
     }
 }

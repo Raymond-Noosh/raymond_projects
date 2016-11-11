@@ -40,7 +40,13 @@ public class WebController {
 
     @RequestMapping(value = "/proxyPost", method = RequestMethod.POST)
     public ResponseEntity<String> proxyPost(@RequestParam String target, HttpServletRequest httpRequest) {
-        ResponseEntity responseEntity = webService.proxyPost(httpRequest, target);
+        URI uri = null;
+        try {
+            uri = new URI(target);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        ResponseEntity responseEntity = webService.proxyPost(httpRequest, uri);
         return responseEntity;
     }
 }
