@@ -175,8 +175,7 @@ public class WebServiceImpl implements WebService {
         if (headers != null && headers.length > 0) {
             for (Header header : headers) {
                 String name = header.getName();
-                if (name.equalsIgnoreCase("content-type") || name.equalsIgnoreCase("content-language")
-                        || name.equalsIgnoreCase("content-length")) {
+                if (name.equalsIgnoreCase("content-type") || name.equalsIgnoreCase("content-language")) {
                     List<String> value = multiValueMap.getOrDefault(name, null);
                     if (value == null) {
                         value = new ArrayList();
