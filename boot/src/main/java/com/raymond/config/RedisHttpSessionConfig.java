@@ -15,21 +15,21 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @EnableRedisHttpSession
 public class RedisHttpSessionConfig {
     /**
-     * jedis
+     * configuration for sentinel
      */
-    @Bean
+    /*@Bean
     public RedisConnectionFactory jedisConnectionFactory() {
         RedisSentinelConfiguration sentinelConfig = new RedisSentinelConfiguration().master("mymaster")
                 .sentinel("192.168.1.24", 26379) .sentinel("192.168.1.25", 26379);
         return new JedisConnectionFactory(sentinelConfig);
-    }
+    }*/
 
 
-    /*@Bean
+    @Bean
     public CacheManager cacheManager(RedisTemplate redisTemplate) {
         RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);
         return cacheManager;
-    }*/
+    }
 
 
 
