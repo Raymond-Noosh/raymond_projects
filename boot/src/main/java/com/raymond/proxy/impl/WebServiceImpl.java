@@ -15,6 +15,7 @@ import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
@@ -40,6 +41,7 @@ import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Raymond Kwong on 11/10/2016.
@@ -115,16 +117,15 @@ public class WebServiceImpl implements WebService {
         httpclient = createCloseableHttpClient_AcceptsUntrustedCerts();
         try {
             HttpPost httpPost = new HttpPost(uri);
-            //Header[] requestHeaders = buildHeadersFromRequest(httpRequest, uri);
-            //httpPost.setHeaders(requestHeaders);
+            Header[] requestHeaders = buildHeadersFromRequest(httpRequest, uri);
+            httpPost.setHeaders(requestHeaders);
+            String bodyString = httpRequest.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
 
-            //String body = "{\"sourceSystem\":\"SOS\",\"orderPriceTypeRequested\":\"ePB\",\"jobSet\":[{\"sku\":2103923,\"jobQty\":15,\"turnTime\":5,\"configurationId\":\"\",\"multiPriceIndicator\":\"true\",\"documentSet\":[{\"configValueSet\":[{\"configAttrValueId\":\"V547\"},{\"configAttrValueId\":\"V548\"},{\"configAttrValueId\":\"V542\"}]}]}]}";
             //httpPost.setEntity(new UrlEncodedFormEntity(nvps));
-            EntityBuilder entityBuilder = EntityBuilder.create()
-                    //.setText(body)
-                    .setContentType(ContentType.APPLICATION_JSON);
+            httpPost.setEntity(new StringEntity(bodyString));
+            /*EntityBuilder entityBuilder = EntityBuilder.create().setText(bodyString);
+            httpPost.setEntity(entityBuilder.build());*/
 
-            httpPost.setEntity(entityBuilder.build());
             CloseableHttpResponse response = httpclient.execute(httpPost);
             logger.info("POST:" + uri.toString() + " : " +response.getStatusLine());
             return proxyResponseHandler(response);
@@ -143,23 +144,56 @@ public class WebServiceImpl implements WebService {
         return null;
     }
 
+    private Header[] buildHeadersFromRequest(HttpServletRequest httpRequest, String scheme, String host) {
+        Enumeration<String> stringEnumeration = httpRequest.getHeaderNames();
+        ArrayList<BasicHeader> headersList = new ArrayList();
+        while (stringEnumeration.hasMoreElements()) {
+            String headerName = stringEnumeration.nextElement();
+            String headerValue = httpRequest.getHeader(headerName);
+            if (headerName.equalsIgnoreCase("host")) {
+                headersList.add(new BasicHeader("host", host));
+            }
+            else if (headerName.equalsIgnoreCase("origin")) {
+                String origin = scheme + "://" + host;
+                headersList.add(new BasicHeader("origin", origin));
+            }
+            else if (headerName.equalsIgnoreCase("content-length")) {//headers to ignore from original request
+                continue;
+            }
+            else {
+                headersList.add(new BasicHeader(headerName, headerValue));
+            }
+        }
+
+        Header[] headers = new Header[headersList.size()];
+        int count = 0;
+        for (BasicHeader header : headersList) {
+            headers[count] = header;
+            count++;
+        }
+        return headers;
+    }
+
     private Header[] buildHeadersFromRequest(HttpServletRequest httpRequest, URI uri) {
         Enumeration<String> stringEnumeration = httpRequest.getHeaderNames();
         ArrayList<BasicHeader> headersList = new ArrayList();
         while (stringEnumeration.hasMoreElements()) {
             String headerName = stringEnumeration.nextElement();
             String headerValue = httpRequest.getHeader(headerName);
-            if (headerValue != null && headerValue.length() > 0) {
-                if (headerName.equalsIgnoreCase("host")) {
-                    headersList.add(new BasicHeader("host", uri.getHost()));
-                }
-                else {
-                    headersList.add(new BasicHeader(headerName, headerValue));
-                }
+            if (headerName.equalsIgnoreCase("host")) {
+                headersList.add(new BasicHeader("host", uri.getHost()));
+            }
+            else if (headerName.equalsIgnoreCase("origin")) {
+                String origin = uri.getScheme() + "://" + uri.getHost();
+                headersList.add(new BasicHeader("origin", origin));
+            }
+            else if (headerName.equalsIgnoreCase("content-length")) {//headers to ignore from original request
+                continue;
+            }
+            else {
+                headersList.add(new BasicHeader(headerName, headerValue));
             }
         }
-        String origin = uri.getScheme() + "://" + uri.getHost();
-        headersList.add(new BasicHeader("origin", origin));
 
         Header[] headers = new Header[headersList.size()];
         int count = 0;
@@ -185,23 +219,6 @@ public class WebServiceImpl implements WebService {
                 }
             }
         }
-
-        /*ArrayList acah = new ArrayList();
-        acah.add("Origin, X-Requested-With, Content-Type, Accept");
-        multiValueMap.put("access-control-allow-headers", acah);
-
-        ArrayList acam = new ArrayList();
-        acam.add("POST, GET, OPTIONS, DELETE");
-        multiValueMap.put("access-control-allow-methods", acam);
-
-        ArrayList acao = new ArrayList();
-        acao.add("*");
-        multiValueMap.put("access-control-allow-origin", acao);
-
-        ArrayList acma = new ArrayList();
-        acma.add("3600");
-        multiValueMap.put("access-control-max-age", acma);*/
-
         return multiValueMap;
     }
 
