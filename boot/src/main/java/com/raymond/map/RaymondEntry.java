@@ -6,10 +6,12 @@ package com.raymond.map;
 public class RaymondEntry<T, K> {
     private T key;
     private K value;
+    private RaymondEntry next;
 
-    public RaymondEntry(T key, K value) {
+    public RaymondEntry(T key, K value, RaymondEntry next) {
         this.key = key;
         this.value = value;
+        this.next = next;
     }
 
     public T getKey() {
@@ -26,5 +28,13 @@ public class RaymondEntry<T, K> {
 
     public void setValue(K value) {
         this.value = value;
+    }
+
+    public RaymondEntry getNext() {
+        return next;
+    }
+
+    public void setNext(RaymondEntry next) {
+        this.next = next;
     }
 }
