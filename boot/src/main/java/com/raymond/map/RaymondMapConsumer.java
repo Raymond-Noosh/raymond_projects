@@ -12,6 +12,7 @@ public class RaymondMapConsumer implements Runnable{
 
     @Override
     public void run() {
-        this.map.remove("1");
+        this.map.remove("arm");
+        this.map.remove("race");
     }
 }

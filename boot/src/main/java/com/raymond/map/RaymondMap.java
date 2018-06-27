@@ -134,19 +134,13 @@ public class RaymondMap<T, K> implements RaymondM<T, K>{
         m.put("glue", "stick");
         m.put("table", "wood");
         m.put("bag", "white");
-        m.put("cup", "yellow");
-        m.put("speaker", "black");
-        m.put("phone", "off");
-        m.put("Eye", "Yes");
-
-        m.remove("arm");
-        m.remove("race");
         m.put("lips", "orange");
         String dd = m.get("lips");
         String arm = m.get("arm");
         System.out.println(dd);
         System.out.println(arm);
-        /*int i = 2;
+
+        int i = 2;
         while (i > 0) {
             new Thread(new RaymondMapProducer(m)).start();//1
             i--;
@@ -163,11 +157,7 @@ public class RaymondMap<T, K> implements RaymondM<T, K>{
         catch (InterruptedException e) {
             e.printStackTrace();
         }
-        RaymondEntry[] e = m.getMap();
-        for (int p = 0; p < m.getSize(); p++) {
-            System.out.println(e[p].getValue());
-        }
-        System.out.println("Size=" + m.getSize());*/
+        System.out.println("Size=" + m.getSize());
     }
 
 }

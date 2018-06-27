@@ -1,5 +1,7 @@
 package com.raymond.queue;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadInfo;
 import java.util.*;
 
 /**
@@ -47,26 +49,27 @@ public class RaymondNormalQueue<T> implements RaymondQueue {
         return queue;
     }
 
-    /*public static void main(String args[]) {
-        new Thread(new RaymondQueueProducer()).start();//1
-        new Thread(new RaymondQueueProducer()).start();//1
-        new Thread(new RaymondQueueProducer()).start();//1
-        new Thread(new RaymondQueueProducer()).start();//1
-        new Thread(new RaymondQueueProducer()).start();//1
-        new Thread(new RaymondQueueProducer()).start();//2
-        new Thread(new RaymondQueueConsumer()).start();//1
-        new Thread(new RaymondQueueProducer()).start();//2
-        new Thread(new RaymondQueueProducer()).start();//3
-        new Thread(new RaymondQueueConsumer()).start();//2
-        new Thread(new RaymondQueueProducer()).start();//3
-        new Thread(new RaymondQueueProducer()).start();//4
-        new Thread(new RaymondQueueProducer()).start();//5
-        new Thread(new RaymondQueueProducer()).start();//6
+    public static void main(String args[]) {
+        RaymondQueue raymondQueue = new RaymondNormalQueue();
+        new Thread(new RaymondQueueProducer(raymondQueue)).start();//1
+        new Thread(new RaymondQueueProducer(raymondQueue)).start();//1
+        new Thread(new RaymondQueueProducer(raymondQueue)).start();//1
+        new Thread(new RaymondQueueProducer(raymondQueue)).start();//1
+        new Thread(new RaymondQueueProducer(raymondQueue)).start();//1
+        new Thread(new RaymondQueueProducer(raymondQueue)).start();//2
+        new Thread(new RaymondQueueConsumer(raymondQueue)).start();//1
+        new Thread(new RaymondQueueProducer(raymondQueue)).start();//2
+        new Thread(new RaymondQueueProducer(raymondQueue)).start();//3
+        new Thread(new RaymondQueueConsumer(raymondQueue)).start();//2
+        new Thread(new RaymondQueueProducer(raymondQueue)).start();//3
+        new Thread(new RaymondQueueProducer(raymondQueue)).start();//4
+        new Thread(new RaymondQueueProducer(raymondQueue)).start();//5
+        new Thread(new RaymondQueueProducer(raymondQueue)).start();//6
 
         ThreadInfo[] infos = ManagementFactory.getThreadMXBean().dumpAllThreads(true, true);
         for (int i = 0; i < infos.length; i++) {
             System.out.println("Waiting Threads -" + infos[i].getWaitedCount());
         }
-    }*/
+    }
 
 }

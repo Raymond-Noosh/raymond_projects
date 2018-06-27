@@ -15,8 +15,9 @@ public class RaymondMapProducer implements Runnable {
 
     @Override
     public void run() {
-        Random r = new Random();
-        int random = r.nextInt(Integer.MAX_VALUE);
-        this.map.put(""+random, ""+random);
+        map.put("cup", "yellow");
+        map.put("speaker", "black");
+        map.put("phone", "off");
+        map.put("Eye", "Yes");
     }
 }

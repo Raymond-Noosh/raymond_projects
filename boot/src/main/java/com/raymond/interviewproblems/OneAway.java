@@ -76,12 +76,12 @@ public class OneAway {
         return diff;
     }
 
-    public static void main (String[] args) {
+    /*public static void main (String[] args) {
         OneAway oneAway = new OneAway();
         String str1 = "acbd";
         String str2 = "ab";
 
         boolean isIt = oneAway.oneEditAway(str1, str2);
         System.out.println(isIt);
-    }
+    }*/
 }

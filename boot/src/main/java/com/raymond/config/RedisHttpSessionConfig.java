@@ -25,11 +25,11 @@ public class RedisHttpSessionConfig {
     }*/
 
 
-    @Bean
+    /*@Bean
     public CacheManager cacheManager(RedisTemplate redisTemplate) {
         RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);
         return cacheManager;
-    }
+    }*/
 
 
 
