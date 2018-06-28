@@ -68,7 +68,8 @@ public class RaymondNormalQueue<T> implements RaymondQueue {
 
         ThreadInfo[] infos = ManagementFactory.getThreadMXBean().dumpAllThreads(true, true);
         for (int i = 0; i < infos.length; i++) {
-            System.out.println("Waiting Threads -" + infos[i].getWaitedCount());
+            System.out.println("Waiting Threads - " + infos[i].getWaitedCount());
+            System.out.println("BlockedCount Threads - " + infos[i].getBlockedCount());
         }
     }
 
