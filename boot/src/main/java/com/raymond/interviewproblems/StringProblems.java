@@ -23,8 +23,9 @@ public class StringProblems {
     //
 
     //Count the number of characters between repeating characters and print largest
-    //abcdefjak
+    //abcdefjakyc
     //In this case, the number of chars between the a
+    //Another example with c
 
 
 }
