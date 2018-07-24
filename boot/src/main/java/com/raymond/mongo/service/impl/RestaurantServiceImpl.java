@@ -22,7 +22,7 @@ import java.util.List;
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
 
-    @Autowired
+    /*@Autowired
     private RestaurantMapstruct restaurantMapstruct;
 
     @Autowired
@@ -67,5 +67,5 @@ public class RestaurantServiceImpl implements RestaurantService {
         AggregationResults aggregationResults = mongoTemplate.aggregate(Aggregation.newAggregation(aggregations), "restaurants", RestaurantDto.class);
         List<Restaurant> restaurants = aggregationResults.getMappedResults();
         return restaurants;
-    }
+    }*/
 }

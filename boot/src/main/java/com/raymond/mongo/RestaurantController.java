@@ -15,7 +15,7 @@ import java.util.List;
 @Controller
 public class RestaurantController {
 
-    @Autowired
+    /*@Autowired
     private RestaurantService restaurantService;
 
     @RequestMapping("/findUsingMatchOperation")
@@ -28,5 +28,5 @@ public class RestaurantController {
     public @ResponseBody List<Restaurant> findUsingAggregationOperation() {
         List<Restaurant> addresses = restaurantService.findUsingAggregationOperation();
         return addresses;
-    }
+    }*/
 }

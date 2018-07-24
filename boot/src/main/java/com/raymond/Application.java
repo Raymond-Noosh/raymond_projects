@@ -1,28 +1,26 @@
 package com.raymond;
 
+import com.raymond.mongo.RestaurantController;
+import com.raymond.mongo.service.RestaurantService;
+import com.raymond.mongo.service.impl.RestaurantServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import java.io.File;
 
 //@SpringBootApplication // same as @Configuration @EnableAutoConfiguration @ComponentScan
-@Configuration
+@EnableAutoConfiguration(exclude={MongoAutoConfiguration.class, MongoDataAutoConfiguration.class, RestaurantController.class, RestaurantService.class, RestaurantServiceImpl.class })
 @ComponentScan
-@EnableAutoConfiguration
 @EnableCaching
-//@EnableGlobalMethodSecurity(securedEnabled = true)
 public class Application extends SpringBootServletInitializer {
 
     public static String ROOT = "upload-dir";

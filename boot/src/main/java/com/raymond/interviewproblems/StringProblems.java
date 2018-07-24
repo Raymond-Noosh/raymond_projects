@@ -10,9 +10,10 @@ public class StringProblems {
     //-1 if smaller
 
     //abc abc 0
-    //abc z  -1
     //z   abc 1
+    //abc z  -1
     public int compareTo(String s1, String s2) {
+
         return -1;
     }
 

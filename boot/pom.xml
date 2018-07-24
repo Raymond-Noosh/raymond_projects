@@ -49,6 +49,7 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
+
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-mongodb</artifactId>
@@ -69,26 +70,30 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-commons</artifactId>
-            <version>1.12.4.RELEASE</version>
-        </dependency>
-        <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
             <version>3.3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+            <version>1.12.4.RELEASE</version>
         </dependency>
 
         <!--used to exclude log4j -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+            <!--Exclude for log4j-->
+            <!--
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-logging</artifactId>
                 </exclusion>
             </exclusions>
+            -->
         </dependency>
 
         <dependency>
@@ -103,6 +108,8 @@
             <version>2.0.3.RELEASE</version>
         </dependency>
 
+        <!--Exclude for log4j-->
+        <!--
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-web</artifactId>
@@ -126,6 +133,7 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.21</version>
         </dependency>
+        -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>

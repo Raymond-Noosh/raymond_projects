@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 /**
  * Created by Raymond Kwong on 6/27/2016.
@@ -15,17 +14,17 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 //mongo --host rs0/localhost:27017,localhost:27018,localhost:27019 dist -u "admin" -p "password" --authenticationDatabase "admin"
 @Configuration
 public class MongoDBConfiguration {
-    private MongoClientURI mongo() throws Exception {
+    /*private MongoClientURI mongo() throws Exception {
         return new MongoClientURI("mongodb://dist:dist_app@localhost:27017,localhost:27018,localhost:27019/dist?replicaSet=rs0");
-    }
+    }*/
 
-    @Bean
+    /*@Bean
     public MongoDbFactory mongoDbFactory() throws Exception {
         return new SimpleMongoDbFactory(mongo());
-    }
+    }*/
 
-    @Bean
+    /*@Bean
     public MongoTemplate mongoTemplate() throws Exception {
         return new MongoTemplate(mongoDbFactory());
-    }
+    }*/
 }

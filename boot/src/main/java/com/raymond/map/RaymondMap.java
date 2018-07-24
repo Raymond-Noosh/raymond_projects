@@ -116,7 +116,7 @@ public class RaymondMap<T, K> implements RaymondM<T, K>{
         return modulus;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 
         RaymondMap<String, String> m = new RaymondMap();
         m.put("Hi", "No");
@@ -158,6 +158,6 @@ public class RaymondMap<T, K> implements RaymondM<T, K>{
             e.printStackTrace();
         }
         System.out.println("Size=" + m.getSize());
-    }
+    }*/
 
 }

@@ -49,7 +49,7 @@ public class RaymondNormalQueue<T> implements RaymondQueue {
         return queue;
     }
 
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         RaymondQueue raymondQueue = new RaymondNormalQueue();
         new Thread(new RaymondQueueProducer(raymondQueue)).start();//1
         new Thread(new RaymondQueueProducer(raymondQueue)).start();//1
@@ -71,6 +71,6 @@ public class RaymondNormalQueue<T> implements RaymondQueue {
             System.out.println("Waiting Threads - " + infos[i].getWaitedCount());
             System.out.println("BlockedCount Threads - " + infos[i].getBlockedCount());
         }
-    }
+    }*/
 
 }
