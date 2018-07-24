@@ -1,5 +1,7 @@
 package com.raymond.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -15,19 +17,24 @@ import java.util.Map;
  */
 @Controller
 public class HomeController {
+
+    static final Logger LOG = LoggerFactory.getLogger(HomeController.class);
+
     @RequestMapping("/")
-    public String home(Map<String, Object> model, HttpServletRequest request) {
+    public String root(Map<String, Object> model, HttpServletRequest request) {
         model.put("message", "Hello World");
         model.put("title", "Hello Home");
         model.put("date", new Date());
+        LOG.info("root page");
         return "home";
     }
 
     @RequestMapping("/home")
-    public String home2(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) {
+    public String home(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) {
         model.put("message", "Hello World");
         model.put("title", "Hello Home");
         model.put("date", new Date());
+        LOG.info("home page");
         return "home";
     }
 
@@ -38,6 +45,7 @@ public class HomeController {
 
     @RequestMapping("/test")
     public String test(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) {
+        LOG.info("test page");
         return "test";
     }
 
