@@ -5,10 +5,8 @@ package com.raymond.config;
 //import com.hazelcast.core.HazelcastInstance;
 //import com.hazelcast.web.SessionListener;
 //import com.hazelcast.web.spring.SpringAwareWebFilter;
-import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.session.hazelcast.config.annotation.web.http.EnableHazelcastHttpSession;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.http.HttpSessionListener;
