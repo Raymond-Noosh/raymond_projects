@@ -1,34 +1,33 @@
-<configuration scan="true">
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="logdir" value="${catalina.base}/logs" />
+    <property name="logname" value="boot" />
+    <property name="max.retention.days" value="60" />
+    <property name="layout" value="%-90(%d %-5level {%16.16thread} [%logger{32}]) : %msg%n"></property>
 
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <!-- encoders are assigned the type
-             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <!--<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
-            <pattern>%d %-5level {%thread} [%logger{20}] : %msg%n</pattern>
+            <pattern>${layout}</pattern>
         </encoder>
     </appender>
 
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logFile.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- daily rollover -->
-            <fileNamePattern>logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
-
-            <!-- keep 30 days' worth of history capped at 3GB total size -->
-            <maxHistory>30</maxHistory>
-            <totalSizeCap>3GB</totalSizeCap>
-
-        </rollingPolicy>
-
+    <appender name="ROLLING-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logdir}/${logname}.log</file>
+        <append>true</append>
         <encoder>
-            <!--<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
-            <pattern>%d %-5level {%thread} [%logger{20}] : %msg%n</pattern>
+            <charset>utf-8</charset>
+            <pattern>${layout}</pattern>
         </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${logdir}/%d{yyyy-MM, aux}/${logname}-%d{yyyy-MM-dd}-%i.log.gz</fileNamePattern>
+            <maxHistory>${max.retention.days}</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+            <maxFileSize>20MB</maxFileSize>
+        </rollingPolicy>
     </appender>
 
     <root level="info">
-        <appender-ref ref="STDOUT" />
-        <appender-ref ref="FILE" />
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="ROLLING-FILE" />
     </root>
 </configuration>

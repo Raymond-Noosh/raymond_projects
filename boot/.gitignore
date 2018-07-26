@@ -45,6 +45,7 @@ Thumbs.db
 
 /target/
 /upload-dir/
+/logs/**
 
 # Dependency directories
 node_modules
