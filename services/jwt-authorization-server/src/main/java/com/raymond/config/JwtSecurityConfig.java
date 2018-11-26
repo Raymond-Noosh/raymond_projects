@@ -2,11 +2,9 @@ package com.raymond.config;
 
 import com.raymond.entrypoint.JwtAuthenticationEntryPoint;
 import com.raymond.filter.JwtAuthFilter;
-import com.raymond.filter.JwtTokenAuthenticationFilter;
 import com.raymond.provider.JwtAuthProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,7 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 
 /**

@@ -1,6 +1,5 @@
 package com.raymond.controller;
 
-import com.raymond.JWTAuthorizationApplication;
 import com.raymond.config.JwtConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
