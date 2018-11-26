@@ -111,7 +111,7 @@ public class Fibonacci {
             //1 + 0
     }
 
-    public static void main(String[] args){
+    /*public static void main(String[] args){
         int i = factorial(3);
         //logger.info("" + i);
 
@@ -139,5 +139,5 @@ public class Fibonacci {
         now = new Date().getTime();
         int f3 = fibonacciRecursionSlowLimit(maxFibonacci);//Slow
         logger.info("" + f3 + " Time:" + (new Date().getTime()-now));
-    }
+    }*/
 }

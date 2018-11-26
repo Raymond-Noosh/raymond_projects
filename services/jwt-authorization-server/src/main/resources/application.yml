@@ -1,0 +1,13 @@
+#spring:
+#  profiles: default
+server:
+  port: 8080
+  servlet:
+    contextPath: /
+security:
+  jwt:
+    uri: /auth/**
+    header: Authorization
+    prefix: Bearer
+    expiration: 86400
+    secret: JwtSecretKey
