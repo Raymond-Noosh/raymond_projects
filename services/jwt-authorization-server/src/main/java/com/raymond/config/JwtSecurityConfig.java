@@ -2,6 +2,7 @@ package com.raymond.config;
 
 import com.raymond.entrypoint.JwtAuthenticationEntryPoint;
 import com.raymond.filter.JwtAuthFilter;
+import com.raymond.filter.JwtUsernameAndPasswordAuthenticationFilter;
 import com.raymond.provider.JwtAuthProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,22 +42,15 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    @Bean
+    /*@Bean
     public AuthenticationManager authenticationManager() {
         return new ProviderManager(Collections.singletonList(authenticationProvider));
-    }
-
-    //create a custom filter
-    @Bean
-    public JwtAuthFilter authTokenFilter() {
-        JwtAuthFilter filter = new JwtAuthFilter();
-        filter.setAuthenticationManager(authenticationManager());
-        //filter.setAuthenticationSuccessHandler(new JwtSuccessHandler());
-        return filter;
-    }
+    }*/
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        logger.info(jwtConfig.getUri());
+        logger.info(jwtConfig.getUri2());
         http
                 .csrf().disable()
                 // make sure we use stateless session; session won't be used to store user's state.
@@ -66,12 +60,13 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(entryPoint)
                 .and()
                 // Add a filter to validate the tokens with every request
-                //.addFilterAfter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig), UsernamePasswordAuthenticationFilter.class) //method1
-                .addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class)//method 2
+                .addFilterAfter(new JwtUsernameAndPasswordAuthenticationFilter("/auth", authenticationManager()), UsernamePasswordAuthenticationFilter.class) //method1
+                .addFilterBefore(new JwtAuthFilter("/auth2", authenticationManager()), UsernamePasswordAuthenticationFilter.class)//method 2
                 // authorization requests config
                 .authorizeRequests()
                 // allow all who are accessing "auth" service
-                .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
+                .antMatchers(HttpMethod.POST, "/auth/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/auth2/**").permitAll()//method 2
                 // must be an admin if trying to access admin area (authentication is also required here)
                 //.antMatchers("/gallery" + "/admin/**").hasRole("ADMIN")
                 // Any other request must be authenticated
@@ -81,7 +76,8 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());//I can choose to either use a userservice
+        auth.authenticationProvider(authenticationProvider);//or use a authenicationProvider, which has precendence, will run before userservice
     }
 
     @Bean
