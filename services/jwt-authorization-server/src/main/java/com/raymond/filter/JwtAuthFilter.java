@@ -27,12 +27,12 @@ public class JwtAuthFilter extends AbstractAuthenticationProcessingFilter {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Autowired
     private JwtConfig jwtConfig;
 
-    public JwtAuthFilter(String defaultFilterProcessesUrl, AuthenticationManager authManager) {
+    public JwtAuthFilter(String defaultFilterProcessesUrl, AuthenticationManager authManager, JwtConfig jwtConfig) {
         super(defaultFilterProcessesUrl);
         super.setAuthenticationManager(authManager);
+        this.jwtConfig = jwtConfig;
     }
 
     @Override

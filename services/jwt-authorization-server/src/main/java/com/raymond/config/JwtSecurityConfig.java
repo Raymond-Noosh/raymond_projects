@@ -60,8 +60,8 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(entryPoint)
                 .and()
                 // Add a filter to validate the tokens with every request
-                .addFilterAfter(new JwtUsernameAndPasswordAuthenticationFilter("/auth", authenticationManager()), UsernamePasswordAuthenticationFilter.class) //method1
-                .addFilterBefore(new JwtAuthFilter("/auth2", authenticationManager()), UsernamePasswordAuthenticationFilter.class)//method 2
+                .addFilterAfter(new JwtUsernameAndPasswordAuthenticationFilter(jwtConfig.getUri(), authenticationManager(), jwtConfig), UsernamePasswordAuthenticationFilter.class) //method1
+                .addFilterAfter(new JwtAuthFilter(jwtConfig.getUri2(), authenticationManager(), jwtConfig), UsernamePasswordAuthenticationFilter.class)//method 2
                 // authorization requests config
                 .authorizeRequests()
                 // allow all who are accessing "auth" service

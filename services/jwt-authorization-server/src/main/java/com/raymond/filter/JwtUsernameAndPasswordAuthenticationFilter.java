@@ -2,12 +2,17 @@ package com.raymond.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.raymond.UserCredentials;
+import com.raymond.config.JwtConfig;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -16,6 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Date;
+import java.util.stream.Collectors;
 
 /**
  * Created by Raymond Kwong on 11/27/2018.
@@ -26,10 +33,12 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
     // We use auth manager to validate the user credentials
     private AuthenticationManager authManager;
+    private JwtConfig jwtConfig;
 
-    public JwtUsernameAndPasswordAuthenticationFilter(String filterProcessesUrl, AuthenticationManager authManager) {
+    public JwtUsernameAndPasswordAuthenticationFilter(String filterProcessesUrl, AuthenticationManager authManager, JwtConfig jwtConfig) {
         super.setFilterProcessesUrl(filterProcessesUrl);
         this.authManager = authManager;
+        this.jwtConfig = jwtConfig;
     }
 
     @Override
@@ -60,7 +69,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                                             Authentication auth) throws IOException, ServletException {
         logger.info("successfulAuthentication");
         Long now = System.currentTimeMillis();
-        /*String token = Jwts.builder()
+        String token = Jwts.builder()
                 .setSubject(auth.getName())
                 // Convert to list of strings.
                 // This is important because it affects the way we get them back in the Gateway.
@@ -72,6 +81,6 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                 .compact();
 
         // Add token to header
-        response.addHeader(jwtConfig.getHeader(), jwtConfig.getPrefix() + token);*/
+        response.addHeader(jwtConfig.getHeader(), jwtConfig.getPrefix() + token);
     }
 }
