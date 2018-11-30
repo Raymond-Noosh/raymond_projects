@@ -40,8 +40,9 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        logger.info(jwtConfig.getUri());
+        logger.info(jwtConfig.getUri());//maybe i can print out where i am loading from on startup
         logger.info(jwtConfig.getUri2());
+        logger.info(jwtConfig.getHeader());
         logger.info(jwtConfig.getPrefix());
         http
                 .csrf().disable()

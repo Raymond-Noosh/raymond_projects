@@ -7,8 +7,9 @@ server:
 security:
   jwt:
     uri: /auth/**
-    header: Authorization
-    prefix: Bearer
+    uri2: /auth2/**
+    header: Authorization-YML
+    prefix: Bearer-YML
     expiration: 86400
     secret: JwtSecretKey
 spring:
