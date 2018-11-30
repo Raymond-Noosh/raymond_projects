@@ -8,15 +8,15 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Created by Raymond Kwong on 11/27/2018.
  */
-@Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+@Component
+public class JwtUserDetailsService implements UserDetailsService {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 

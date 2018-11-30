@@ -1,12 +1,12 @@
 package com.raymond.config;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * Created by Raymond Kwong on 11/24/2018.
  */
-@Component
+@Configuration
 public class JwtConfig {
     @Value("${security.jwt.uri:/auth/**}")
     private String Uri;

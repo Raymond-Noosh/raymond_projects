@@ -1,0 +1,15 @@
+spring-boot:run "--Dsecurity.jwt.prefix=Bitch" "-Dspring-boot.run.jvmArguments=-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=n"
+
+spring-boot:run "-Dspring-boot.run.jvmArguments=-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=n"
+
+spring-boot:run "-Dsecurity.jwt.prefix=Bitch -Dspring-boot.run.jvmArguments=-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=n"
+
+-Dsecurity.jwt.prefix=Bitch
+
+java -jar jwt-authorization-server-0.0.1-SNAPSHOT.jar --security.jwt.prefix=Bitch
+
+
+cd /d C:\raymond_projects\services\jwt-authorization-server\target
+cp jwt-authorization-server-0.0.1-SNAPSHOT.jar 
+
+java -jar jwt-authorization-server-0.0.1-SNAPSHOT.jar --spring.config.location=override.properties

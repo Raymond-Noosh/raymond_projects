@@ -5,7 +5,7 @@
 
     <artifactId>jwt-authorization-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>jwt-authorization-server</name>
     <description>jwt-authorization-server</description>
 

@@ -66,8 +66,9 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <jvmArguments>-Dcatalina.base=${basedir}</jvmArguments>
-                    <!-- -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005-->
+                    <!--<jvmArguments>-Dcatalina.base=${basedir}</jvmArguments>-->
+                    <!--Required for Debugging-->
+                    <jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5100</jvmArguments>
                 </configuration>
             </plugin>
         </plugins>

@@ -7,7 +7,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -31,13 +30,11 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    // We use auth manager to validate the user credentials
-    private AuthenticationManager authManager;
     private JwtConfig jwtConfig;
 
     public JwtUsernameAndPasswordAuthenticationFilter(String filterProcessesUrl, AuthenticationManager authManager, JwtConfig jwtConfig) {
         super.setFilterProcessesUrl(filterProcessesUrl);
-        this.authManager = authManager;
+        super.setAuthenticationManager(authManager);
         this.jwtConfig = jwtConfig;
     }
 
@@ -55,7 +52,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                     creds.getUsername(), creds.getPassword(), Collections.emptyList());
 
             // 3. Authentication manager authenticate the user, and use UserDetialsServiceImpl::loadUserByUsername() method to load the user.
-            return authManager.authenticate(authToken);
+            return getAuthenticationManager().authenticate(authToken);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
