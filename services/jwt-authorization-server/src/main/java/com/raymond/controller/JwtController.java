@@ -25,4 +25,25 @@ public class JwtController {
         ResponseEntity responseEntity = new ResponseEntity(HttpStatus.OK);
         return responseEntity;
     }
+
+    @GetMapping("/testErrors")
+    public ResponseEntity<String> testErrors() {
+        logger.info(jwtConfig.getHeader());
+
+        if (1==1) {
+            throw new NullPointerException();
+            //throw new BadCredentialsException("test");
+        }
+
+        ResponseEntity responseEntity = new ResponseEntity(HttpStatus.OK);
+        return responseEntity;
+    }
+
+    @GetMapping("/testResource")
+    public ResponseEntity<String> testResource() {
+        logger.info(jwtConfig.getHeader());
+
+        ResponseEntity responseEntity = new ResponseEntity(HttpStatus.OK);
+        return responseEntity;
+    }
 }

@@ -55,6 +55,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
                 .antMatchers(HttpMethod.POST, jwtConfig.getUri2()).permitAll()//method 2
+                .antMatchers(HttpMethod.GET, "/test").permitAll()//method 2
                 //.antMatchers("/gallery" + "/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
     }
