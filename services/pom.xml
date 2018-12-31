@@ -9,6 +9,7 @@
         <module>jwt-authorization-server</module>
         <module>config</module>
         <module>eureka</module>
+        <module>gateway</module>
     </modules>
     <packaging>pom</packaging>
     <name>services</name>

@@ -1,23 +1,22 @@
 #spring:
 #  profiles: default
-server:
-  port: 8080
-  servlet:
-    contextPath: /
-security:
-  jwt:
-    uri: /auth/**
-    uri2: /auth2/**
-    header: Authorization-YML
-    prefix: Bearer-YML
-    expiration: 86400
-    secret: JwtSecretKey
-spring:
-  h2:
-    console:
-      enabled: true
-  datasource:
-    url: jdbc:h2:file:~/test
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+#server:
+#  servlet:
+#    contextPath: /
+#security:
+#  jwt:
+#    uri: /auth/**
+#    uri2: /auth2/**
+#    header: Authorization-YML
+#    prefix: Bearer-YML
+#    expiration: 86400
+#    secret: JwtSecretKey
+#spring:
+#  h2:
+#    console:
+#      enabled: true
+#  datasource:
+#    url: jdbc:h2:file:~/test
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver
