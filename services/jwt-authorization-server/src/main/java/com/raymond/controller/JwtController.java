@@ -1,6 +1,8 @@
 package com.raymond.controller;
 
 import com.raymond.config.JwtConfig;
+import com.raymond.entity.Student;
+import com.raymond.service.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class JwtController {
 
     @Autowired
     private JwtConfig jwtConfig;
+
+    @Autowired
+    private StudentService studentService;
 
     @GetMapping("/jwt")
     public ResponseEntity<String> jwt() {
@@ -42,6 +47,13 @@ public class JwtController {
     @GetMapping("/testResource")
     public ResponseEntity<String> testResource() {
         logger.info(jwtConfig.getHeader());
+
+        Student student = studentService.findStudentById(10001L);
+        logger.info(student.getName());
+
+        Student student2 = studentService.findStudentByUsername("user2");
+        logger.info(student2.getName());
+
 
         ResponseEntity responseEntity = new ResponseEntity(HttpStatus.OK);
         return responseEntity;

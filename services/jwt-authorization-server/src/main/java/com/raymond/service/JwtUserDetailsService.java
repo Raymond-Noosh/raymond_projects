@@ -1,7 +1,9 @@
 package com.raymond.service;
 
+import com.raymond.entity.Student;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -21,14 +23,15 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
+    @Autowired
+    private StudentService studentService;
+
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         logger.info("loadUserByUsername");
+        Student student = studentService.findStudentByUsername(s);
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
                 .commaSeparatedStringToAuthorityList("ROLE_" + "USER"/*appUser.getRole()*/);
-
-        // The "User" class is provided by Spring and represents a model class for user to be returned by UserDetailsService
-        // And used by auth manager to verify and check user authentication.
-        return new User("a", "b", grantedAuthorities);
+        return new User(student.getUsername(), student.getPassword(), grantedAuthorities);
     }
 }

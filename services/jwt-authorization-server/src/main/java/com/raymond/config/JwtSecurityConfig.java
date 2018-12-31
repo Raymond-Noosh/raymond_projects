@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -53,10 +54,12 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterAfter(new JwtUsernameAndPasswordAuthenticationFilter(jwtConfig.getUri(), authenticationManager(), jwtConfig), UsernamePasswordAuthenticationFilter.class) //method1
                 .addFilterAfter(new JwtAuthFilter(jwtConfig.getUri2(), authenticationManager(), jwtConfig), UsernamePasswordAuthenticationFilter.class)//method 2
                 .authorizeRequests()
+                .antMatchers(HttpMethod.GET,"/h2-console").permitAll()
                 .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
                 .antMatchers(HttpMethod.POST, jwtConfig.getUri2()).permitAll()//method 2
-                .antMatchers(HttpMethod.GET, "/test").permitAll()//method 2
+                .antMatchers(HttpMethod.GET, "/testResource").permitAll()//method 2
                 //.antMatchers("/gallery" + "/admin/**").hasRole("ADMIN")
+                //.anyRequest().permitAll();
                 .anyRequest().authenticated();
     }
 
