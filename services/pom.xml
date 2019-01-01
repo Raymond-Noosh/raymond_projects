@@ -6,10 +6,11 @@
     <artifactId>services</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
-        <module>jwt-authorization-server</module>
         <module>config</module>
         <module>eureka</module>
         <module>gateway</module>
+        <module>jwt-authorization-server</module>
+        <module>resource</module>
     </modules>
     <packaging>pom</packaging>
     <name>services</name>
