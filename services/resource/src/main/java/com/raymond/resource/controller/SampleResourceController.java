@@ -3,6 +3,7 @@ package com.raymond.resource.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.raymond.resource.dto.UserCredentials;
+import com.raymond.resource.dto.UserDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -24,9 +25,18 @@ public class SampleResourceController {
         return responseEntity;
     }
 
+    @GetMapping("/getRandomUser")
+    public ResponseEntity<UserDto> getRandomUser() {
+        UserDto userDto = new UserDto();
+        userDto.setFirstName("John"+Math.random());
+        userDto.setLastName("Doe"+Math.random());
+        ResponseEntity responseEntity = new ResponseEntity(userDto, HttpStatus.OK);
+        return responseEntity;
+    }
+
     @PostMapping("/create")
     @ResponseBody
-    public ResponseEntity<String> create(@RequestBody UserCredentials userCredentials) {
+    public ResponseEntity<String> create(@ModelAttribute UserCredentials userCredentials) {
         ObjectMapper mapper = new ObjectMapper();
         try {
             logger.info(mapper.writeValueAsString(userCredentials));

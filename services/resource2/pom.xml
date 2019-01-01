@@ -8,9 +8,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<groupId>com.raymond</groupId>
-	<artifactId>resource</artifactId>
+	<artifactId>resource2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>resource</name>
+	<name>resource2</name>
 	<description>Demo project for Spring Boot</description>
 
 	<packaging>jar</packaging>
@@ -53,7 +53,7 @@
 					<profiles>
 						<profile>dev</profile>
 					</profiles>
-					<jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5006</jvmArguments>
+					<jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5007</jvmArguments>
 				</configuration>
 			</plugin>
 		</plugins>

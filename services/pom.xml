@@ -11,6 +11,7 @@
         <module>gateway</module>
         <module>jwt-authorization-server</module>
         <module>resource</module>
+        <module>resource2</module>
     </modules>
     <packaging>pom</packaging>
     <name>services</name>
