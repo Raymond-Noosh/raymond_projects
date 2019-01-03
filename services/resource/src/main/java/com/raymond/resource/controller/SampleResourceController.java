@@ -36,7 +36,7 @@ public class SampleResourceController {
 
     @PostMapping("/create")
     @ResponseBody
-    public ResponseEntity<String> create(@ModelAttribute UserCredentials userCredentials) {
+    public ResponseEntity<String> create(@RequestBody UserCredentials userCredentials) {
         ObjectMapper mapper = new ObjectMapper();
         try {
             logger.info(mapper.writeValueAsString(userCredentials));
