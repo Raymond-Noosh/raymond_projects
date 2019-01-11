@@ -1,0 +1,51 @@
+version: '3'
+services:
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    hostname: "rabbitmq"
+    ports:
+     - "5672:5672"
+     - "15672:15672"
+  config:
+    depends_on:
+      - "rabbitmq"
+    image: "raymond/config:0.0.1-SNAPSHOT"
+    hostname: "config"
+    ports:
+      - "8081:8081"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=dev"
+  eureka1:
+    depends_on:
+      - "config"
+    image: "raymond/eureka:0.0.1-SNAPSHOT"
+    hostname: "eureka1"
+    ports:
+      - "8761:8761"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=dev1"
+  eureka2:
+    depends_on:
+      - "config"
+    image: "raymond/eureka:0.0.1-SNAPSHOT"
+    hostname: "eureka2"
+    ports:
+      - "8762:8762"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=dev2"
+  gateway:
+    depends_on:
+      - "eureka1"
+      - "eureka2"
+    image: "raymond/gateway:0.0.1-SNAPSHOT"
+    hostname: "gateway"
+    ports:
+      - "8080:8080"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=dev"
+
+
+#Sample run command
+
+#docker run -d --hostname rabbitmq --name rabbitmq -p 15672:15672 -p 5672:5672 --rm rabbitmq:3-management
+#docker run --name=config -e "SPRING_PROFILES_ACTIVE=dev" --rm raymond/config:0.0.1-SNAPSHOT
