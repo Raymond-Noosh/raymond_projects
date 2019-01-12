@@ -7,10 +7,10 @@
         <artifactId>services</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>jwt-authorization-server</artifactId>
+    <artifactId>jwt-auth</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>jwt-authorization-server</name>
-    <description>jwt-authorization-server</description>
+    <name>jwt-auth</name>
+    <description>jwt-auth</description>
 
     <properties>
         <java.version>1.8</java.version>

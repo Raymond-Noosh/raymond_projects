@@ -9,7 +9,7 @@
         <module>config</module>
         <module>eureka</module>
         <module>gateway</module>
-        <module>jwt-authorization-server</module>
+        <module>jwt-auth</module>
         <module>resource</module>
         <module>resource2</module>
     </modules>

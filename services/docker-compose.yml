@@ -33,18 +33,27 @@ services:
       - "8762:8762"
     environment:
       - "SPRING_PROFILES_ACTIVE=dev2"
-  gateway:
-    depends_on:
-      - "eureka1"
-      - "eureka2"
-    image: "raymond/gateway:0.0.1-SNAPSHOT"
-    hostname: "gateway"
-    ports:
-      - "8080:8080"
-    environment:
-      - "SPRING_PROFILES_ACTIVE=dev"
-
-
+#  gateway:
+#    depends_on:
+#      - "eureka1"
+#      - "eureka2"
+#    image: "raymond/gateway:0.0.1-SNAPSHOT"
+#    hostname: "gateway"
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      - "SPRING_PROFILES_ACTIVE=dev"
+#  jwt-auth:
+#    depends_on:
+#      - "eureka1"
+#      - "eureka2"
+#    image: "raymond/jwt-auth:0.0.1-SNAPSHOT"
+#    hostname: "jwt-auth"
+#    ports:
+#      - "8085:8085"
+#    environment:
+#      - "SPRING_PROFILES_ACTIVE=dev"
+#
 #Sample run command
 
 #docker run -d --hostname rabbitmq --name rabbitmq -p 15672:15672 -p 5672:5672 --rm rabbitmq:3-management
