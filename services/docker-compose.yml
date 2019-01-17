@@ -2,42 +2,67 @@ version: '3'
 services:
   rabbitmq:
     image: "rabbitmq:3-management"
+    deploy:
+      replicas: 1
     hostname: "rabbitmq"
     ports:
      - "5672:5672"
      - "15672:15672"
-  config:
+  config1:
     depends_on:
       - "rabbitmq"
-    image: "raymond/config:0.0.1-SNAPSHOT"
-    hostname: "config"
+    image: "raym123/config:0.0.1-SNAPSHOT"
+    deploy:
+      replicas: 1
+    hostname: "config1"
     ports:
       - "8081:8081"
     environment:
+      - "SERVER_PORT=8081"
+      - "SPRING_PROFILES_ACTIVE=dev"
+  config2:
+    depends_on:
+      - "rabbitmq"
+    image: "raym123/config:0.0.1-SNAPSHOT"
+    deploy:
+      replicas: 1
+    hostname: "config2"
+    ports:
+      - "8082:8082"
+    environment:
+      - "SERVER_PORT=8082"
       - "SPRING_PROFILES_ACTIVE=dev"
   eureka1:
     depends_on:
-      - "config"
-    image: "raymond/eureka:0.0.1-SNAPSHOT"
+      - "config1"
+      - "config2"
+    image: "raym123/eureka:0.0.1-SNAPSHOT"
+    deploy:
+      replicas: 1
     hostname: "eureka1"
     ports:
       - "8761:8761"
     environment:
+      - "SERVER_PORT=8761"
       - "SPRING_PROFILES_ACTIVE=dev1"
   eureka2:
     depends_on:
-      - "config"
-    image: "raymond/eureka:0.0.1-SNAPSHOT"
+      - "config1"
+      - "config2"
+    image: "raym123/eureka:0.0.1-SNAPSHOT"
+    deploy:
+      replicas: 1
     hostname: "eureka2"
     ports:
       - "8762:8762"
     environment:
+      - "SERVER_PORT=8762"
       - "SPRING_PROFILES_ACTIVE=dev2"
 #  gateway:
 #    depends_on:
 #      - "eureka1"
 #      - "eureka2"
-#    image: "raymond/gateway:0.0.1-SNAPSHOT"
+#    image: "raym123/gateway:0.0.1-SNAPSHOT"
 #    hostname: "gateway"
 #    ports:
 #      - "8080:8080"
@@ -47,14 +72,14 @@ services:
 #    depends_on:
 #      - "eureka1"
 #      - "eureka2"
-#    image: "raymond/jwt-auth:0.0.1-SNAPSHOT"
+#    image: "raym123/jwt-auth:0.0.1-SNAPSHOT"
 #    hostname: "jwt-auth"
 #    ports:
 #      - "8085:8085"
 #    environment:
 #      - "SPRING_PROFILES_ACTIVE=dev"
-#
+
 #Sample run command
 
 #docker run -d --hostname rabbitmq --name rabbitmq -p 15672:15672 -p 5672:5672 --rm rabbitmq:3-management
-#docker run --name=config -e "SPRING_PROFILES_ACTIVE=dev" --rm raymond/config:0.0.1-SNAPSHOT
+#docker run --name=config -e "SPRING_PROFILES_ACTIVE=dev" --rm raym123/config:0.0.1-SNAPSHOT
