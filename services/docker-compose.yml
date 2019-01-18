@@ -3,7 +3,7 @@ services:
   rabbitmq:
     image: "rabbitmq:3-management"
     deploy:
-      replicas: 1
+      replicas: 2
     hostname: "rabbitmq"
     ports:
      - "5672:5672"
@@ -13,7 +13,7 @@ services:
       - "rabbitmq"
     image: "raym123/config:0.0.1-SNAPSHOT"
     deploy:
-      replicas: 1
+      replicas: 2
     hostname: "config1"
     ports:
       - "8081:8081"
@@ -25,7 +25,7 @@ services:
       - "rabbitmq"
     image: "raym123/config:0.0.1-SNAPSHOT"
     deploy:
-      replicas: 1
+      replicas: 2
     hostname: "config2"
     ports:
       - "8082:8082"
@@ -38,7 +38,7 @@ services:
       - "config2"
     image: "raym123/eureka:0.0.1-SNAPSHOT"
     deploy:
-      replicas: 1
+      replicas: 2
     hostname: "eureka1"
     ports:
       - "8761:8761"
@@ -51,7 +51,7 @@ services:
       - "config2"
     image: "raym123/eureka:0.0.1-SNAPSHOT"
     deploy:
-      replicas: 1
+      replicas: 2
     hostname: "eureka2"
     ports:
       - "8762:8762"
@@ -64,7 +64,7 @@ services:
       - "eureka2"
     image: "raym123/gateway:0.0.1-SNAPSHOT"
     deploy:
-      replicas: 1
+      replicas: 2
     hostname: "gateway"
     ports:
       - "8080:8080"

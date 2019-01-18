@@ -1,0 +1,52 @@
+version: '3'
+services:
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    deploy:
+      replicas: 1
+    hostname: "rabbitmq"
+    ports:
+     - "5672:5672"
+     - "15672:15672"
+    networks:
+      - "my-overlay"
+  config1:
+    depends_on:
+      - "rabbitmq"
+    image: "raym123/config:0.0.1-SNAPSHOT"
+    deploy:
+      replicas: 1
+    hostname: "config1"
+    ports:
+      - "8081:8081"
+    networks:
+      - "my-overlay"
+    environment:
+      - "SERVER_PORT=8081"
+      - "SPRING_PROFILES_ACTIVE=dev"
+  config2:
+    depends_on:
+      - "rabbitmq"
+    image: "raym123/config:0.0.1-SNAPSHOT"
+    deploy:
+      replicas: 1
+    hostname: "config2"
+    ports:
+      - "8082:8082"
+    networks:
+      - "my-overlay"
+    environment:
+      - "SERVER_PORT=8082"
+      - "SPRING_PROFILES_ACTIVE=dev"
+
+networks:
+  my-overlay:
+    driver: "overlay"
+    external: true
+
+
+
+#Sample run command
+
+#docker run -d --hostname rabbitmq --name rabbitmq -p 15672:15672 -p 5672:5672 --rm rabbitmq:3-management
+#docker run --name=config -e "SPRING_PROFILES_ACTIVE=dev" --rm raym123/config:0.0.1-SNAPSHOT

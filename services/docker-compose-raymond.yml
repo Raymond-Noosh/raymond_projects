@@ -1,0 +1,24 @@
+version: '3'
+services:
+  jwt-auth:
+    image: "raym123/jwt-auth:0.0.1-SNAPSHOT"
+    deploy:
+      replicas: 2
+    hostname: "jwt-auth"
+    ports:
+      - "8085:8085"
+    networks:
+      - "my-overlay"
+    environment:
+      - "SERVER_PORT=8085"
+      - "SPRING_PROFILES_ACTIVE=dev"
+
+networks:
+  my-overlay:
+    driver: "overlay"
+    external: true
+
+#Sample run command
+
+#docker run -d --hostname rabbitmq --name rabbitmq -p 15672:15672 -p 5672:5672 --rm rabbitmq:3-management
+#docker run --name=config -e "SPRING_PROFILES_ACTIVE=dev" --rm raym123/config:0.0.1-SNAPSHOT
