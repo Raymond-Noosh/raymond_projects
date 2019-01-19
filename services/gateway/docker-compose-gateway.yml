@@ -1,0 +1,28 @@
+version: '3'
+services:
+  gateway:
+    depends_on:
+      - "eureka1"
+      - "eureka2"
+    image: "raym123/gateway:latest"
+    deploy:
+      replicas: 2
+    hostname: "gateway"
+    ports:
+      - "8080:8080"
+    networks:
+      - "my-overlay"
+    environment:
+      - "SERVER_PORT=8080"
+      - "SPRING_PROFILES_ACTIVE=dev"
+      - "SPRING_CLOUD_CONFIG_URI=http://config1:8081,http://config2:8082"
+
+networks:
+  my-overlay:
+    driver: "overlay"
+    external: true
+
+#Sample run command
+
+#docker run -d --hostname rabbitmq --name rabbitmq -p 15672:15672 -p 5672:5672 --rm rabbitmq:3-management
+#docker run --name=config -e "SPRING_PROFILES_ACTIVE=dev" --rm raym123/config:0.0.1-SNAPSHOT
