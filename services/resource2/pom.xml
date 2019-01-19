@@ -76,7 +76,9 @@
                     <profiles>
                         <profile>dev</profile>
                     </profiles>
-                    <jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5007</jvmArguments>
+                    <arguments>
+                        <argument>--spring.cloud.config.uri=http://192.168.99.101:8081,http://192.168.99.101:8082</argument>
+                    </arguments>
                 </configuration>
             </plugin>
         </plugins>
