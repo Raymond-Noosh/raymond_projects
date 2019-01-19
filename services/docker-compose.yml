@@ -11,7 +11,7 @@ services:
   config1:
     depends_on:
       - "rabbitmq"
-    image: "raym123/config:0.0.1-SNAPSHOT"
+    image: "raym123/config:latest"
     deploy:
       replicas: 2
     hostname: "config1"
@@ -23,7 +23,7 @@ services:
   config2:
     depends_on:
       - "rabbitmq"
-    image: "raym123/config:0.0.1-SNAPSHOT"
+    image: "raym123/config:latest"
     deploy:
       replicas: 2
     hostname: "config2"
@@ -36,7 +36,7 @@ services:
     depends_on:
       - "config1"
       - "config2"
-    image: "raym123/eureka:0.0.1-SNAPSHOT"
+    image: "raym123/eureka:latest"
     deploy:
       replicas: 2
     hostname: "eureka1"
@@ -49,7 +49,7 @@ services:
     depends_on:
       - "config1"
       - "config2"
-    image: "raym123/eureka:0.0.1-SNAPSHOT"
+    image: "raym123/eureka:latest"
     deploy:
       replicas: 2
     hostname: "eureka2"
@@ -62,7 +62,7 @@ services:
     depends_on:
       - "eureka1"
       - "eureka2"
-    image: "raym123/gateway:0.0.1-SNAPSHOT"
+    image: "raym123/gateway:latest"
     deploy:
       replicas: 2
     hostname: "gateway"
@@ -75,7 +75,7 @@ services:
 #    depends_on:
 #      - "eureka1"
 #      - "eureka2"
-#    image: "raym123/jwt-auth:0.0.1-SNAPSHOT"
+#    image: "raym123/jwt-auth:latest"
 #    hostname: "jwt-auth"
 #    ports:
 #      - "8085:8085"
@@ -85,4 +85,4 @@ services:
 #Sample run command
 
 #docker run -d --hostname rabbitmq --name rabbitmq -p 15672:15672 -p 5672:5672 --rm rabbitmq:3-management
-#docker run --name=config -e "SPRING_PROFILES_ACTIVE=dev" --rm raym123/config:0.0.1-SNAPSHOT
+#docker run --name=config -e "SPRING_PROFILES_ACTIVE=dev" --rm raym123/config:latest

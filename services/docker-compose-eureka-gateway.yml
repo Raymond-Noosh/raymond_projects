@@ -1,7 +1,7 @@
 version: '3'
 services:
   eureka1:
-    image: "raym123/eureka:0.0.1-SNAPSHOT"
+    image: "raym123/eureka:latest"
     deploy:
       replicas: 1
     hostname: "eureka1"
@@ -14,7 +14,7 @@ services:
       - "SPRING_PROFILES_ACTIVE=dev1"
       - "SPRING_CLOUD_CONFIG_URI=http://config1:8081,http://config2:8082"
   eureka2:
-    image: "raym123/eureka:0.0.1-SNAPSHOT"
+    image: "raym123/eureka:latest"
     deploy:
       replicas: 1
     hostname: "eureka2"
@@ -30,7 +30,7 @@ services:
     depends_on:
       - "eureka1"
       - "eureka2"
-    image: "raym123/gateway:0.0.1-SNAPSHOT"
+    image: "raym123/gateway:latest"
     deploy:
       replicas: 2
     hostname: "gateway"
