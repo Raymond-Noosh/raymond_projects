@@ -7,7 +7,6 @@
 .classpath
 .project
 .springBeans
-target/
 
 *.iml
 .idea
