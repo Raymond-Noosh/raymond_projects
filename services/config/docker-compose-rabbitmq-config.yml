@@ -13,7 +13,7 @@ services:
   config1:
     depends_on:
       - "rabbitmq"
-    image: "raym123/config:latest"
+    image: "raym123/config:0.0.1-SNAPSHOT"
     deploy:
       replicas: 1
     hostname: "config1"
@@ -27,7 +27,7 @@ services:
   config2:
     depends_on:
       - "rabbitmq"
-    image: "raym123/config:latest"
+    image: "raym123/config:0.0.1-SNAPSHOT"
     deploy:
       replicas: 1
     hostname: "config2"
