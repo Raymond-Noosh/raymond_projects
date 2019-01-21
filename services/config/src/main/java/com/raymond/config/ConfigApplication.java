@@ -11,7 +11,7 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 public class ConfigApplication {
 
 	public static void main(String[] args) {
-		System.out.println("BLACK-0.0.1-SNAPSHOT");
+		System.out.println("WHITE-0.0.1-SNAPSHOT");
 		SpringApplication.run(ConfigApplication.class, args);
 	}
 }
