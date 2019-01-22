@@ -10,8 +10,6 @@ services:
     networks:
       - "my-overlay"
   config:
-    depends_on:
-      - "rabbitmq"
     image: "raym123/config:latest"
     deploy:
       replicas: 2

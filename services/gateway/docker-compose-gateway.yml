@@ -1,9 +1,6 @@
 version: '3'
 services:
   gateway:
-    depends_on:
-      - "eureka1"
-      - "eureka2"
     image: "raym123/gateway:latest"
     deploy:
       replicas: 2
