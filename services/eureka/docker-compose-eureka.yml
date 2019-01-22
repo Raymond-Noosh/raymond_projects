@@ -13,6 +13,7 @@ services:
       - "SERVER_PORT=8761"
       - "SPRING_PROFILES_ACTIVE=dev"
       - "SPRING_CLOUD_CONFIG_URI=http://config:8081"
+      - "EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka2:8762/eureka/"
   eureka2:
     image: "raym123/eureka:latest"
     deploy:
@@ -26,6 +27,7 @@ services:
       - "SERVER_PORT=8762"
       - "SPRING_PROFILES_ACTIVE=dev"
       - "SPRING_CLOUD_CONFIG_URI=http://config:8081"
+      - "EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka1:8761/eureka/"
 
 networks:
   my-overlay:
