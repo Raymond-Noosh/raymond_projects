@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Created by Raymond Kwong on 1/21/2019.
  */
-@RestController
+//@RestController
 public class RestartController {
 
-    @Autowired
+    /*@Autowired
     RestartService restartService;
 
     @PostMapping("/restart")
     public void restart() {
         System.out.println("restart");
         restartService.restartApp();
-    }
+    }*/
 }
