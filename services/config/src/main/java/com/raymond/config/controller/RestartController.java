@@ -17,6 +17,7 @@ public class RestartController {
 
     @PostMapping("/restart")
     public void restart() {
+        System.out.println("restart");
         restartService.restartApp();
     }
 }
