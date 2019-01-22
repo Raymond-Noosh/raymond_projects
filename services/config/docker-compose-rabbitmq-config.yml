@@ -13,6 +13,7 @@ services:
     image: "raym123/config:latest"
     deploy:
       replicas: 2
+    hostname: "config"
     ports:
       - "8081:8081"
     networks:
