@@ -5,6 +5,8 @@ services:
     image: "raym123/config:latest"
     deploy:
       replicas: 1
+      update_config:
+        delay: 20s
     hostname: "config"
     ports:
       - "8081:8081"

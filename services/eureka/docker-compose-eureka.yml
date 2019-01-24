@@ -4,6 +4,8 @@ services:
     image: "raym123/eureka:latest"
     deploy:
       replicas: 1
+      update_config:
+        delay: 20s
     hostname: "eureka1"
     ports:
       - "8761:8761"
@@ -19,6 +21,8 @@ services:
     image: "raym123/eureka:latest"
     deploy:
       replicas: 1
+      update_config:
+        delay: 20s
     hostname: "eureka2"
     ports:
       - "8762:8762"
