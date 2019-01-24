@@ -73,6 +73,9 @@
                     <profiles>
                         <profile>dev</profile>
                     </profiles>
+                    <arguments>
+                        <argument>--SPRING.CLOUD.CONFIG.URI=http://raymond:wtf@192.168.99.103:8081</argument>
+                    </arguments>
                 </configuration>
             </plugin>
         </plugins>

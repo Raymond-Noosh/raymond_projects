@@ -4,7 +4,7 @@ services:
   config:
     image: "raym123/config:latest"
     deploy:
-      replicas: 2
+      replicas: 3
     hostname: "config"
     ports:
       - "8081:8081"
@@ -13,6 +13,9 @@ services:
     environment:
       - "SERVER_PORT=8081"
       - "SPRING_PROFILES_ACTIVE=dev"
+      - "SPRING_SECURITY_USER_NAME=test"
+      - "SPRING_SECURITY_USER_PASSWORD=dfesdf"
+      - "ENCRYPT_KEY=dfehh43d"
 
 networks:
   my-overlay:
