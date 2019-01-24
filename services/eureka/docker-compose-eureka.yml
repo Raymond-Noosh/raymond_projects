@@ -16,7 +16,6 @@ services:
       - "SPRING_PROFILES_ACTIVE=dev1"
       - "SPRING_CLOUD_CONFIG_URI=http://test:dfesdf@config:8081"
       - "EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka2:8762/eureka/"
-      - "EUREKA_INSTANCE_HOSTNAME=eureka1"
   eureka2:
     image: "raym123/eureka:latest"
     deploy:
@@ -33,7 +32,6 @@ services:
       - "SPRING_PROFILES_ACTIVE=dev2"
       - "SPRING_CLOUD_CONFIG_URI=http://test:dfesdf@config:8081"
       - "EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka1:8761/eureka/"
-      - "EUREKA_INSTANCE_HOSTNAME=eureka2"
 
 networks:
   my-overlay:
