@@ -1,15 +1,6 @@
 version: '3'
+
 services:
-  rabbitmq:
-    image: "rabbitmq:3-management"
-    deploy:
-      replicas: 1
-    hostname: "rabbitmq"
-    ports:
-     - "5672:5672"
-     - "15672:15672"
-    networks:
-      - "my-overlay"
   config:
     image: "raym123/config:latest"
     deploy:
