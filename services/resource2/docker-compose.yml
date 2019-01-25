@@ -3,7 +3,9 @@ services:
   resource:
     image: "raym123/resource2:latest"
     deploy:
-      replicas: 2
+      replicas: 1
+      update_config:
+        delay: 20s
     hostname: "resource2"
     ports:
       - "8301:8301"
