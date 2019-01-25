@@ -48,7 +48,7 @@ services:
     depends_on:
       - "eureka1"
       - "eureka2"
-    image: "raym123/gateway:latest"
+    image: "raym123/zuulgateway:latest"
     deploy:
       replicas: 2
     hostname: "gateway"
@@ -57,12 +57,12 @@ services:
     environment:
       - "SERVER_PORT=8080"
       - "SPRING_PROFILES_ACTIVE=dev"
-#  jwt-auth:
+#  jwtauth:
 #    depends_on:
 #      - "eureka1"
 #      - "eureka2"
-#    image: "raym123/jwt-auth:latest"
-#    hostname: "jwt-auth"
+#    image: "raym123/jwtauth:latest"
+#    hostname: "jwtauth"
 #    ports:
 #      - "8085:8085"
 #    environment:

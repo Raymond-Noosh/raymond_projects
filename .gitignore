@@ -27,8 +27,8 @@ node/
 *.log
 config/src/test/
 eureka/src/test/
-gateway/src/test/
-jwt-auth/src/test/
+zuulgateway/src/test/
+jwtauth/src/test/
 resource/src/main/resources/static/
 resource/src/main/resources/templates/
 resource2/src/main/resources/static/

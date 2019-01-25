@@ -8,8 +8,8 @@
     <modules>
         <module>config</module>
         <module>eureka</module>
-        <module>gateway</module>
-        <module>jwt-auth</module>
+        <module>zuulgateway</module>
+        <module>jwtauth</module>
         <module>resource</module>
         <module>resource2</module>
     </modules>

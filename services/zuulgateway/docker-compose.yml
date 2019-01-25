@@ -1,7 +1,7 @@
 version: '3'
 services:
   gateway:
-    image: "raym123/gateway:latest"
+    image: "raym123/zuulgateway:latest"
     deploy:
       replicas: 1
     hostname: "gateway"
