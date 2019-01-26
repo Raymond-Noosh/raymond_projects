@@ -6,7 +6,7 @@ services:
     deploy:
       replicas: 1
       update_config:
-        delay: 1m
+        delay: 2m
         order: start-first
     hostname: "resource"
     ports:
