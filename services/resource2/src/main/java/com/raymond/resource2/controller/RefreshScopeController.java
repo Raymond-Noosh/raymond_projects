@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope
 @RestController
 public class RefreshScopeController {
-    @Value("${refresh.test}")
+    @Value("${refresh.test:defaultbetterchangeit}")
     private String refreshtest;
 
     @GetMapping("/refreshtest")
