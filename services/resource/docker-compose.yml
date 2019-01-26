@@ -1,4 +1,4 @@
-version: '3'
+version: '3.6'
 
 services:
   resource:
@@ -6,7 +6,8 @@ services:
     deploy:
       replicas: 2
       update_config:
-        delay: 20s
+        delay: 1m
+        order: start-first
     hostname: "resource"
     ports:
       - "8300:8300"

@@ -1,11 +1,12 @@
-version: '3'
+version: '3.6'
 services:
   eureka1:
     image: "raym123/eureka:latest"
     deploy:
       replicas: 1
       update_config:
-        delay: 20s
+        delay: 1m
+        order: start-first
     hostname: "eureka1"
     ports:
       - "8761:8761"
@@ -21,7 +22,8 @@ services:
     deploy:
       replicas: 1
       update_config:
-        delay: 20s
+        delay: 1m
+        order: start-first
     hostname: "eureka2"
     ports:
       - "8762:8762"
