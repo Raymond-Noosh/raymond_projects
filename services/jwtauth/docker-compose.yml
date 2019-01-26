@@ -3,7 +3,7 @@ services:
   jwtauth:
     image: "raym123/jwtauth:latest"
     deploy:
-      replicas: 2
+      replicas: 1
     hostname: "jwtauth"
     ports:
       - "8085:8085"

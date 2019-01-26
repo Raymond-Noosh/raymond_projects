@@ -12,6 +12,7 @@
         <module>jwtauth</module>
         <module>resource</module>
         <module>resource2</module>
+        <module>cloudgateway</module>
     </modules>
     <packaging>pom</packaging>
     <name>services</name>
