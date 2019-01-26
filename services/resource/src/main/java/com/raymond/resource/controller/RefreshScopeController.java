@@ -1,4 +1,4 @@
-package com.raymond.eureka.controller;
+package com.raymond.resource.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
