@@ -4,7 +4,7 @@ services:
   resource:
     image: "raym123/resource:latest"
     deploy:
-      replicas: 2
+      replicas: 1
       update_config:
         delay: 1m
         order: start-first

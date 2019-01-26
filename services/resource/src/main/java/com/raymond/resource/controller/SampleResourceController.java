@@ -27,7 +27,7 @@ public class SampleResourceController {
 
     private final static Logger logger = LoggerFactory.getLogger(SampleResourceController.class);
 
-    @GetMapping("/test")
+    @GetMapping("/getLocalPort")
     public ResponseEntity<String> testErrors() {
         String[] activeProfiles = environment.getActiveProfiles();      // it will return String Array of all active profile.
         String port = environment.getProperty("local.server.port");
