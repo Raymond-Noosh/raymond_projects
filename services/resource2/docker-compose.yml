@@ -1,9 +1,10 @@
 version: '3.6'
+
 services:
   resource:
     image: "raym123/resource2:latest"
     deploy:
-      replicas: 2
+      replicas: 1
       update_config:
         delay: 1m
         order: start-first

@@ -1,4 +1,5 @@
 version: '3.6'
+
 services:
   eureka1:
     image: "raym123/eureka:latest"
