@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   resource:
-    image: "raym123/resource:v1"
+    image: "raym123/resource:v2"
     deploy:
       replicas: 2
       update_config:
@@ -17,11 +17,9 @@ services:
       - "SPRING_PROFILES_ACTIVE=dev"
       - "SPRING_CLOUD_CONFIG_URI=http://test:dfesdf@config:8081"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8300/resource/actuator/info"]
+      test: curl --fail -s http://localhost:8300/resource/actuator/health || exit 1
       interval: 1m30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      start_period: 1m
 
 networks:
   my-overlay:
