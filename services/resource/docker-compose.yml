@@ -2,11 +2,11 @@ version: '3.6'
 
 services:
   resource:
-    image: "raym123/resource:v3"
+    image: "raym123/resource:v1"
     deploy:
       replicas: 2
       update_config:
-        delay: 1m
+        delay: 2m
     hostname: "resource"
     ports:
       - "8300:8300"
@@ -18,8 +18,9 @@ services:
       - "SPRING_CLOUD_CONFIG_URI=http://test:dfesdf@config:8081"
     healthcheck:
       test: curl --fail -s http://localhost:8300/resource/actuator/health || exit 1
-      interval: 1m30s
-      start_period: 1m
+      interval: 30s
+      start_period: 1m30s
+      retries: 5
 
 networks:
   my-overlay:
