@@ -35,8 +35,8 @@ public class SampleResourceController {
         for(String profile:activeProfiles) {
             buffer.append(profile);
         }
-        logger.info("v2, port is:"+port);
-        ResponseEntity responseEntity = new ResponseEntity("v2: Using local port:"+port, HttpStatus.OK);
+        logger.info("v3, port is:"+port);
+        ResponseEntity responseEntity = new ResponseEntity("v3: Using local port:"+port, HttpStatus.OK);
         return responseEntity;
     }
 
