@@ -5,5 +5,6 @@ WORKDIR /tmp/
 RUN mvn package
 
 FROM openjdk:8-jdk-alpine
+RUN apk --no-cache add curl
 COPY --from=build /tmp/target/*.jar /opt/myservice/services.jar
 ENTRYPOINT ["java","-jar","/opt/myservice/services.jar"]
