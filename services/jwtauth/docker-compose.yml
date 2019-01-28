@@ -1,12 +1,12 @@
 version: '3.6'
+
 services:
   jwtauth:
     image: "raym123/jwtauth:latest"
     deploy:
-      replicas: 1
+      replicas: 2
       update_config:
-        delay: 1m
-        order: start-first
+        delay: 2m
     hostname: "jwtauth"
     ports:
       - "8085:8085"
@@ -15,6 +15,12 @@ services:
     environment:
       - "SERVER_PORT=8085"
       - "SPRING_PROFILES_ACTIVE=dev"
+      - "SPRING_CLOUD_CONFIG_URI=http://test:dfesdf@config:8081"
+    healthcheck:
+      test: curl --fail -s http://localhost:8085/actuator/health || exit 1
+      interval: 30s
+      start_period: 1m30s
+      retries: 5
 
 networks:
   my-overlay:

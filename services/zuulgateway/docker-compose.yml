@@ -1,9 +1,12 @@
 version: '3.6'
+
 services:
   gateway:
     image: "raym123/zuulgateway:latest"
     deploy:
       replicas: 1
+      update_config:
+        delay: 2m
     hostname: "gateway"
     ports:
       - "8080:8080"
@@ -13,6 +16,11 @@ services:
       - "SERVER_PORT=8080"
       - "SPRING_PROFILES_ACTIVE=dev"
       - "SPRING_CLOUD_CONFIG_URI=http://test:dfesdf@config:8081"
+    healthcheck:
+      test: curl --fail -s http://localhost:8080/actuator/health || exit 1
+      interval: 30s
+      start_period: 1m30s
+      retries: 5
 
 networks:
   my-overlay:
