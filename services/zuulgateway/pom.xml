@@ -75,6 +75,9 @@
                     <profiles>
                         <profile>dev</profile>
                     </profiles>
+                    <arguments>
+                        <argument>--SPRING.CLOUD.CONFIG.URI=http://test:dfesdf@config:8081</argument>
+                    </arguments>
                 </configuration>
             </plugin>
         </plugins>

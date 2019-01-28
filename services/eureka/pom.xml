@@ -67,7 +67,6 @@
                         <profile>dev</profile>
                     </profiles>
                     <arguments>
-                        <argument>--SPRING.RABBITMQ.HOST=rabbitmq</argument>
                         <argument>--SPRING.CLOUD.CONFIG.URI=http://test:dfesdf@config:8081</argument>
                     </arguments>
                 </configuration>

@@ -109,8 +109,9 @@
                     <profiles>
                         <profile>dev</profile>
                     </profiles>
-                    <!--<jvmArguments>-Dcatalina.base=${basedir}</jvmArguments>-->
-                    <!--Required for Debugging-->
+                    <arguments>
+                        <argument>--SPRING.CLOUD.CONFIG.URI=http://test:dfesdf@config:8081</argument>
+                    </arguments>
                     <jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>
                 </configuration>
             </plugin>

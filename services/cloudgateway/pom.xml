@@ -71,9 +71,7 @@
                         <profile>dev</profile>
                     </profiles>
                     <arguments>
-                        <argument>--SPRING.SECURITY.USER.NAME=test</argument>
-                        <argument>--SPRING.SECURITY.USER.PASSWORD=dfesdf</argument>
-                        <argument>--ENCRYPT.KEY=dfehh43d</argument>
+                        <argument>--SPRING.CLOUD.CONFIG.URI=http://test:dfesdf@config:8081</argument>
                     </arguments>
                 </configuration>
             </plugin>

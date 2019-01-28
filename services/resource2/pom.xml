@@ -80,7 +80,7 @@
                         <profile>dev</profile>
                     </profiles>
                     <arguments>
-                        <argument>--spring.cloud.config.uri=http://192.168.99.101:8081,http://192.168.99.101:8082</argument>
+                        <argument>--SPRING.CLOUD.CONFIG.URI=http://test:dfesdf@config:8081</argument>
                     </arguments>
                 </configuration>
             </plugin>
