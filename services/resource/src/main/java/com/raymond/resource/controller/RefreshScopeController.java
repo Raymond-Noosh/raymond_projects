@@ -17,12 +17,12 @@ public class RefreshScopeController {
     private String refreshtest;
 
     @Autowired
-    RefreshScopeConfig refreshScopeConfig;
+    private RefreshScopeConfig refreshScopeConfig;
 
 
     @GetMapping("/refreshtest")
     public String getServiceName() {
-        return "1. configuration test: " + refreshScopeConfig.getRefreshtest()
+        return "1. configuration test: " + refreshScopeConfig.getTest()
                 + "\n2. refresh test value: " + this.refreshtest;
     }
 }

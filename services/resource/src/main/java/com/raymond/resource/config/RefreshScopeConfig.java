@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
  * Created by Raymond Kwong on 1/28/2019.
  */
 @Component
-@ConfigurationProperties
+@ConfigurationProperties(prefix="refresh")
 public class RefreshScopeConfig {
 
-    @Value("${refresh.test:defaultbetterchangeit}")
-    private String refreshtest;
+    @Value("${test:defaultbetterchangeit}")
+    private String test;
 
-    public String getRefreshtest() {
-        return refreshtest;
+    public String getTest() {
+        return test;
     }
 }
