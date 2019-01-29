@@ -1,5 +1,7 @@
 package com.raymond.resource.controller;
 
+import com.raymond.resource.config.RefreshScopeConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +16,13 @@ public class RefreshScopeController {
     @Value("${refresh.test:defaultbetterchangeit}")
     private String refreshtest;
 
+    @Autowired
+    RefreshScopeConfig refreshScopeConfig;
+
+
     @GetMapping("/refreshtest")
     public String getServiceName() {
-        return "refresh test value: " + this.refreshtest;
+        return "1. configuration test: " + refreshScopeConfig.getRefreshtest()
+                + "\n2. refresh test value: " + this.refreshtest;
     }
 }
