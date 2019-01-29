@@ -22,7 +22,7 @@ public class RefreshScopeController {
 
     @GetMapping("/refreshtest")
     public String getServiceName() {
-        return "1. configuration test: " + refreshScopeConfig.getTest2()
+        return "1. configuration test2: " + refreshScopeConfig.getTest2()
                 + "\n2. refresh test value: " + this.refreshtest;
     }
 }
