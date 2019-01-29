@@ -14,6 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 /**
  * Created by Raymond Kwong on 12/31/2018.
  */
@@ -28,15 +31,18 @@ public class SampleResourceController {
     private final static Logger logger = LoggerFactory.getLogger(SampleResourceController.class);
 
     @GetMapping("/getLocalPort")
-    public ResponseEntity<String> testErrors() {
+    public ResponseEntity<String> testErrors() throws UnknownHostException {
         String[] activeProfiles = environment.getActiveProfiles();      // it will return String Array of all active profile.
         String port = environment.getProperty("local.server.port");
         StringBuffer buffer = new StringBuffer();
-        for(String profile:activeProfiles) {
+        for (String profile : activeProfiles) {
             buffer.append(profile);
         }
-        logger.info("v3, port is:"+port);
-        ResponseEntity responseEntity = new ResponseEntity("v3: Using local port:"+port, HttpStatus.OK);
+        logger.info("v3, port is:" + port);
+        String hostAddress = InetAddress.getLocalHost().getHostAddress();
+        System.out.println(hostAddress);
+
+        ResponseEntity responseEntity = new ResponseEntity("v3: Using host address " + hostAddress + " and local port:" + port, HttpStatus.OK);
         return responseEntity;
     }
 
