@@ -11,10 +11,14 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix="refresh", ignoreUnknownFields=false)
 public class RefreshScopeConfig {
 
-    @Value("${test:defaultbetterchangeit}")
+    @Value("${test2:defaultbetterchangeit}")
     private String test2;
 
     public String getTest2() {
         return test2;
+    }
+
+    public void setTest2(String test2) {
+        this.test2 = test2;
     }
 }
