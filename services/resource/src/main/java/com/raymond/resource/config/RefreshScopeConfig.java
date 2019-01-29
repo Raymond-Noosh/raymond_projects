@@ -12,9 +12,9 @@ import org.springframework.stereotype.Component;
 public class RefreshScopeConfig {
 
     @Value("${test:defaultbetterchangeit}")
-    private String test;
+    private String test2;
 
-    public String getTest() {
-        return test;
+    public String getTest2() {
+        return test2;
     }
 }
