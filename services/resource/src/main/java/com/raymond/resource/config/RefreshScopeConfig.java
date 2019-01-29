@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * Created by Raymond Kwong on 1/28/2019.
  */
 @Component
-@ConfigurationProperties(prefix="refresh")
+@ConfigurationProperties(prefix="refresh", ignoreUnknownFields=false)
 public class RefreshScopeConfig {
 
     @Value("${test:defaultbetterchangeit}")
