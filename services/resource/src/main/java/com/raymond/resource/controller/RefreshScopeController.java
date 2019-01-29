@@ -14,15 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RefreshScopeController {
     @Value("${refresh.test:defaultbetterchangeit}")
-    private String refreshtest;
+    private String test;
 
     @Autowired
     private RefreshScopeConfig refreshScopeConfig;
 
-
     @GetMapping("/refreshtest")
     public String getServiceName() {
-        return "1. configuration test2: " + refreshScopeConfig.getTest2()
-                + "\n2. refresh test value: " + this.refreshtest;
+        return "1. RefreshScope-test: " + this.test
+                + "\n2. ConfigurationProperties-test2: " + refreshScopeConfig.getTest2();
     }
 }
