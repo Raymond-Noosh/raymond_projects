@@ -21,6 +21,8 @@ public class RefreshScopeController {
 
     @GetMapping("/refreshtest")
     public String getServiceName() {
+        System.out.println("1. RefreshScope-test: " + this.test
+                + "\n2. ConfigurationProperties-test2: " + refreshScopeConfig.getTest2());
         return "1. RefreshScope-test: " + this.test
                 + "\n2. ConfigurationProperties-test2: " + refreshScopeConfig.getTest2();
     }
