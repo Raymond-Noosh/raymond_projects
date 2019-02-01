@@ -17,7 +17,7 @@ services:
       - "SPRING_PROFILES_ACTIVE=dev"
       - "SPRING_CLOUD_CONFIG_URI=http://test:dfesdf@config:8081"
     healthcheck:
-      test: curl --fail -s http://localhost:8300/resource/actuator/health || exit 1
+      test: curl --fail -s http://localhost:8300/actuator/health || exit 1
       interval: 30s
       start_period: 1m30s
       retries: 5
