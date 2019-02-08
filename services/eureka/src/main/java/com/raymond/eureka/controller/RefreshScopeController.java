@@ -16,6 +16,6 @@ public class RefreshScopeController {
 
     @GetMapping("/refreshtest")
     public String getServiceName() {
-        return "refresh test value: " + this.refreshtest;
+        return "refresh test value1: " + this.refreshtest;
     }
 }
