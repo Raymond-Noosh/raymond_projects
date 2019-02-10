@@ -4,7 +4,7 @@ services:
   jwtauth:
     image: "raym123/jwtauth:latest"
     deploy:
-      replicas: 2
+      replicas: 1
       update_config:
         delay: 2m
     hostname: "jwtauth"

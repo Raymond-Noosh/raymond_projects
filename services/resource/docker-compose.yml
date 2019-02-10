@@ -4,7 +4,7 @@ services:
   resource:
     image: "raym123/resource:latest"
     deploy:
-      replicas: 2
+      replicas: 1
       update_config:
         delay: 2m
     hostname: "resource"
@@ -21,6 +21,11 @@ services:
       interval: 30s
       start_period: 1m30s
       retries: 5
+    logging:
+      driver: "syslog"
+      options:
+        syslog-address: "tcp://192.168.99.102:5000"
+        syslog-facility: "daemon"
 
 networks:
   my-overlay:

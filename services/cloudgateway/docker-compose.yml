@@ -4,7 +4,7 @@ services:
   gateway:
     image: "raym123/cloudgateway:latest"
     deploy:
-      replicas: 2
+      replicas: 1
       update_config:
         delay: 2m
     hostname: "gateway"

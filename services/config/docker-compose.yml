@@ -4,7 +4,7 @@ services:
   config:
     image: "raym123/config:latest"
     deploy:
-      replicas: 2
+      replicas: 1
       update_config:
         delay: 2m
     hostname: "config"

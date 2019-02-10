@@ -18,6 +18,11 @@ services:
       - "SPRING_PROFILES_ACTIVE=dev1"
       - "SPRING_CLOUD_CONFIG_URI=http://test:dfesdf@config:8081"
       - "EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka2:8762/eureka/"
+    healthcheck:
+      test: curl --fail -s http://localhost:8761/actuator/health || exit 1
+      interval: 30s
+      start_period: 1m30s
+      retries: 5
   eureka2:
     image: "raym123/eureka:latest"
     deploy:
@@ -35,6 +40,11 @@ services:
       - "SPRING_PROFILES_ACTIVE=dev2"
       - "SPRING_CLOUD_CONFIG_URI=http://test:dfesdf@config:8081"
       - "EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka1:8761/eureka/"
+    healthcheck:
+      test: curl --fail -s http://localhost:8762/actuator/health || exit 1
+      interval: 30s
+      start_period: 1m30s
+      retries: 5
 
 networks:
   my-overlay:
