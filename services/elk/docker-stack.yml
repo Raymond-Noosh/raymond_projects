@@ -1,7 +1,6 @@
 version: '3.6'
 
 services:
-
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.6.0
     ports:
@@ -17,7 +16,6 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-
   metricbeat:
     image: docker.elastic.co/beats/metricbeat:6.6.0
     configs:
@@ -32,7 +30,6 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-
   logstash:
     image: docker.elastic.co/logstash/logstash-oss:6.6.0
     ports:
@@ -50,7 +47,6 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-
   kibana:
     image: docker.elastic.co/kibana/kibana-oss:6.6.0
     ports:
@@ -65,7 +61,6 @@ services:
       replicas: 1
 
 configs:
-
   elastic_config:
     file: ./elasticsearch/config/elasticsearch.yml
   metricbeat_config:
