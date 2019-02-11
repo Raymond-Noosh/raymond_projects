@@ -12,7 +12,7 @@ services:
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
-      - my-overlay
+      - "my-overlay"
     deploy:
       mode: replicated
       replicas: 1
@@ -26,7 +26,7 @@ services:
       SETUP_KIBANA_HOST: "kibana:5601"
       OUTPUT_ELASTICSEARCH_HOSTS: "elasticsearch:9200"
     networks:
-      - my-overlay
+      - "my-overlay"
     deploy:
       mode: replicated
       replicas: 1
@@ -43,7 +43,7 @@ services:
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
-      - my-overlay
+      - "my-overlay"
     deploy:
       mode: replicated
       replicas: 1
@@ -55,7 +55,7 @@ services:
       - source: kibana_config
         target: /usr/share/kibana/config/kibana.yml
     networks:
-      - my-overlay
+      - "my-overlay"
     deploy:
       mode: replicated
       replicas: 1
